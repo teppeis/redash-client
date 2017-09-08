@@ -2,6 +2,8 @@ workflows:
   version: 2
   node-multi-build:
     jobs:
+      - node-v4
+      - node-v6
       - node-v8
 
 version: 2
@@ -14,9 +16,7 @@ jobs:
     steps:
       - run:
           name: Versions
-          command: |
-            yarn versions
-            echo "npm: $(npm --version)"
+          command: npm version
       - checkout
       - restore_cache:
           keys:
