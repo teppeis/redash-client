@@ -55,7 +55,20 @@ redash.postQuery({
   console.log(resp.job);
 });</code>
 </code></pre>
-<h2 id="api">API</h2><h3 id="-code-new-redashclient--endpoint--apitoken--authheadername----code-"><code>new RedashClient({endPoint, apiToken, authHeaderName})</code></h3><h3 id="-code--postquery--query--data-source-id--max-age--query-id----code-"><code>.postQuery({query, data_source_id, max_age, query_id})</code></h3><h3 id="-code--getjob-jobid---code-"><code>.getJob(jobId)</code></h3><h3 id="-code--getqueryresult-queryresultid---code-"><code>.getQueryResult(queryResultId)</code></h3><h3 id="-code--queryandwaitresult--query--data-source-id--max-age--query-id---timeout---code-"><code>.queryAndWaitResult({query, data_source_id, max_age, query_id}, timeout)</code></h3><h2 id="license">License</h2><p>MIT License: Teppei Sato &lt;teppeis@gmail.com&gt;</p>
+<h2 id="api">API</h2><p>See <a href="https://teppeis.github.io/redash-client/">API document</a></p>
+<h3 id="supported-rest-api">Supported REST API</h3><ul>
+<li><code>#postQuery()</code></li>
+<li><code>#getJob()</code></li>
+<li><code>#getQueryResult()</code></li>
+</ul>
+<p>Methods for other REST API are not implemented yet. Help!</p>
+<h3 id="utility-methods">Utility methods</h3><h4 id="-code--queryandwaitresult----code-"><code>#queryAndWaitResult()</code></h4><p>Internally:</p>
+<ol>
+<li><code>postQuery()</code></li>
+<li>Poll <code>getJob()</code></li>
+<li>Return <code>getAueryRestul()</code></li>
+</ol>
+<h2 id="license">License</h2><p>MIT License: Teppei Sato &lt;teppeis@gmail.com&gt;</p>
 </div>
 </div>
 
