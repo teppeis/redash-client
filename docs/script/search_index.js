@@ -6,6 +6,54 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "redashclient src/redashclient.js~redashclient,redashclient",
+    "test-file/test/index.js.html#lineNumber10",
+    "RedashClient",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/index.js.html#lineNumber16",
+    "RedashClient api",
+    "test"
+  ],
+  [
+    "redashclient#getjob src/redashclient.js~redashclient#getjob,redashclient#getjob",
+    "test-file/test/index.js.html#lineNumber41",
+    "RedashClient api getJob",
+    "test"
+  ],
+  [
+    "redashclient#getqueryresult src/redashclient.js~redashclient#getqueryresult,redashclient#getqueryresult",
+    "test-file/test/index.js.html#lineNumber51",
+    "RedashClient api getQueryResult",
+    "test"
+  ],
+  [
+    "redashclient#postquery src/redashclient.js~redashclient#postquery,redashclient#postquery",
+    "test-file/test/index.js.html#lineNumber28",
+    "RedashClient api postQuery with max_age = 0",
+    "test"
+  ],
+  [
+    "redashclient#queryandwaitresult src/redashclient.js~redashclient#queryandwaitresult,redashclient#queryandwaitresult",
+    "test-file/test/index.js.html#lineNumber61",
+    "RedashClient api queryAndWaitResult",
+    "test"
+  ],
+  [
+    "redashclient#queryandwaitresult src/redashclient.js~redashclient#queryandwaitresult,redashclient#queryandwaitresult",
+    "test-file/test/index.js.html#lineNumber83",
+    "RedashClient api queryAndWaitResult: timeout",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/index.js.html#lineNumber11",
+    "RedashClient should be a constructor",
+    "test"
+  ],
+  [
     "src/.external-ecmascript.js~array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
     "src/.external-ecmascript.js~Array",
@@ -328,5 +376,11 @@ window.esdocSearchIndex = [
     "class/src/RedashClient.js~RedashClient.html#instance-method-queryAndWaitResult",
     "src/RedashClient.js~RedashClient#queryAndWaitResult",
     "method"
+  ],
+  [
+    "test/index.js",
+    "test-file/test/index.js.html",
+    "test/index.js",
+    "testFile"
   ]
 ]

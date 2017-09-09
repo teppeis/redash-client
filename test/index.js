@@ -6,6 +6,7 @@ const Mock = require('axios-mock-adapter');
 
 require('axios-debug-log');
 
+/** @test {RedashClient} */
 describe('RedashClient', () => {
   it('should be a constructor', () => {
     const client = new Client();
@@ -23,6 +24,7 @@ describe('RedashClient', () => {
       mock = new Mock(client.axios_);
     });
 
+    /** @test {RedashClient#postQuery} */
     it('postQuery with max_age = 0', async () => {
       const expectedBody = require('./fixtures/post-query_results-max_age_0');
 
@@ -35,6 +37,7 @@ describe('RedashClient', () => {
       assert.deepEqual(result, expectedBody);
     });
 
+    /** @test {RedashClient#getJob} */
     it('getJob', async () => {
       const expectedBody = require('./fixtures/get-jobs-1');
 
@@ -44,6 +47,7 @@ describe('RedashClient', () => {
       assert.deepEqual(result, expectedBody);
     });
 
+    /** @test {RedashClient#getQueryResult} */
     it('getQueryResult', async () => {
       const expectedBody = require('./fixtures/get-query_results');
 
@@ -53,6 +57,7 @@ describe('RedashClient', () => {
       assert.deepEqual(result, expectedBody);
     });
 
+    /** @test {RedashClient#queryAndWaitResult} */
     it('queryAndWaitResult', async () => {
       const job1 = require('./fixtures/post-query_results-max_age_0');
       const job2 = require('./fixtures/get-jobs-2');
@@ -74,6 +79,7 @@ describe('RedashClient', () => {
       assert.deepEqual(actual, queryResult);
     });
 
+    /** @test {RedashClient#queryAndWaitResult} */
     it('queryAndWaitResult: timeout', function(done) {
       this.timeout(3000);
 

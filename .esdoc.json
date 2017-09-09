@@ -2,7 +2,19 @@
   "source": "./src",
   "destination": "./docs",
   "plugins": [
-    {"name": "esdoc-node"},
-    {"name": "esdoc-standard-plugin"}
+    {
+      "name": "esdoc-node"
+    },
+    {
+      "name": "esdoc-standard-plugin",
+      "option": {
+        "test": {
+          "source": "./test/",
+          "interfaces": ["describe", "it", "context", "suite", "test"],
+          "includes": ["\\.js$"],
+          "excludes": ["/fixtures/"]
+        }
+      }
+    }
   ]
 }

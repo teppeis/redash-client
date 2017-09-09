@@ -853,5 +853,138 @@
     "name": "package.json",
     "static": true,
     "access": "public"
+  },
+  {
+    "__docId__": 59,
+    "kind": "testFile",
+    "name": "test/index.js",
+    "content": "'use strict';\n\nconst Client = require('../');\nconst assert = require('assert');\nconst Mock = require('axios-mock-adapter');\n\nrequire('axios-debug-log');\n\n/** @test {RedashClient} */\ndescribe('RedashClient', () => {\n  it('should be a constructor', () => {\n    const client = new Client();\n    assert(client instanceof Client);\n  });\n\n  describe('api', () => {\n    let client, mock;\n\n    beforeEach(() => {\n      client = new Client({\n        endPoint: 'https://demo.redash.io/',\n        apiToken: process.env.API_TOKEN || 'abc123',\n      });\n      mock = new Mock(client.axios_);\n    });\n\n    /** @test {RedashClient#postQuery} */\n    it('postQuery with max_age = 0', async () => {\n      const expectedBody = require('./fixtures/post-query_results-max_age_0');\n\n      mock.onPost('/api/query_results').reply(200, expectedBody);\n      const result = await client.postQuery({\n        query: 'select * from cohort2',\n        data_source_id: 2,\n        max_age: 0,\n      });\n      assert.deepEqual(result, expectedBody);\n    });\n\n    /** @test {RedashClient#getJob} */\n    it('getJob', async () => {\n      const expectedBody = require('./fixtures/get-jobs-1');\n\n      const {id} = expectedBody.job;\n      mock.onGet(`/api/jobs/${id}`).reply(200, expectedBody);\n      const result = await client.getJob(id);\n      assert.deepEqual(result, expectedBody);\n    });\n\n    /** @test {RedashClient#getQueryResult} */\n    it('getQueryResult', async () => {\n      const expectedBody = require('./fixtures/get-query_results');\n\n      const {id} = expectedBody.query_result;\n      mock.onGet(`/api/query_results/${id}`).reply(200, expectedBody);\n      const result = await client.getQueryResult(id);\n      assert.deepEqual(result, expectedBody);\n    });\n\n    /** @test {RedashClient#queryAndWaitResult} */\n    it('queryAndWaitResult', async () => {\n      const job1 = require('./fixtures/post-query_results-max_age_0');\n      const job2 = require('./fixtures/get-jobs-2');\n      const job3 = require('./fixtures/get-jobs-3');\n      const queryResult = require('./fixtures/get-query_results');\n\n      const jobId = job1.job.id;\n      const queryResultId = job3.job.query_result_id;\n      mock.onPost('/api/query_results').reply(200, job1);\n      mock.onGet(`/api/jobs/${jobId}`).replyOnce(200, job2);\n      mock.onGet(`/api/jobs/${jobId}`).replyOnce(200, job3);\n      mock.onGet(`/api/query_results/${queryResultId}`).reply(200, queryResult);\n\n      const actual = await client.queryAndWaitResult({\n        query: 'select * from cohort2',\n        data_source_id: 2,\n        max_age: 0,\n      });\n      assert.deepEqual(actual, queryResult);\n    });\n\n    /** @test {RedashClient#queryAndWaitResult} */\n    it('queryAndWaitResult: timeout', function(done) {\n      this.timeout(3000);\n\n      const job1 = require('./fixtures/post-query_results-max_age_0');\n      const job2 = require('./fixtures/get-jobs-2');\n\n      const jobId = job1.job.id;\n      mock.onPost('/api/query_results').reply(200, job1);\n      mock.onGet(`/api/jobs/${jobId}`).reply(200, job2);\n\n      client.queryAndWaitResult({\n        query: 'select * from cohort2',\n        data_source_id: 2,\n        max_age: 0,\n      }, 1000).catch(e => {\n        assert(/polling timeout/.test(e.message));\n        done();\n      });\n    });\n  });\n});\n",
+    "static": true,
+    "longname": "/Users/teppeis/src/github.com/teppeis/redash-client/test/index.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 60,
+    "kind": "test",
+    "name": "describe0",
+    "testId": 0,
+    "memberof": "test/index.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/index.js~describe0",
+    "access": null,
+    "description": "RedashClient",
+    "lineNumber": 10,
+    "testTargets": [
+      "RedashClient"
+    ]
+  },
+  {
+    "__docId__": 61,
+    "kind": "test",
+    "name": "it1",
+    "testId": 1,
+    "memberof": "test/index.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/index.js~describe0.it1",
+    "access": null,
+    "description": "should be a constructor",
+    "lineNumber": 11
+  },
+  {
+    "__docId__": 62,
+    "kind": "test",
+    "name": "describe2",
+    "testId": 2,
+    "memberof": "test/index.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/index.js~describe0.describe2",
+    "access": null,
+    "description": "api",
+    "lineNumber": 16
+  },
+  {
+    "__docId__": 63,
+    "kind": "test",
+    "name": "it3",
+    "testId": 3,
+    "memberof": "test/index.js~describe0.describe2",
+    "testDepth": 2,
+    "static": true,
+    "longname": "test/index.js~describe0.describe2.it3",
+    "access": null,
+    "description": "postQuery with max_age = 0",
+    "lineNumber": 28,
+    "testTargets": [
+      "RedashClient#postQuery"
+    ]
+  },
+  {
+    "__docId__": 64,
+    "kind": "test",
+    "name": "it4",
+    "testId": 4,
+    "memberof": "test/index.js~describe0.describe2",
+    "testDepth": 2,
+    "static": true,
+    "longname": "test/index.js~describe0.describe2.it4",
+    "access": null,
+    "description": "getJob",
+    "lineNumber": 41,
+    "testTargets": [
+      "RedashClient#getJob"
+    ]
+  },
+  {
+    "__docId__": 65,
+    "kind": "test",
+    "name": "it5",
+    "testId": 5,
+    "memberof": "test/index.js~describe0.describe2",
+    "testDepth": 2,
+    "static": true,
+    "longname": "test/index.js~describe0.describe2.it5",
+    "access": null,
+    "description": "getQueryResult",
+    "lineNumber": 51,
+    "testTargets": [
+      "RedashClient#getQueryResult"
+    ]
+  },
+  {
+    "__docId__": 66,
+    "kind": "test",
+    "name": "it6",
+    "testId": 6,
+    "memberof": "test/index.js~describe0.describe2",
+    "testDepth": 2,
+    "static": true,
+    "longname": "test/index.js~describe0.describe2.it6",
+    "access": null,
+    "description": "queryAndWaitResult",
+    "lineNumber": 61,
+    "testTargets": [
+      "RedashClient#queryAndWaitResult"
+    ]
+  },
+  {
+    "__docId__": 67,
+    "kind": "test",
+    "name": "it7",
+    "testId": 7,
+    "memberof": "test/index.js~describe0.describe2",
+    "testDepth": 2,
+    "static": true,
+    "longname": "test/index.js~describe0.describe2.it7",
+    "access": null,
+    "description": "queryAndWaitResult: timeout",
+    "lineNumber": 83,
+    "testTargets": [
+      "RedashClient#queryAndWaitResult"
+    ]
   }
 ]
