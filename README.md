@@ -36,16 +36,25 @@ redash.postQuery({
 
 ## API
 
-### `new RedashClient({endPoint, apiToken, authHeaderName})`
+See [API document](https://teppeis.github.io/redash-client/)
 
+### Supported REST API
 
-### `.postQuery({query, data_source_id, max_age, query_id})`
+- `#postQuery()`
+- `#getJob()`
+- `#getQueryResult()`
 
-### `.getJob(jobId)`
+Methods for other REST API are not implemented yet. Help!
 
-### `.getQueryResult(queryResultId)`
+### Utility methods
 
-### `.queryAndWaitResult({query, data_source_id, max_age, query_id}, timeout)`
+#### `#queryAndWaitResult()`
+
+Internally:
+
+1. `postQuery()`
+2. Poll `getJob()`
+3. Return `getAueryRestul()`
 
 ## License
 
