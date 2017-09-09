@@ -1118,7 +1118,7 @@
               "leadingComments": [
                 {
                   "type": "CommentBlock",
-                  "value": "*\n   * @param {{endPoint: string, apiToken: string, authHeaderName?: string}} options\n   ",
+                  "value": "*\n   * @param {{endPoint: string, apiToken: string, authHeaderName: ?string}} options\n   ",
                   "start": 175,
                   "end": 268,
                   "loc": {
@@ -4954,7 +4954,7 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\n   * @param {{endPoint: string, apiToken: string, authHeaderName?: string}} options\n   ",
+                    "value": "*\n   * @param {{endPoint: string, apiToken: string, authHeaderName: ?string}} options\n   ",
                     "start": 175,
                     "end": 268,
                     "loc": {
@@ -8060,7 +8060,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * @param {{endPoint: string, apiToken: string, authHeaderName?: string}} options\n   ",
+      "value": "*\n   * @param {{endPoint: string, apiToken: string, authHeaderName: ?string}} options\n   ",
       "start": 175,
       "end": 268,
       "loc": {
@@ -8930,7 +8930,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n   * @param {{endPoint: string, apiToken: string, authHeaderName?: string}} options\n   ",
+      "value": "*\n   * @param {{endPoint: string, apiToken: string, authHeaderName: ?string}} options\n   ",
       "start": 175,
       "end": 268,
       "loc": {

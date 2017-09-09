@@ -10,7 +10,7 @@ const DEFAULT_POLLING_TIMEOUT_MS = 60 * 1000;
  */
 class RedashClient {
   /**
-   * @param {{endPoint: string, apiToken: string, authHeaderName?: string}} options
+   * @param {{endPoint: string, apiToken: string, authHeaderName: ?string}} options
    */
   constructor({endPoint, apiToken, authHeaderName = 'Authorization'} = {}) {
     /**
