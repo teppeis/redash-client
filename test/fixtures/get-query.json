@@ -1,0 +1,49 @@
+{
+  "latest_query_data_id": null,
+  "schedule": null,
+  "is_archived": false,
+  "updated_at": "2017-12-27T13:20:38.619894+00:00",
+  "user": {
+    "auth_type": "password",
+    "created_at": "2017-12-27T13:19:38.153685+00:00",
+    "name": "admin",
+    "gravatar_url": "https://www.gravatar.com/avatar/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx?s=40",
+    "updated_at": "2017-12-27T13:19:38.153685+00:00",
+    "id": 1,
+    "groups": [1, 2],
+    "email": "admin@example.com"
+  },
+  "query": "select * from cohort2;",
+  "is_draft": true,
+  "id": 1,
+  "description": null,
+  "can_edit": true,
+  "name": "New Query",
+  "created_at": "2017-12-27T13:20:38.619894+00:00",
+  "last_modified_by": {
+    "auth_type": "password",
+    "created_at": "2017-12-27T13:19:38.153685+00:00",
+    "name": "admin",
+    "gravatar_url": "https://www.gravatar.com/avatar/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx?s=40",
+    "updated_at": "2017-12-27T13:19:38.153685+00:00",
+    "id": 1,
+    "groups": [1, 2],
+    "email": "admin@example.com"
+  },
+  "version": 1,
+  "query_hash": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "visualizations": [
+    {
+      "description": "",
+      "created_at": "2017-12-27T13:20:38.619894+00:00",
+      "updated_at": "2017-12-27T13:20:38.619894+00:00",
+      "id": 1,
+      "type": "TABLE",
+      "options": {},
+      "name": "Table"
+    }
+  ],
+  "api_key": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "options": { "parameters": [] },
+  "data_source_id": 2
+}
