@@ -18,20 +18,20 @@
     "test:unit": "mocha --require intelli-espower-loader test"
   },
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.17.1",
     "delay": "^2.0.0"
   },
   "devDependencies": {
-    "axios-debug-log": "^0.3.0",
-    "axios-mock-adapter": "^1.9.0",
-    "esdoc": "^1.0.2",
+    "axios-debug-log": "^0.4.0",
+    "axios-mock-adapter": "^1.10.0",
+    "esdoc": "^1.0.4",
     "esdoc-node": "^1.0.2",
     "esdoc-standard-plugin": "^1.0.0",
-    "eslint": "^4.5.0",
-    "eslint-config-teppeis": "^6.2.0",
+    "eslint": "^4.14.0",
+    "eslint-config-teppeis": "^6.3.1",
     "intelli-espower-loader": "^1.0.1",
-    "mocha": "^3.5.0",
-    "npm-run-all": "^4.1.1",
+    "mocha": "^4.0.1",
+    "npm-run-all": "^4.1.2",
     "power-assert": "^1.4.4"
   },
   "repository": {
