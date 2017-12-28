@@ -19,31 +19,37 @@ window.esdocSearchIndex = [
   ],
   [
     "redashclient#getjob src/redashclient.js~redashclient#getjob,redashclient#getjob",
-    "test-file/test/index.js.html#lineNumber41",
+    "test-file/test/index.js.html#lineNumber51",
     "RedashClient api getJob",
     "test"
   ],
   [
+    "redashclient#getquery src/redashclient.js~redashclient#getquery,redashclient#getquery",
+    "test-file/test/index.js.html#lineNumber28",
+    "RedashClient api getQuery",
+    "test"
+  ],
+  [
     "redashclient#getqueryresult src/redashclient.js~redashclient#getqueryresult,redashclient#getqueryresult",
-    "test-file/test/index.js.html#lineNumber51",
+    "test-file/test/index.js.html#lineNumber61",
     "RedashClient api getQueryResult",
     "test"
   ],
   [
     "redashclient#postquery src/redashclient.js~redashclient#postquery,redashclient#postquery",
-    "test-file/test/index.js.html#lineNumber28",
+    "test-file/test/index.js.html#lineNumber38",
     "RedashClient api postQuery with max_age = 0",
     "test"
   ],
   [
     "redashclient#queryandwaitresult src/redashclient.js~redashclient#queryandwaitresult,redashclient#queryandwaitresult",
-    "test-file/test/index.js.html#lineNumber61",
+    "test-file/test/index.js.html#lineNumber71",
     "RedashClient api queryAndWaitResult",
     "test"
   ],
   [
     "redashclient#queryandwaitresult src/redashclient.js~redashclient#queryandwaitresult,redashclient#queryandwaitresult",
-    "test-file/test/index.js.html#lineNumber83",
+    "test-file/test/index.js.html#lineNumber93",
     "RedashClient api queryAndWaitResult: timeout",
     "test"
   ],
@@ -357,6 +363,12 @@ window.esdocSearchIndex = [
     "src/redashclient.js~redashclient#getjob",
     "class/src/RedashClient.js~RedashClient.html#instance-method-getJob",
     "src/RedashClient.js~RedashClient#getJob",
+    "method"
+  ],
+  [
+    "src/redashclient.js~redashclient#getquery",
+    "class/src/RedashClient.js~RedashClient.html#instance-method-getQuery",
+    "src/RedashClient.js~RedashClient#getQuery",
     "method"
   ],
   [
