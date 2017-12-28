@@ -55,7 +55,7 @@ Internally:
 
 1. `postQuery()`
 2. Poll `getJob()`
-3. Return `getAueryRestul()`
+3. Return `getQueryResult()`
 
 ## License
 
