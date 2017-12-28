@@ -68,7 +68,7 @@ MIT License: Teppei Sato &lt;teppeis@gmail.com&gt;
 [travis-url]: https://travis-ci.org/teppeis/redash-client
 [deps-image]: https://img.shields.io/david/teppeis/redash-client.svg
 [deps-url]: https://david-dm.org/teppeis/redash-client
-[node-version]: https://img.shields.io/badge/Node.js%20support-v8-brightgreen.svg
+[node-version]: https://img.shields.io/badge/Node.js%20support-v8,v9-brightgreen.svg
 [coverage-image]: https://img.shields.io/coveralls/teppeis/redash-client/master.svg
 [coverage-url]: https://coveralls.io/github/teppeis/redash-client?branch=master
 [license]: https://img.shields.io/npm/l/redash-client.svg
