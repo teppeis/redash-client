@@ -9,7 +9,7 @@ JavaScript Client for [Redash](https://redash.io/) API
 [![dependency status][deps-image]][deps-url]
 ![License][license]
 
-##### Note: This pacakge requires Node v8 for async/await
+##### Note: This pacakge requires Node v8+ for async/await
 
 ## Install
 

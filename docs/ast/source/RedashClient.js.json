@@ -422,6 +422,7 @@
                   "column": 3
                 }
               },
+              "static": false,
               "computed": false,
               "key": {
                 "type": "Identifier",
@@ -441,7 +442,6 @@
                 "name": "constructor",
                 "leadingComments": null
               },
-              "static": false,
               "kind": "constructor",
               "id": null,
               "generator": false,
@@ -1166,6 +1166,7 @@
                   "column": 3
                 }
               },
+              "static": false,
               "computed": false,
               "key": {
                 "type": "Identifier",
@@ -1185,7 +1186,6 @@
                 "name": "getQuery",
                 "leadingComments": null
               },
-              "static": false,
               "kind": "method",
               "id": null,
               "generator": false,
@@ -1607,6 +1607,7 @@
                   "column": 3
                 }
               },
+              "static": false,
               "computed": false,
               "key": {
                 "type": "Identifier",
@@ -1626,7 +1627,6 @@
                 "name": "postQuery",
                 "leadingComments": null
               },
-              "static": false,
               "kind": "method",
               "id": null,
               "generator": false,
@@ -2009,6 +2009,7 @@
                   "column": 3
                 }
               },
+              "static": false,
               "computed": false,
               "key": {
                 "type": "Identifier",
@@ -2028,7 +2029,6 @@
                 "name": "getJob",
                 "leadingComments": null
               },
-              "static": false,
               "kind": "method",
               "id": null,
               "generator": false,
@@ -2450,6 +2450,7 @@
                   "column": 3
                 }
               },
+              "static": false,
               "computed": false,
               "key": {
                 "type": "Identifier",
@@ -2469,7 +2470,6 @@
                 "name": "getQueryResult",
                 "leadingComments": null
               },
-              "static": false,
               "kind": "method",
               "id": null,
               "generator": false,
@@ -2891,6 +2891,7 @@
                   "column": 3
                 }
               },
+              "static": false,
               "computed": false,
               "key": {
                 "type": "Identifier",
@@ -2909,7 +2910,6 @@
                 },
                 "name": "queryAndWaitResult"
               },
-              "static": false,
               "kind": "method",
               "id": null,
               "generator": false,
@@ -4699,6 +4699,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -4718,7 +4719,6 @@
                   "name": "constructor",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "constructor",
                 "id": null,
                 "generator": false,
@@ -5443,6 +5443,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -5462,7 +5463,6 @@
                   "name": "getQuery",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -5884,6 +5884,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -5903,7 +5904,6 @@
                   "name": "postQuery",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -6286,6 +6286,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -6305,7 +6306,6 @@
                   "name": "getJob",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -6727,6 +6727,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -6746,7 +6747,6 @@
                   "name": "getQueryResult",
                   "leadingComments": null
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
@@ -7168,6 +7168,7 @@
                     "column": 3
                   }
                 },
+                "static": false,
                 "computed": false,
                 "key": {
                   "type": "Identifier",
@@ -7186,7 +7187,6 @@
                   },
                   "name": "queryAndWaitResult"
                 },
-                "static": false,
                 "kind": "method",
                 "id": null,
                 "generator": false,
