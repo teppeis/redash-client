@@ -18,11 +18,11 @@
     "test:unit": "mocha --require intelli-espower-loader test"
   },
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.17.1",
     "delay": "^2.0.0"
   },
   "devDependencies": {
-    "axios-debug-log": "^0.3.0",
+    "axios-debug-log": "^0.4.0",
     "axios-mock-adapter": "^1.10.0",
     "esdoc": "^1.0.4",
     "esdoc-node": "^1.0.2",
