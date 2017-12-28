@@ -30,8 +30,8 @@ describe('RedashClient', () => {
 
       const {id} = expectedBody;
       mock.onGet(`/api/queries/${id}`).reply(200, expectedBody);
-      const result = await client.getQuery(id);
-      assert.deepEqual(result, expectedBody);
+      const actual = await client.getQuery(id);
+      assert.deepEqual(actual, expectedBody);
     });
 
     /** @test {RedashClient#postQuery} */
@@ -39,12 +39,12 @@ describe('RedashClient', () => {
       const expectedBody = require('./fixtures/post-query_results-max_age_0');
 
       mock.onPost('/api/query_results').reply(200, expectedBody);
-      const result = await client.postQuery({
+      const actual = await client.postQuery({
         query: 'select * from cohort2',
         data_source_id: 2,
         max_age: 0,
       });
-      assert.deepEqual(result, expectedBody);
+      assert.deepEqual(actual, expectedBody);
     });
 
     /** @test {RedashClient#getJob} */
@@ -53,8 +53,8 @@ describe('RedashClient', () => {
 
       const {id} = expectedBody.job;
       mock.onGet(`/api/jobs/${id}`).reply(200, expectedBody);
-      const result = await client.getJob(id);
-      assert.deepEqual(result, expectedBody);
+      const actual = await client.getJob(id);
+      assert.deepEqual(actual, expectedBody);
     });
 
     /** @test {RedashClient#getQueryResult} */
@@ -63,8 +63,8 @@ describe('RedashClient', () => {
 
       const {id} = expectedBody.query_result;
       mock.onGet(`/api/query_results/${id}`).reply(200, expectedBody);
-      const result = await client.getQueryResult(id);
-      assert.deepEqual(result, expectedBody);
+      const actual = await client.getQueryResult(id);
+      assert.deepEqual(actual, expectedBody);
     });
 
     /** @test {RedashClient#queryAndWaitResult} */

@@ -61,17 +61,27 @@ describe(&apos;RedashClient&apos;, () =&gt; {
       mock = new Mock(client.axios_);
     });
 
+    /** @test {RedashClient#getQuery} */
+    it(&apos;getQuery&apos;, async () =&gt; {
+      const expectedBody = require(&apos;./fixtures/get-query&apos;);
+
+      const {id} = expectedBody;
+      mock.onGet(`/api/queries/${id}`).reply(200, expectedBody);
+      const actual = await client.getQuery(id);
+      assert.deepEqual(actual, expectedBody);
+    });
+
     /** @test {RedashClient#postQuery} */
     it(&apos;postQuery with max_age = 0&apos;, async () =&gt; {
       const expectedBody = require(&apos;./fixtures/post-query_results-max_age_0&apos;);
 
       mock.onPost(&apos;/api/query_results&apos;).reply(200, expectedBody);
-      const result = await client.postQuery({
+      const actual = await client.postQuery({
         query: &apos;select * from cohort2&apos;,
         data_source_id: 2,
         max_age: 0,
       });
-      assert.deepEqual(result, expectedBody);
+      assert.deepEqual(actual, expectedBody);
     });
 
     /** @test {RedashClient#getJob} */
@@ -80,8 +90,8 @@ describe(&apos;RedashClient&apos;, () =&gt; {
 
       const {id} = expectedBody.job;
       mock.onGet(`/api/jobs/${id}`).reply(200, expectedBody);
-      const result = await client.getJob(id);
-      assert.deepEqual(result, expectedBody);
+      const actual = await client.getJob(id);
+      assert.deepEqual(actual, expectedBody);
     });
 
     /** @test {RedashClient#getQueryResult} */
@@ -90,8 +100,8 @@ describe(&apos;RedashClient&apos;, () =&gt; {
 
       const {id} = expectedBody.query_result;
       mock.onGet(`/api/query_results/${id}`).reply(200, expectedBody);
-      const result = await client.getQueryResult(id);
-      assert.deepEqual(result, expectedBody);
+      const actual = await client.getQueryResult(id);
+      assert.deepEqual(actual, expectedBody);
     });
 
     /** @test {RedashClient#queryAndWaitResult} */

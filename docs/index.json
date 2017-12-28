@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/RedashClient.js",
-    "content": "'use strict';\n\nconst axios = require('axios');\nconst delay = require('delay');\n\nconst DEFAULT_POLLING_TIMEOUT_MS = 60 * 1000;\n\n/**\n * Redash Client\n */\nclass RedashClient {\n  /**\n   * @param {{endPoint: string, apiToken: string, authHeaderName: ?string}} options\n   */\n  constructor({endPoint, apiToken, authHeaderName = 'Authorization'} = {}) {\n    /**\n     * @type {axios}\n     * @private\n     */\n    this.axios_ = axios.create({\n      baseURL: endPoint,\n      headers: {\n        [authHeaderName]: `Key ${apiToken}`,\n      },\n    });\n  }\n\n  /**\n   * @param {{data_source_id: number, max_age: number, query: string, query_id: number}} query\n   * @return {Promise<{job: Job}|{query_result: QueryResult}>}\n   */\n  postQuery(query) {\n    return this.axios_.post('api/query_results', query).then(resp => resp.data);\n  }\n\n  /**\n   * @param {number} id\n   * @return {Promise<{job: Job}>}\n   */\n  getJob(id) {\n    return this.axios_.get(`api/jobs/${id}`).then(resp => resp.data);\n  }\n\n  /**\n   * @param {number} queryResultId\n   * @return {Promise<{query_result: QueryResult}>}\n   */\n  getQueryResult(queryResultId) {\n    return this.axios_.get(`api/query_results/${queryResultId}`).then(resp => resp.data);\n  }\n\n  /**\n   * @param {{data_source_id: number, max_age: number, query: string, query_id: number}} query\n   * @param {number=} timeout\n   * @return {Promise<{query_result: QueryResult}>}\n   */\n  async queryAndWaitResult(query, timeout = DEFAULT_POLLING_TIMEOUT_MS) {\n    // `max_age` should be 0 to disable cache always\n    query = Object.assign({}, query, {max_age: 0});\n    const {job: {id}} = await this.postQuery(query);\n    let queryResultId;\n    const start = Date.now();\n    while (true) {\n      const {job} = await this.getJob(id);\n      if (job.status === 3) {\n        queryResultId = job.query_result_id;\n        break;\n      }\n      if (Date.now() - start > timeout) {\n        throw new Error('polling timeout');\n      }\n      await delay(1000);\n    }\n    return this.getQueryResult(queryResultId);\n  }\n}\n\nmodule.exports = RedashClient;\n",
+    "content": "'use strict';\n\nconst axios = require('axios');\nconst delay = require('delay');\n\nconst DEFAULT_POLLING_TIMEOUT_MS = 60 * 1000;\n\n/**\n * Redash Client\n */\nclass RedashClient {\n  /**\n   * @param {{endPoint: string, apiToken: string, authHeaderName: ?string}} options\n   */\n  constructor({endPoint, apiToken, authHeaderName = 'Authorization'} = {}) {\n    /**\n     * @type {axios}\n     * @private\n     */\n    this.axios_ = axios.create({\n      baseURL: endPoint,\n      headers: {\n        [authHeaderName]: `Key ${apiToken}`,\n      },\n    });\n  }\n\n  /**\n   * @param {number} id\n   * @return {Promise<Query>}\n   */\n  getQuery(id) {\n    return this.axios_.get(`api/queries/${id}`).then(resp => resp.data);\n  }\n\n  /**\n   * @param {{data_source_id: number, max_age: number, query: string, query_id: number}} query\n   * @return {Promise<{job: Job}|{query_result: QueryResult}>}\n   */\n  postQuery(query) {\n    return this.axios_.post('api/query_results', query).then(resp => resp.data);\n  }\n\n  /**\n   * @param {number} id\n   * @return {Promise<{job: Job}>}\n   */\n  getJob(id) {\n    return this.axios_.get(`api/jobs/${id}`).then(resp => resp.data);\n  }\n\n  /**\n   * @param {number} queryResultId\n   * @return {Promise<{query_result: QueryResult}>}\n   */\n  getQueryResult(queryResultId) {\n    return this.axios_.get(`api/query_results/${queryResultId}`).then(resp => resp.data);\n  }\n\n  /**\n   * @param {{data_source_id: number, max_age: number, query: string, query_id: number}} query\n   * @param {number=} timeout\n   * @return {Promise<{query_result: QueryResult}>}\n   */\n  async queryAndWaitResult(query, timeout = DEFAULT_POLLING_TIMEOUT_MS) {\n    // `max_age` should be 0 to disable cache always\n    query = Object.assign({}, query, {max_age: 0});\n    const {job: {id}} = await this.postQuery(query);\n    let queryResultId;\n    const start = Date.now();\n    while (true) {\n      const {job} = await this.getJob(id);\n      if (job.status === 3) {\n        queryResultId = job.query_result_id;\n        break;\n      }\n      if (Date.now() - start > timeout) {\n        throw new Error('polling timeout');\n      }\n      await delay(1000);\n    }\n    return this.getQueryResult(queryResultId);\n  }\n}\n\nmodule.exports = RedashClient;\n",
     "static": true,
     "longname": "/Users/teppeis/src/github.com/teppeis/redash-client/src/RedashClient.js",
     "access": "public",
@@ -699,6 +699,39 @@
   {
     "__docId__": 55,
     "kind": "method",
+    "name": "getQuery",
+    "memberof": "src/RedashClient.js~RedashClient",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/RedashClient.js~RedashClient#getQuery",
+    "access": "public",
+    "description": "",
+    "lineNumber": 32,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "id",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise<Query>"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 56,
+    "kind": "method",
     "name": "postQuery",
     "memberof": "src/RedashClient.js~RedashClient",
     "generator": false,
@@ -707,7 +740,7 @@
     "longname": "src/RedashClient.js~RedashClient#postQuery",
     "access": "public",
     "description": "",
-    "lineNumber": 32,
+    "lineNumber": 40,
     "params": [
       {
         "nullable": null,
@@ -730,7 +763,7 @@
     }
   },
   {
-    "__docId__": 56,
+    "__docId__": 57,
     "kind": "method",
     "name": "getJob",
     "memberof": "src/RedashClient.js~RedashClient",
@@ -740,7 +773,7 @@
     "longname": "src/RedashClient.js~RedashClient#getJob",
     "access": "public",
     "description": "",
-    "lineNumber": 40,
+    "lineNumber": 48,
     "params": [
       {
         "nullable": null,
@@ -763,7 +796,7 @@
     }
   },
   {
-    "__docId__": 57,
+    "__docId__": 58,
     "kind": "method",
     "name": "getQueryResult",
     "memberof": "src/RedashClient.js~RedashClient",
@@ -773,7 +806,7 @@
     "longname": "src/RedashClient.js~RedashClient#getQueryResult",
     "access": "public",
     "description": "",
-    "lineNumber": 48,
+    "lineNumber": 56,
     "params": [
       {
         "nullable": null,
@@ -796,7 +829,7 @@
     }
   },
   {
-    "__docId__": 58,
+    "__docId__": 59,
     "kind": "method",
     "name": "queryAndWaitResult",
     "memberof": "src/RedashClient.js~RedashClient",
@@ -806,7 +839,7 @@
     "longname": "src/RedashClient.js~RedashClient#queryAndWaitResult",
     "access": "public",
     "description": "",
-    "lineNumber": 57,
+    "lineNumber": 65,
     "params": [
       {
         "nullable": null,
@@ -840,7 +873,7 @@
   },
   {
     "kind": "index",
-    "content": "redash-client\n======\n\nJavaScript Client for [Redash](https://redash.io/) API\n\n[![npm version][npm-image]][npm-url]\n![Node.js Version Support][node-version]\n[![build status][circleci-image]][circleci-url]\n[![dependency status][deps-image]][deps-url]\n![License][license]\n\n##### Note: This pacakge requires Node v8 for async/await\n\n## Install\n\n```console\n$ npm install redash-client\n```\n\n## Usage\n\n```javascript\nconst RedashClient = require('redash-client');\nconst redash = new RedashClient({\n  endPoint: 'https://your-redash.com/',\n  apiToken: 'abcde12345',\n});\nredash.postQuery({\n  query: 'select * from cohort2',\n  data_source_id: 2,\n  max_age: 0,\n}).then(resp => {\n  console.log(resp.job);\n});\n```\n\n## API\n\nSee [API document](https://teppeis.github.io/redash-client/)\n\n### Supported REST API\n\n- `#postQuery()`\n- `#getJob()`\n- `#getQueryResult()`\n\nMethods for other REST API are not implemented yet. Help!\n\n### Utility methods\n\n#### `#queryAndWaitResult()`\n\nInternally:\n\n1. `postQuery()`\n2. Poll `getJob()`\n3. Return `getAueryRestul()`\n\n## License\n\nMIT License: Teppei Sato &lt;teppeis@gmail.com&gt;\n\n[npm-image]: https://img.shields.io/npm/v/redash-client.svg\n[npm-url]: https://npmjs.org/package/redash-client\n[npm-downloads-image]: https://img.shields.io/npm/dm/redash-client.svg\n[travis-image]: https://img.shields.io/travis/teppeis/redash-client/master.svg\n[travis-url]: https://travis-ci.org/teppeis/redash-client\n[deps-image]: https://img.shields.io/david/teppeis/redash-client.svg\n[deps-url]: https://david-dm.org/teppeis/redash-client\n[node-version]: https://img.shields.io/badge/Node.js%20support-v8-brightgreen.svg\n[coverage-image]: https://img.shields.io/coveralls/teppeis/redash-client/master.svg\n[coverage-url]: https://coveralls.io/github/teppeis/redash-client?branch=master\n[license]: https://img.shields.io/npm/l/redash-client.svg\n[appveyor-image]: https://ci.appveyor.com/api/projects/status/22nwyfaf5p0yw54j/branch/master?svg=true\n[appveyor-url]: https://ci.appveyor.com/project/teppeis/redash-client/branch/master\n[circleci-image]: https://circleci.com/gh/teppeis/redash-client.svg?style=svg\n[circleci-url]: https://circleci.com/gh/teppeis/redash-client\n",
+    "content": "redash-client\n======\n\nJavaScript Client for [Redash](https://redash.io/) API\n\n[![npm version][npm-image]][npm-url]\n![Node.js Version Support][node-version]\n[![build status][circleci-image]][circleci-url]\n[![dependency status][deps-image]][deps-url]\n![License][license]\n\n##### Note: This pacakge requires Node v8 for async/await\n\n## Install\n\n```console\n$ npm install redash-client\n```\n\n## Usage\n\n```javascript\nconst RedashClient = require('redash-client');\nconst redash = new RedashClient({\n  endPoint: 'https://your-redash.com/',\n  apiToken: 'abcde12345',\n});\nredash.postQuery({\n  query: 'select * from cohort2',\n  data_source_id: 2,\n  max_age: 0,\n}).then(resp => {\n  console.log(resp.job);\n});\n```\n\n## API\n\nSee [API document](https://teppeis.github.io/redash-client/)\n\n### Supported REST API\n\n- `#getQuery()`\n- `#postQuery()`\n- `#getJob()`\n- `#getQueryResult()`\n\nMethods for other REST API are not implemented yet. Help!\n\n### Utility methods\n\n#### `#queryAndWaitResult()`\n\nInternally:\n\n1. `postQuery()`\n2. Poll `getJob()`\n3. Return `getAueryRestul()`\n\n## License\n\nMIT License: Teppei Sato &lt;teppeis@gmail.com&gt;\n\n[npm-image]: https://img.shields.io/npm/v/redash-client.svg\n[npm-url]: https://npmjs.org/package/redash-client\n[npm-downloads-image]: https://img.shields.io/npm/dm/redash-client.svg\n[travis-image]: https://img.shields.io/travis/teppeis/redash-client/master.svg\n[travis-url]: https://travis-ci.org/teppeis/redash-client\n[deps-image]: https://img.shields.io/david/teppeis/redash-client.svg\n[deps-url]: https://david-dm.org/teppeis/redash-client\n[node-version]: https://img.shields.io/badge/Node.js%20support-v8-brightgreen.svg\n[coverage-image]: https://img.shields.io/coveralls/teppeis/redash-client/master.svg\n[coverage-url]: https://coveralls.io/github/teppeis/redash-client?branch=master\n[license]: https://img.shields.io/npm/l/redash-client.svg\n[appveyor-image]: https://ci.appveyor.com/api/projects/status/22nwyfaf5p0yw54j/branch/master?svg=true\n[appveyor-url]: https://ci.appveyor.com/project/teppeis/redash-client/branch/master\n[circleci-image]: https://circleci.com/gh/teppeis/redash-client.svg?style=svg\n[circleci-url]: https://circleci.com/gh/teppeis/redash-client\n",
     "longname": "/Users/teppeis/src/github.com/teppeis/redash-client/README.md",
     "name": "./README.md",
     "static": true,
@@ -855,10 +888,10 @@
     "access": "public"
   },
   {
-    "__docId__": 59,
+    "__docId__": 60,
     "kind": "testFile",
     "name": "test/index.js",
-    "content": "'use strict';\n\nconst Client = require('../');\nconst assert = require('assert');\nconst Mock = require('axios-mock-adapter');\n\nrequire('axios-debug-log');\n\n/** @test {RedashClient} */\ndescribe('RedashClient', () => {\n  it('should be a constructor', () => {\n    const client = new Client();\n    assert(client instanceof Client);\n  });\n\n  describe('api', () => {\n    let client, mock;\n\n    beforeEach(() => {\n      client = new Client({\n        endPoint: 'https://demo.redash.io/',\n        apiToken: process.env.API_TOKEN || 'abc123',\n      });\n      mock = new Mock(client.axios_);\n    });\n\n    /** @test {RedashClient#postQuery} */\n    it('postQuery with max_age = 0', async () => {\n      const expectedBody = require('./fixtures/post-query_results-max_age_0');\n\n      mock.onPost('/api/query_results').reply(200, expectedBody);\n      const result = await client.postQuery({\n        query: 'select * from cohort2',\n        data_source_id: 2,\n        max_age: 0,\n      });\n      assert.deepEqual(result, expectedBody);\n    });\n\n    /** @test {RedashClient#getJob} */\n    it('getJob', async () => {\n      const expectedBody = require('./fixtures/get-jobs-1');\n\n      const {id} = expectedBody.job;\n      mock.onGet(`/api/jobs/${id}`).reply(200, expectedBody);\n      const result = await client.getJob(id);\n      assert.deepEqual(result, expectedBody);\n    });\n\n    /** @test {RedashClient#getQueryResult} */\n    it('getQueryResult', async () => {\n      const expectedBody = require('./fixtures/get-query_results');\n\n      const {id} = expectedBody.query_result;\n      mock.onGet(`/api/query_results/${id}`).reply(200, expectedBody);\n      const result = await client.getQueryResult(id);\n      assert.deepEqual(result, expectedBody);\n    });\n\n    /** @test {RedashClient#queryAndWaitResult} */\n    it('queryAndWaitResult', async () => {\n      const job1 = require('./fixtures/post-query_results-max_age_0');\n      const job2 = require('./fixtures/get-jobs-2');\n      const job3 = require('./fixtures/get-jobs-3');\n      const queryResult = require('./fixtures/get-query_results');\n\n      const jobId = job1.job.id;\n      const queryResultId = job3.job.query_result_id;\n      mock.onPost('/api/query_results').reply(200, job1);\n      mock.onGet(`/api/jobs/${jobId}`).replyOnce(200, job2);\n      mock.onGet(`/api/jobs/${jobId}`).replyOnce(200, job3);\n      mock.onGet(`/api/query_results/${queryResultId}`).reply(200, queryResult);\n\n      const actual = await client.queryAndWaitResult({\n        query: 'select * from cohort2',\n        data_source_id: 2,\n        max_age: 0,\n      });\n      assert.deepEqual(actual, queryResult);\n    });\n\n    /** @test {RedashClient#queryAndWaitResult} */\n    it('queryAndWaitResult: timeout', function(done) {\n      this.timeout(3000);\n\n      const job1 = require('./fixtures/post-query_results-max_age_0');\n      const job2 = require('./fixtures/get-jobs-2');\n\n      const jobId = job1.job.id;\n      mock.onPost('/api/query_results').reply(200, job1);\n      mock.onGet(`/api/jobs/${jobId}`).reply(200, job2);\n\n      client.queryAndWaitResult({\n        query: 'select * from cohort2',\n        data_source_id: 2,\n        max_age: 0,\n      }, 1000).catch(e => {\n        assert(/polling timeout/.test(e.message));\n        done();\n      });\n    });\n  });\n});\n",
+    "content": "'use strict';\n\nconst Client = require('../');\nconst assert = require('assert');\nconst Mock = require('axios-mock-adapter');\n\nrequire('axios-debug-log');\n\n/** @test {RedashClient} */\ndescribe('RedashClient', () => {\n  it('should be a constructor', () => {\n    const client = new Client();\n    assert(client instanceof Client);\n  });\n\n  describe('api', () => {\n    let client, mock;\n\n    beforeEach(() => {\n      client = new Client({\n        endPoint: 'https://demo.redash.io/',\n        apiToken: process.env.API_TOKEN || 'abc123',\n      });\n      mock = new Mock(client.axios_);\n    });\n\n    /** @test {RedashClient#getQuery} */\n    it('getQuery', async () => {\n      const expectedBody = require('./fixtures/get-query');\n\n      const {id} = expectedBody;\n      mock.onGet(`/api/queries/${id}`).reply(200, expectedBody);\n      const actual = await client.getQuery(id);\n      assert.deepEqual(actual, expectedBody);\n    });\n\n    /** @test {RedashClient#postQuery} */\n    it('postQuery with max_age = 0', async () => {\n      const expectedBody = require('./fixtures/post-query_results-max_age_0');\n\n      mock.onPost('/api/query_results').reply(200, expectedBody);\n      const actual = await client.postQuery({\n        query: 'select * from cohort2',\n        data_source_id: 2,\n        max_age: 0,\n      });\n      assert.deepEqual(actual, expectedBody);\n    });\n\n    /** @test {RedashClient#getJob} */\n    it('getJob', async () => {\n      const expectedBody = require('./fixtures/get-jobs-1');\n\n      const {id} = expectedBody.job;\n      mock.onGet(`/api/jobs/${id}`).reply(200, expectedBody);\n      const actual = await client.getJob(id);\n      assert.deepEqual(actual, expectedBody);\n    });\n\n    /** @test {RedashClient#getQueryResult} */\n    it('getQueryResult', async () => {\n      const expectedBody = require('./fixtures/get-query_results');\n\n      const {id} = expectedBody.query_result;\n      mock.onGet(`/api/query_results/${id}`).reply(200, expectedBody);\n      const actual = await client.getQueryResult(id);\n      assert.deepEqual(actual, expectedBody);\n    });\n\n    /** @test {RedashClient#queryAndWaitResult} */\n    it('queryAndWaitResult', async () => {\n      const job1 = require('./fixtures/post-query_results-max_age_0');\n      const job2 = require('./fixtures/get-jobs-2');\n      const job3 = require('./fixtures/get-jobs-3');\n      const queryResult = require('./fixtures/get-query_results');\n\n      const jobId = job1.job.id;\n      const queryResultId = job3.job.query_result_id;\n      mock.onPost('/api/query_results').reply(200, job1);\n      mock.onGet(`/api/jobs/${jobId}`).replyOnce(200, job2);\n      mock.onGet(`/api/jobs/${jobId}`).replyOnce(200, job3);\n      mock.onGet(`/api/query_results/${queryResultId}`).reply(200, queryResult);\n\n      const actual = await client.queryAndWaitResult({\n        query: 'select * from cohort2',\n        data_source_id: 2,\n        max_age: 0,\n      });\n      assert.deepEqual(actual, queryResult);\n    });\n\n    /** @test {RedashClient#queryAndWaitResult} */\n    it('queryAndWaitResult: timeout', function(done) {\n      this.timeout(3000);\n\n      const job1 = require('./fixtures/post-query_results-max_age_0');\n      const job2 = require('./fixtures/get-jobs-2');\n\n      const jobId = job1.job.id;\n      mock.onPost('/api/query_results').reply(200, job1);\n      mock.onGet(`/api/jobs/${jobId}`).reply(200, job2);\n\n      client.queryAndWaitResult({\n        query: 'select * from cohort2',\n        data_source_id: 2,\n        max_age: 0,\n      }, 1000).catch(e => {\n        assert(/polling timeout/.test(e.message));\n        done();\n      });\n    });\n  });\n});\n",
     "static": true,
     "longname": "/Users/teppeis/src/github.com/teppeis/redash-client/test/index.js",
     "access": null,
@@ -866,7 +899,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 60,
+    "__docId__": 61,
     "kind": "test",
     "name": "describe0",
     "testId": 0,
@@ -882,7 +915,7 @@
     ]
   },
   {
-    "__docId__": 61,
+    "__docId__": 62,
     "kind": "test",
     "name": "it1",
     "testId": 1,
@@ -895,7 +928,7 @@
     "lineNumber": 11
   },
   {
-    "__docId__": 62,
+    "__docId__": 63,
     "kind": "test",
     "name": "describe2",
     "testId": 2,
@@ -908,7 +941,7 @@
     "lineNumber": 16
   },
   {
-    "__docId__": 63,
+    "__docId__": 64,
     "kind": "test",
     "name": "it3",
     "testId": 3,
@@ -917,14 +950,14 @@
     "static": true,
     "longname": "test/index.js~describe0.describe2.it3",
     "access": null,
-    "description": "postQuery with max_age = 0",
+    "description": "getQuery",
     "lineNumber": 28,
     "testTargets": [
-      "RedashClient#postQuery"
+      "RedashClient#getQuery"
     ]
   },
   {
-    "__docId__": 64,
+    "__docId__": 65,
     "kind": "test",
     "name": "it4",
     "testId": 4,
@@ -933,14 +966,14 @@
     "static": true,
     "longname": "test/index.js~describe0.describe2.it4",
     "access": null,
-    "description": "getJob",
-    "lineNumber": 41,
+    "description": "postQuery with max_age = 0",
+    "lineNumber": 38,
     "testTargets": [
-      "RedashClient#getJob"
+      "RedashClient#postQuery"
     ]
   },
   {
-    "__docId__": 65,
+    "__docId__": 66,
     "kind": "test",
     "name": "it5",
     "testId": 5,
@@ -949,14 +982,14 @@
     "static": true,
     "longname": "test/index.js~describe0.describe2.it5",
     "access": null,
-    "description": "getQueryResult",
+    "description": "getJob",
     "lineNumber": 51,
     "testTargets": [
-      "RedashClient#getQueryResult"
+      "RedashClient#getJob"
     ]
   },
   {
-    "__docId__": 66,
+    "__docId__": 67,
     "kind": "test",
     "name": "it6",
     "testId": 6,
@@ -965,14 +998,14 @@
     "static": true,
     "longname": "test/index.js~describe0.describe2.it6",
     "access": null,
-    "description": "queryAndWaitResult",
+    "description": "getQueryResult",
     "lineNumber": 61,
     "testTargets": [
-      "RedashClient#queryAndWaitResult"
+      "RedashClient#getQueryResult"
     ]
   },
   {
-    "__docId__": 67,
+    "__docId__": 68,
     "kind": "test",
     "name": "it7",
     "testId": 7,
@@ -981,8 +1014,24 @@
     "static": true,
     "longname": "test/index.js~describe0.describe2.it7",
     "access": null,
+    "description": "queryAndWaitResult",
+    "lineNumber": 71,
+    "testTargets": [
+      "RedashClient#queryAndWaitResult"
+    ]
+  },
+  {
+    "__docId__": 69,
+    "kind": "test",
+    "name": "it8",
+    "testId": 8,
+    "memberof": "test/index.js~describe0.describe2",
+    "testDepth": 2,
+    "static": true,
+    "longname": "test/index.js~describe0.describe2.it8",
+    "access": null,
     "description": "queryAndWaitResult: timeout",
-    "lineNumber": 83,
+    "lineNumber": 93,
     "testTargets": [
       "RedashClient#queryAndWaitResult"
     ]

@@ -63,6 +63,14 @@ class RedashClient {
   }
 
   /**
+   * @param {number} id
+   * @return {Promise&lt;Query&gt;}
+   */
+  getQuery(id) {
+    return this.axios_.get(`api/queries/${id}`).then(resp =&gt; resp.data);
+  }
+
+  /**
    * @param {{data_source_id: number, max_age: number, query: string, query_id: number}} query
    * @return {Promise&lt;{job: Job}|{query_result: QueryResult}&gt;}
    */
