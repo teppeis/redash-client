@@ -24,6 +24,16 @@ describe('RedashClient', () => {
       mock = new Mock(client.axios_);
     });
 
+    /** @test {RedashClient#getQuery} */
+    it('getQuery', async () => {
+      const expectedBody = require('./fixtures/get-query');
+
+      const {id} = expectedBody;
+      mock.onGet(`/api/queries/${id}`).reply(200, expectedBody);
+      const result = await client.getQuery(id);
+      assert.deepEqual(result, expectedBody);
+    });
+
     /** @test {RedashClient#postQuery} */
     it('postQuery with max_age = 0', async () => {
       const expectedBody = require('./fixtures/post-query_results-max_age_0');
