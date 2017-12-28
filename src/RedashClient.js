@@ -27,7 +27,7 @@ class RedashClient {
 
   /**
    * @param {number} id
-   * @return {Promise<{query: Query}>}
+   * @return {Promise<Query>}
    */
   getQuery(id) {
     return this.axios_.get(`api/queries/${id}`).then(resp => resp.data);
