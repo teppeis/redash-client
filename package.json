@@ -25,7 +25,7 @@
     "axios-debug-log": "^0.4.0",
     "axios-mock-adapter": "^1.10.0",
     "esdoc": "^1.0.4",
-    "esdoc-node": "^1.0.2",
+    "esdoc-node": "^1.0.3",
     "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^4.19.0",
     "eslint-config-teppeis": "^6.6.2",
