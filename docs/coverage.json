@@ -1,14 +1,12 @@
 {
-  "coverage": "72.72%",
-  "expectCount": 11,
+  "coverage": "88.88%",
+  "expectCount": 9,
   "actualCount": 8,
   "files": {
     "src/RedashClient.js": {
-      "expectCount": 11,
+      "expectCount": 9,
       "actualCount": 8,
       "undocumentLines": [
-        3,
-        4,
         6
       ]
     }
