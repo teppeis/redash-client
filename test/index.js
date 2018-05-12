@@ -100,14 +100,19 @@ describe('RedashClient', () => {
       mock.onPost('/api/query_results').reply(200, job1);
       mock.onGet(`/api/jobs/${jobId}`).reply(200, job2);
 
-      client.queryAndWaitResult({
-        query: 'select * from cohort2',
-        data_source_id: 2,
-        max_age: 0,
-      }, 1000).catch(e => {
-        assert(/polling timeout/.test(e.message));
-        done();
-      });
+      client
+        .queryAndWaitResult(
+          {
+            query: 'select * from cohort2',
+            data_source_id: 2,
+            max_age: 0,
+          },
+          1000
+        )
+        .catch(e => {
+          assert(/polling timeout/.test(e.message));
+          done();
+        });
     });
   });
 });

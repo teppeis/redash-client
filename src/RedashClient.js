@@ -64,8 +64,10 @@ class RedashClient {
    */
   async queryAndWaitResult(query, timeout = DEFAULT_POLLING_TIMEOUT_MS) {
     // `max_age` should be 0 to disable cache always
-    query = ({...query, max_age: 0});
-    const {job: {id}} = await this.postQuery(query);
+    query = {...query, max_age: 0};
+    const {
+      job: {id},
+    } = await this.postQuery(query);
     let queryResultId;
     const start = Date.now();
     while (true) {
