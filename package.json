@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "delay": "^2.0.0"
+    "delay": "^3.0.0"
   },
   "devDependencies": {
     "axios-debug-log": "^0.4.0",
