@@ -27,7 +27,7 @@
     "esdoc": "^1.1.0",
     "esdoc-node": "^1.0.3",
     "esdoc-standard-plugin": "^1.0.0",
-    "eslint": "^5.3.0",
+    "eslint": "^5.4.0",
     "eslint-config-teppeis": "^8.2.0",
     "intelli-espower-loader": "^1.0.1",
     "mocha": "^5.2.0",
