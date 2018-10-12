@@ -44,6 +44,6 @@
     }
   ],
   "api_key": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-  "options": { "parameters": [] },
+  "options": {"parameters": []},
   "data_source_id": 2
 }
