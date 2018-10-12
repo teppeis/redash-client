@@ -41,6 +41,7 @@ See [API document](https://teppeis.github.io/redash-client/)
 ### Supported REST API
 
 - `#getQuery()`
+- `#getQueries()`
 - `#postQuery()`
 - `#getJob()`
 - `#getQueryResult()`
