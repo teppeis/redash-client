@@ -34,6 +34,15 @@ describe('RedashClient', () => {
       assert.deepEqual(actual, expectedBody);
     });
 
+    /** @test {RedashClient#getQueries} */
+    it('getQueries', async () => {
+      const expectedBody = require('./fixtures/get-queries');
+
+      mock.onGet(`/api/queries`).reply(200, expectedBody);
+      const actual = await client.getQueries();
+      assert.deepEqual(actual, expectedBody);
+    });
+
     /** @test {RedashClient#postQuery} */
     it('postQuery with max_age = 0', async () => {
       const expectedBody = require('./fixtures/post-query_results-max_age_0');
