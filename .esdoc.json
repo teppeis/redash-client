@@ -15,6 +15,12 @@
           "excludes": ["/fixtures/"]
         }
       }
+    },
+    {
+      "name": "esdoc-ecmascript-proposal-plugin",
+      "option": {
+        "objectRestSpread": true
+      }
     }
   ]
 }

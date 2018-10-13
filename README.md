@@ -1,5 +1,4 @@
-redash-client
-======
+# redash-client
 
 JavaScript Client for [Redash](https://redash.io/) API
 
@@ -25,13 +24,15 @@ const redash = new RedashClient({
   endPoint: 'https://your-redash.com/',
   apiToken: 'abcde12345',
 });
-redash.postQuery({
-  query: 'select * from cohort2',
-  data_source_id: 2,
-  max_age: 0,
-}).then(resp => {
-  console.log(resp.job);
-});
+redash
+  .postQuery({
+    query: 'select * from cohort2',
+    data_source_id: 2,
+    max_age: 0,
+  })
+  .then(resp => {
+    console.log(resp.job);
+  });
 ```
 
 ## API
@@ -41,6 +42,7 @@ See [API document](https://teppeis.github.io/redash-client/)
 ### Supported REST API
 
 - `#getQuery()`
+- `#getQueries()`
 - `#postQuery()`
 - `#getJob()`
 - `#getQueryResult()`
