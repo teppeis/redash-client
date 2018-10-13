@@ -71,6 +71,13 @@ class RedashClient {
   }
 
   /**
+   * @return {Promise&lt;{count: number, page: number, page_size: number, results: Array&lt;Query&gt;}&gt;}
+   */
+  getQueries() {
+    return this.axios_.get(`api/queries`).then(resp =&gt; resp.data);
+  }
+
+  /**
    * @param {{data_source_id: number, max_age: number, query: string, query_id: number}} query
    * @return {Promise&lt;{job: Job}|{query_result: QueryResult}&gt;}
    */
@@ -101,8 +108,10 @@ class RedashClient {
    */
   async queryAndWaitResult(query, timeout = DEFAULT_POLLING_TIMEOUT_MS) {
     // `max_age` should be 0 to disable cache always
-    query = Object.assign({}, query, {max_age: 0});
-    const {job: {id}} = await this.postQuery(query);
+    query = {...query, max_age: 0};
+    const {
+      job: {id},
+    } = await this.postQuery(query);
     let queryResultId;
     const start = Date.now();
     while (true) {

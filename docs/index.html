@@ -36,7 +36,7 @@
 
 <div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="redash-client">redash-client</h1><p>JavaScript Client for <a href="https://redash.io/">Redash</a> API</p>
 <p><a href="https://npmjs.org/package/redash-client"><img src="https://img.shields.io/npm/v/redash-client.svg" alt="npm version"></a>
-<img src="https://img.shields.io/badge/Node.js%20support-v8,v9-brightgreen.svg" alt="Node.js Version Support">
+<img src="https://img.shields.io/badge/Node.js%20support-v8,v10-brightgreen.svg" alt="Node.js Version Support">
 <a href="https://circleci.com/gh/teppeis/redash-client"><img src="https://circleci.com/gh/teppeis/redash-client.svg?style=shield" alt="build status"></a>
 <a href="https://david-dm.org/teppeis/redash-client"><img src="https://img.shields.io/david/teppeis/redash-client.svg" alt="dependency status"></a>
 <img src="https://img.shields.io/npm/l/redash-client.svg" alt="License"></p>
@@ -47,17 +47,20 @@ const redash = new RedashClient({
   endPoint: &apos;https://your-redash.com/&apos;,
   apiToken: &apos;abcde12345&apos;,
 });
-redash.postQuery({
-  query: &apos;select * from cohort2&apos;,
-  data_source_id: 2,
-  max_age: 0,
-}).then(resp =&gt; {
-  console.log(resp.job);
-});</code>
+redash
+  .postQuery({
+    query: &apos;select * from cohort2&apos;,
+    data_source_id: 2,
+    max_age: 0,
+  })
+  .then(resp =&gt; {
+    console.log(resp.job);
+  });</code>
 </code></pre>
 <h2 id="api">API</h2><p>See <a href="https://teppeis.github.io/redash-client/">API document</a></p>
 <h3 id="supported-rest-api">Supported REST API</h3><ul>
 <li><code>#getQuery()</code></li>
+<li><code>#getQueries()</code></li>
 <li><code>#postQuery()</code></li>
 <li><code>#getJob()</code></li>
 <li><code>#getQueryResult()</code></li>

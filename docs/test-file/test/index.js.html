@@ -71,6 +71,15 @@ describe(&apos;RedashClient&apos;, () =&gt; {
       assert.deepEqual(actual, expectedBody);
     });
 
+    /** @test {RedashClient#getQueries} */
+    it(&apos;getQueries&apos;, async () =&gt; {
+      const expectedBody = require(&apos;./fixtures/get-queries&apos;);
+
+      mock.onGet(`/api/queries`).reply(200, expectedBody);
+      const actual = await client.getQueries();
+      assert.deepEqual(actual, expectedBody);
+    });
+
     /** @test {RedashClient#postQuery} */
     it(&apos;postQuery with max_age = 0&apos;, async () =&gt; {
       const expectedBody = require(&apos;./fixtures/post-query_results-max_age_0&apos;);
@@ -137,14 +146,19 @@ describe(&apos;RedashClient&apos;, () =&gt; {
       mock.onPost(&apos;/api/query_results&apos;).reply(200, job1);
       mock.onGet(`/api/jobs/${jobId}`).reply(200, job2);
 
-      client.queryAndWaitResult({
-        query: &apos;select * from cohort2&apos;,
-        data_source_id: 2,
-        max_age: 0,
-      }, 1000).catch(e =&gt; {
-        assert(/polling timeout/.test(e.message));
-        done();
-      });
+      client
+        .queryAndWaitResult(
+          {
+            query: &apos;select * from cohort2&apos;,
+            data_source_id: 2,
+            max_age: 0,
+          },
+          1000
+        )
+        .catch(e =&gt; {
+          assert(/polling timeout/.test(e.message));
+          done();
+        });
     });
   });
 });

@@ -19,8 +19,14 @@ window.esdocSearchIndex = [
   ],
   [
     "redashclient#getjob src/redashclient.js~redashclient#getjob,redashclient#getjob",
-    "test-file/test/index.js.html#lineNumber51",
+    "test-file/test/index.js.html#lineNumber60",
     "RedashClient api getJob",
+    "test"
+  ],
+  [
+    "redashclient#getqueries src/redashclient.js~redashclient#getqueries,redashclient#getqueries",
+    "test-file/test/index.js.html#lineNumber38",
+    "RedashClient api getQueries",
     "test"
   ],
   [
@@ -31,25 +37,25 @@ window.esdocSearchIndex = [
   ],
   [
     "redashclient#getqueryresult src/redashclient.js~redashclient#getqueryresult,redashclient#getqueryresult",
-    "test-file/test/index.js.html#lineNumber61",
+    "test-file/test/index.js.html#lineNumber70",
     "RedashClient api getQueryResult",
     "test"
   ],
   [
     "redashclient#postquery src/redashclient.js~redashclient#postquery,redashclient#postquery",
-    "test-file/test/index.js.html#lineNumber38",
+    "test-file/test/index.js.html#lineNumber47",
     "RedashClient api postQuery with max_age = 0",
     "test"
   ],
   [
     "redashclient#queryandwaitresult src/redashclient.js~redashclient#queryandwaitresult,redashclient#queryandwaitresult",
-    "test-file/test/index.js.html#lineNumber71",
+    "test-file/test/index.js.html#lineNumber80",
     "RedashClient api queryAndWaitResult",
     "test"
   ],
   [
     "redashclient#queryandwaitresult src/redashclient.js~redashclient#queryandwaitresult,redashclient#queryandwaitresult",
-    "test-file/test/index.js.html#lineNumber93",
+    "test-file/test/index.js.html#lineNumber102",
     "RedashClient api queryAndWaitResult: timeout",
     "test"
   ],
@@ -363,6 +369,12 @@ window.esdocSearchIndex = [
     "src/redashclient.js~redashclient#getjob",
     "class/src/RedashClient.js~RedashClient.html#instance-method-getJob",
     "src/RedashClient.js~RedashClient#getJob",
+    "method"
+  ],
+  [
+    "src/redashclient.js~redashclient#getqueries",
+    "class/src/RedashClient.js~RedashClient.html#instance-method-getQueries",
+    "src/RedashClient.js~RedashClient#getQueries",
     "method"
   ],
   [
