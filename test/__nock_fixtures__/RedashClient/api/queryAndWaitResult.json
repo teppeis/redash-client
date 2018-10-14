@@ -1,0 +1,74 @@
+[
+    {
+        "scope": "https://demo.redash.io:443",
+        "method": "post",
+        "path": "/api/query_results",
+        "body": {
+            "query": "select * from cohort2",
+            "data_source_id": 2,
+            "max_age": 0
+        },
+        "status": 200,
+        "response": {
+            "job": {
+                "status": 1,
+                "error": "",
+                "id": "ba2297dd-553e-4b6b-8250-84f4c62d7cb3",
+                "query_result_id": null,
+                "updated_at": 0
+            }
+        },
+        "rawHeaders": [
+            "Date",
+            "Sun, 14 Oct 2018 06:56:19 GMT",
+            "Content-Type",
+            "application/json",
+            "Transfer-Encoding",
+            "chunked",
+            "Connection",
+            "close",
+            "Set-Cookie",
+            "__cfduid=dbd9ddbe4458f3aeea8bca6ba98621f181539500179; expires=Mon, 14-Oct-19 06:56:19 GMT; path=/; domain=.redash.io; HttpOnly",
+            "Expect-CT",
+            "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+            "Server",
+            "cloudflare",
+            "CF-RAY",
+            "4698253a9defa578-NRT"
+        ]
+    },
+    {
+        "scope": "https://demo.redash.io:443",
+        "method": "get",
+        "path": "/api/jobs/ba2297dd-553e-4b6b-8250-84f4c62d7cb3",
+        "body": "",
+        "status": 200,
+        "response": {
+            "job": {
+                "status": 1,
+                "error": "",
+                "id": "ba2297dd-553e-4b6b-8250-84f4c62d7cb3",
+                "query_result_id": null,
+                "updated_at": 0
+            }
+        },
+        "rawHeaders": [
+            "Date",
+            "Sun, 14 Oct 2018 06:56:20 GMT",
+            "Content-Type",
+            "application/json",
+            "Transfer-Encoding",
+            "chunked",
+            "Connection",
+            "close",
+            "Set-Cookie",
+            "__cfduid=d26500306daec407d46df9f83fc4dbfb41539500180; expires=Mon, 14-Oct-19 06:56:20 GMT; path=/; domain=.redash.io; HttpOnly",
+            "Expect-CT",
+            "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+            "Server",
+            "cloudflare",
+            "CF-RAY",
+            "4698253d98379481-NRT"
+        ]
+    }
+]

@@ -1,0 +1,144 @@
+[
+    {
+        "scope": "https://demo.redash.io:443",
+        "method": "get",
+        "path": "/api/queries/1",
+        "body": "",
+        "status": 200,
+        "response": {
+            "user": {
+                "auth_type": "external",
+                "disabled_at": null,
+                "name": "Arik Fraimovich",
+                "groups": [
+                    2,
+                    1,
+                    4
+                ],
+                "updated_at": "2016-01-15T15:39:12.107895+00:00",
+                "created_at": "2015-03-22T13:00:24.067101+00:00",
+                "is_disabled": false,
+                "id": 1,
+                "profile_image_url": "https://www.gravatar.com/avatar/bd2d1d970d3d414e8d7ddef8175fabd2?s=40&d=identicon",
+                "email": "arik@arikfr.com"
+            },
+            "created_at": "2014-09-25T15:43:14.406345+00:00",
+            "can_edit": false,
+            "latest_query_data_id": 4905090,
+            "schedule": null,
+            "description": null,
+            "tags": [],
+            "updated_at": "2018-09-28T10:42:54.111217+00:00",
+            "last_modified_by": {
+                "auth_type": "external",
+                "disabled_at": null,
+                "name": "Gianpaolo Gasparini",
+                "groups": [
+                    2
+                ],
+                "updated_at": "2016-01-15T15:39:12.179841+00:00",
+                "created_at": "2015-06-10T20:12:57.001865+00:00",
+                "is_disabled": false,
+                "id": 1545,
+                "profile_image_url": "https://www.gravatar.com/avatar/acfe09f3640c699a97f35a53ca89cdc3?s=40&d=identicon",
+                "email": "gianpaolo.rpi@gmail.com"
+            },
+            "options": {},
+            "version": 1,
+            "is_favorite": false,
+            "query_hash": "1beab4b8ded6e7e01526c476b8ea9c68",
+            "is_archived": false,
+            "visualizations": [
+                {
+                    "description": "",
+                    "created_at": "2015-03-22T13:00:24.132792+00:00",
+                    "updated_at": "2015-03-22T13:00:24.136812+00:00",
+                    "id": 1,
+                    "type": "TABLE",
+                    "options": {},
+                    "name": "Table"
+                },
+                {
+                    "description": "",
+                    "created_at": "2015-03-22T13:00:24.132792+00:00",
+                    "updated_at": "2015-03-22T13:00:24.136812+00:00",
+                    "id": 3,
+                    "type": "CHART",
+                    "options": {
+                        "series": {
+                            "stacking": null
+                        },
+                        "seriesOptions": {
+                            "p99": {
+                                "zIndex": 1,
+                                "type": "column",
+                                "name": "p99",
+                                "yAxis": 0
+                            },
+                            "p75": {
+                                "zIndex": 3,
+                                "type": "column",
+                                "name": "p75",
+                                "yAxis": 0
+                            },
+                            "p90": {
+                                "zIndex": 0,
+                                "type": "column",
+                                "name": "p90",
+                                "yAxis": 0
+                            },
+                            "average": {
+                                "zIndex": 2,
+                                "type": "column",
+                                "name": "average",
+                                "yAxis": 0
+                            },
+                            "median": {
+                                "zIndex": 4,
+                                "type": "column",
+                                "name": "median",
+                                "yAxis": 0
+                            },
+                            "type": "column"
+                        },
+                        "xAxis": {
+                            "type": "category"
+                        },
+                        "columnMapping": {
+                            "p90": "y",
+                            "p99": "y",
+                            "average": "y",
+                            "p75": "y",
+                            "median": "y"
+                        }
+                    },
+                    "name": "Chart"
+                }
+            ],
+            "query": "SELECT   round(avg(reqTotal/_connections)) average,\n  round(NTH(50, quantiles(reqTotal/_connections))) median,\n  round(NTH(75, quantiles(reqTotal/_connections))) p75,\n  round(NTH(90, quantiles(reqTotal/_connections))) p90,\n  round(NTH(99, quantiles(reqTotal/_connections))) p99\nFROM [httparchive:runs.latest_pages];",
+            "api_key": "9d17fffe3ba69a4e49722ba337b9112059b45918",
+            "is_draft": false,
+            "id": 1,
+            "data_source_id": 1,
+            "name": "Distribution of HTTP Requests per TCP Connection"
+        },
+        "rawHeaders": [
+            "Date",
+            "Sun, 14 Oct 2018 06:46:43 GMT",
+            "Content-Type",
+            "application/json",
+            "Transfer-Encoding",
+            "chunked",
+            "Connection",
+            "close",
+            "Set-Cookie",
+            "__cfduid=d41c86bc2023386c6bcdca8a4f550b6211539499603; expires=Mon, 14-Oct-19 06:46:43 GMT; path=/; domain=.redash.io; HttpOnly",
+            "Expect-CT",
+            "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+            "Server",
+            "cloudflare",
+            "CF-RAY",
+            "4698172a3b0994e1-NRT"
+        ]
+    }
+]
