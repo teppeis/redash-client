@@ -1,11 +1,11 @@
 [
     {
-        "scope": "https://demo.redash.io:443",
+        "scope": "http://localhost:5000",
         "method": "post",
         "path": "/api/query_results",
         "body": {
-            "query": "select * from cohort2",
-            "data_source_id": 2,
+            "query": "1E7lGYcgerhmYmKsfN7ReRulItby_tm8ivfTvuQD-TBM",
+            "data_source_id": 1,
             "max_age": 0
         },
         "status": 200,
@@ -13,62 +13,133 @@
             "job": {
                 "status": 1,
                 "error": "",
-                "id": "ba2297dd-553e-4b6b-8250-84f4c62d7cb3",
+                "id": "c508c776-7c1e-4bf9-9ab8-6fa25b698d0f",
                 "query_result_id": null,
                 "updated_at": 0
             }
         },
         "rawHeaders": [
+            "Server",
+            "gunicorn/19.7.1",
             "Date",
-            "Sun, 14 Oct 2018 06:56:19 GMT",
-            "Content-Type",
-            "application/json",
-            "Transfer-Encoding",
-            "chunked",
+            "Sun, 14 Oct 2018 13:32:39 GMT",
             "Connection",
             "close",
-            "Set-Cookie",
-            "__cfduid=dbd9ddbe4458f3aeea8bca6ba98621f181539500179; expires=Mon, 14-Oct-19 06:56:19 GMT; path=/; domain=.redash.io; HttpOnly",
-            "Expect-CT",
-            "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
-            "Server",
-            "cloudflare",
-            "CF-RAY",
-            "4698253a9defa578-NRT"
+            "Content-Type",
+            "application/json",
+            "Content-Length",
+            "123"
         ]
     },
     {
-        "scope": "https://demo.redash.io:443",
+        "scope": "http://localhost:5000",
         "method": "get",
-        "path": "/api/jobs/ba2297dd-553e-4b6b-8250-84f4c62d7cb3",
+        "path": "/api/jobs/c508c776-7c1e-4bf9-9ab8-6fa25b698d0f",
         "body": "",
         "status": 200,
         "response": {
             "job": {
-                "status": 1,
+                "status": 2,
                 "error": "",
-                "id": "ba2297dd-553e-4b6b-8250-84f4c62d7cb3",
+                "id": "c508c776-7c1e-4bf9-9ab8-6fa25b698d0f",
                 "query_result_id": null,
                 "updated_at": 0
             }
         },
         "rawHeaders": [
+            "Server",
+            "gunicorn/19.7.1",
             "Date",
-            "Sun, 14 Oct 2018 06:56:20 GMT",
-            "Content-Type",
-            "application/json",
-            "Transfer-Encoding",
-            "chunked",
+            "Sun, 14 Oct 2018 13:32:39 GMT",
             "Connection",
             "close",
-            "Set-Cookie",
-            "__cfduid=d26500306daec407d46df9f83fc4dbfb41539500180; expires=Mon, 14-Oct-19 06:56:20 GMT; path=/; domain=.redash.io; HttpOnly",
-            "Expect-CT",
-            "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+            "Content-Type",
+            "application/json",
+            "Content-Length",
+            "123"
+        ]
+    },
+    {
+        "scope": "http://localhost:5000",
+        "method": "get",
+        "path": "/api/jobs/c508c776-7c1e-4bf9-9ab8-6fa25b698d0f",
+        "body": "",
+        "status": 200,
+        "response": {
+            "job": {
+                "status": 3,
+                "error": "",
+                "id": "c508c776-7c1e-4bf9-9ab8-6fa25b698d0f",
+                "query_result_id": 3,
+                "updated_at": 0
+            }
+        },
+        "rawHeaders": [
             "Server",
-            "cloudflare",
-            "CF-RAY",
-            "4698253d98379481-NRT"
+            "gunicorn/19.7.1",
+            "Date",
+            "Sun, 14 Oct 2018 13:32:42 GMT",
+            "Connection",
+            "close",
+            "Content-Type",
+            "application/json",
+            "Content-Length",
+            "120"
+        ]
+    },
+    {
+        "scope": "http://localhost:5000",
+        "method": "get",
+        "path": "/api/query_results/3",
+        "body": "",
+        "status": 200,
+        "response": {
+            "query_result": {
+                "retrieved_at": "2018-10-14T13:32:41.431891+00:00",
+                "query_hash": "ee3dacbd2e008c90402429af8cdd3740",
+                "query": "1E7lGYcgerhmYmKsfN7ReRulItby_tm8ivfTvuQD-TBM",
+                "runtime": 2.12571406364441,
+                "data": {
+                    "rows": [
+                        {
+                            "name": "foo",
+                            "value": 10
+                        },
+                        {
+                            "name": "bar",
+                            "value": 20
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "friendly_name": "name",
+                            "type": "string",
+                            "name": "name"
+                        },
+                        {
+                            "friendly_name": "value",
+                            "type": "integer",
+                            "name": "value"
+                        }
+                    ]
+                },
+                "id": 3,
+                "data_source_id": 1
+            }
+        },
+        "rawHeaders": [
+            "Server",
+            "gunicorn/19.7.1",
+            "Date",
+            "Sun, 14 Oct 2018 13:32:42 GMT",
+            "Connection",
+            "close",
+            "Content-Type",
+            "application/json",
+            "Content-Length",
+            "454",
+            "Cache-Control",
+            "private,max-age=31557600"
         ]
     }
 ]
