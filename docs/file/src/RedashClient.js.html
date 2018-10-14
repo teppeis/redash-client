@@ -64,6 +64,21 @@ class RedashClient {
 
   /**
    * @param {number} id
+   * @return {Promise&lt;DataSource&gt;}
+   */
+  getDataSource(id) {
+    return this.axios_.get(`api/data_sources/${id}`).then(resp =&gt; resp.data);
+  }
+
+  /**
+   * @return {Promise&lt;Array&lt;DataSource&gt;&gt;}
+   */
+  getDataSources() {
+    return this.axios_.get(`api/data_sources`).then(resp =&gt; resp.data);
+  }
+
+  /**
+   * @param {number} id
    * @return {Promise&lt;Query&gt;}
    */
   getQuery(id) {
