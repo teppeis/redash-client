@@ -24,6 +24,25 @@ describe('RedashClient', () => {
       mock = new Mock(client.axios_);
     });
 
+    /** @test {RedashClient#getDataSource} */
+    it('getDataSource', async () => {
+      const expectedBody = require('./fixtures/get-data_source');
+
+      const {id} = expectedBody;
+      mock.onGet(`/api/data_sources/${id}`).reply(200, expectedBody);
+      const actual = await client.getDataSource(id);
+      assert.deepEqual(actual, expectedBody);
+    });
+
+    /** @test {RedashClient#getDataSources} */
+    it('getDataSources', async () => {
+      const expectedBody = require('./fixtures/get-data_sources');
+
+      mock.onGet(`/api/data_sources`).reply(200, expectedBody);
+      const actual = await client.getDataSources();
+      assert.deepEqual(actual, expectedBody);
+    });
+
     /** @test {RedashClient#getQuery} */
     it('getQuery', async () => {
       const expectedBody = require('./fixtures/get-query');
