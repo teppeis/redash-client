@@ -1,0 +1,14 @@
+{
+  "scheduled_queue_name": "scheduled_queries",
+  "name": "something something",
+  "pause_reason": null,
+  "queue_name": "queries",
+  "syntax": "sql",
+  "paused": false,
+  "options": {},
+  "groups": {
+    "2": false
+  },
+  "type": "results",
+  "id": 3
+}
