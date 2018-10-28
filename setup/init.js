@@ -4,20 +4,23 @@ const pptr = require('puppeteer');
 
 async function run() {
   const browser = await pptr.launch({
-    headless: false,
+    // headless: false,
     // slowMo: 30,
   });
   const page = await browser.newPage();
   await page.setViewport({width: 1024, height: 800});
+
   await init(page);
-  // await login(page);
   await createDataSource(page);
-  await page.waitFor(100);
+  // await login(page);
+  const apiKey = await getApiKey(page);
+  console.log(`API_TOKEN=${apiKey}`);
+
   await browser.close();
 }
 
 async function init(page) {
-  console.log('Initialize Redash Admin');
+  console.log('Initialize Redash Admin...');
   await page.goto('http://localhost/');
   await page.waitFor('input[name="name"]', {timeout: 1000});
   await page.type('input[name="name"]', 'redash-client');
@@ -35,7 +38,7 @@ async function type(page, selector, text) {
 }
 
 async function createDataSource(page) {
-  console.log('Create Data Source');
+  console.log('Create Data Source...');
   await page.goto('http://localhost/data_sources/new');
   await page.waitFor('img[alt="PostgreSQL"]', {timeout: 1000});
   // PostgreSQL
@@ -55,12 +58,24 @@ async function createDataSource(page) {
 }
 
 async function login(page) {
-  console.log('Login');
+  console.log('Login...');
   await page.goto('http://localhost/');
   await page.waitFor('input[name="email"]', {timeout: 1000});
   await page.type('input[name="email"]', 'redash-client@example.com');
   await page.type('input[name="password"]', 'redash-client');
   return Promise.all([page.waitForNavigation(), page.click('button[type=submit]')]);
+}
+
+async function getApiKey(page) {
+  console.log('Get API Key...');
+  await page.goto('http://localhost/users/me');
+  const xpath = '//label[contains(text(), "API Key")]/following-sibling::input';
+  await page.waitFor(xpath, {timeout: 1000});
+  const inputs = await page.$x(xpath);
+  if (inputs.length !== 1) {
+    throw new Error('Unexpected selector matching');
+  }
+  return page.evaluate(input => input.value, inputs[0]);
 }
 
 run();
