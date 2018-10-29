@@ -22,7 +22,7 @@
     "delay": "^4.1.0"
   },
   "devDependencies": {
-    "@teppeis/nock-back-mocha": "^2.1.2",
+    "@teppeis/nock-back-mocha": "^3.0.0",
     "axios-debug-log": "^0.4.0",
     "esdoc": "^1.1.0",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
