@@ -59,17 +59,21 @@ redash
 </code></pre>
 <h2 id="api">API</h2><p>See <a href="https://teppeis.github.io/redash-client/">API document</a></p>
 <h3 id="supported-rest-api">Supported REST API</h3><ul>
-<li><code>#getQuery()</code></li>
-<li><code>#getQueries()</code></li>
+<li><code>#getDataSources()</code></li>
+<li><code>#getDataSource()</code></li>
 <li><code>#postQuery()</code></li>
-<li><code>#getJob()</code></li>
+<li><code>#getQueries()</code></li>
+<li><code>#getQuery()</code></li>
+<li><code>#updateQuery()</code></li>
+<li><code>#postQueryResult()</code></li>
 <li><code>#getQueryResult()</code></li>
+<li><code>#getJob()</code></li>
 </ul>
 <p>Methods for other REST API are not implemented yet. Help!</p>
 <h3 id="utility-methods">Utility methods</h3><h4 id="-code--queryandwaitresult----code-"><code>#queryAndWaitResult()</code></h4><p>Internally:</p>
 <ol>
-<li><code>postQuery()</code></li>
-<li>Poll <code>getJob()</code></li>
+<li><code>postQueryResult()</code></li>
+<li>Polling <code>getJob()</code></li>
 <li>Return <code>getQueryResult()</code></li>
 </ol>
 <h2 id="license">License</h2><p>MIT License: Teppei Sato &lt;<a href="mailto:teppeis@gmail.com">teppeis@gmail.com</a>&gt;</p>

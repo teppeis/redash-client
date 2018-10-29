@@ -2,7 +2,8 @@
 
 const Client = require('../');
 const assert = require('assert');
-const Mock = require('axios-mock-adapter');
+const nockBackMochaFactory = require('@teppeis/nock-back-mocha');
+const nockBackMocha = nockBackMochaFactory();
 
 require('axios-debug-log');
 
@@ -14,133 +15,136 @@ describe('RedashClient', () => {
   });
 
   describe('api', () => {
-    let client, mock;
+    let client;
 
-    beforeEach(() => {
+    beforeEach(function() {
       client = new Client({
-        endPoint: 'https://demo.redash.io/',
-        apiToken: process.env.API_TOKEN || 'abc123',
+        endPoint: 'http://localhost/',
+        // apiToken: process.env.API_TOKEN || 'abc123',
+        apiToken: process.env.API_TOKEN || 'fK3nBy18rt1lBadzmumWdqJrJaFCUEeLBcdgWfrV',
       });
-      mock = new Mock(client.axios_);
+      return nockBackMocha.beforeEach.call(this);
+    });
+
+    afterEach(nockBackMocha.afterEach);
+
+    /** @test {RedashClient#getDataSources} */
+    it('getDataSources', async () => {
+      const actual = await client.getDataSources();
+      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
+      assert.deepEqual(actual, expectedBody);
     });
 
     /** @test {RedashClient#getDataSource} */
     it('getDataSource', async () => {
-      const expectedBody = require('./fixtures/get-data_source');
-
-      const {id} = expectedBody;
-      mock.onGet(`/api/data_sources/${id}`).reply(200, expectedBody);
-      const actual = await client.getDataSource(id);
-      assert.deepEqual(actual, expectedBody);
-    });
-
-    /** @test {RedashClient#getDataSources} */
-    it('getDataSources', async () => {
-      const expectedBody = require('./fixtures/get-data_sources');
-
-      mock.onGet(`/api/data_sources`).reply(200, expectedBody);
-      const actual = await client.getDataSources();
-      assert.deepEqual(actual, expectedBody);
-    });
-
-    /** @test {RedashClient#getQuery} */
-    it('getQuery', async () => {
-      const expectedBody = require('./fixtures/get-query');
-
-      const {id} = expectedBody;
-      mock.onGet(`/api/queries/${id}`).reply(200, expectedBody);
-      const actual = await client.getQuery(id);
-      assert.deepEqual(actual, expectedBody);
-    });
-
-    /** @test {RedashClient#getQueries} */
-    it('getQueries', async () => {
-      const expectedBody = require('./fixtures/get-queries');
-
-      mock.onGet(`/api/queries`).reply(200, expectedBody);
-      const actual = await client.getQueries();
+      const actual = await client.getDataSource(1);
+      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
       assert.deepEqual(actual, expectedBody);
     });
 
     /** @test {RedashClient#postQuery} */
-    it('postQuery with max_age = 0', async () => {
-      const expectedBody = require('./fixtures/post-query_results-max_age_0');
-
-      mock.onPost('/api/query_results').reply(200, expectedBody);
+    it('postQuery', async () => {
       const actual = await client.postQuery({
-        query: 'select * from cohort2',
-        data_source_id: 2,
-        max_age: 0,
+        query: 'select * from actor',
+        data_source_id: 1,
+        name: 'List Actors',
       });
+      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
       assert.deepEqual(actual, expectedBody);
+      nockBackMocha.assertScopesFinished();
     });
 
-    /** @test {RedashClient#getJob} */
-    it('getJob', async () => {
-      const expectedBody = require('./fixtures/get-jobs-1');
-
-      const {id} = expectedBody.job;
-      mock.onGet(`/api/jobs/${id}`).reply(200, expectedBody);
-      const actual = await client.getJob(id);
+    /** @test {RedashClient#getQueries} */
+    it('getQueries', async () => {
+      const actual = await client.getQueries();
+      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
       assert.deepEqual(actual, expectedBody);
+      nockBackMocha.assertScopesFinished();
+    });
+
+    /** @test {RedashClient#getQuery} */
+    it('getQuery', async () => {
+      const actual = await client.getQuery(2);
+      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
+      assert.deepEqual(actual, expectedBody);
+      nockBackMocha.assertScopesFinished();
+    });
+
+    /** @test {RedashClient#updateQuery} */
+    it('updateQuery', async () => {
+      const actual = await client.postQuery({
+        id: 3,
+        query: 'select * from actor limit 10',
+        data_source_id: 1,
+        name: 'Top 10 Actors',
+      });
+      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
+      assert.deepEqual(actual, expectedBody);
+      nockBackMocha.assertScopesFinished();
+    });
+
+    /** @test {RedashClient#postQueryResult} */
+    it('postQueryResult with max_age = 0', async () => {
+      const actual = await client.postQueryResult({
+        query: 'select * from actor',
+        data_source_id: 1,
+        max_age: 0,
+      });
+      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
+      assert.deepEqual(actual, expectedBody);
+      nockBackMocha.assertScopesFinished();
     });
 
     /** @test {RedashClient#getQueryResult} */
     it('getQueryResult', async () => {
-      const expectedBody = require('./fixtures/get-query_results');
-
-      const {id} = expectedBody.query_result;
-      mock.onGet(`/api/query_results/${id}`).reply(200, expectedBody);
+      const id = 5;
       const actual = await client.getQueryResult(id);
+      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
       assert.deepEqual(actual, expectedBody);
+      nockBackMocha.assertScopesFinished();
+    });
+
+    /** @test {RedashClient#getJob} */
+    it('getJob', async () => {
+      const id = 'a8822893-7614-4b35-b90d-6ae2dcb44e69';
+      const actual = await client.getJob(id);
+      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
+      assert.deepEqual(actual, expectedBody);
+      nockBackMocha.assertScopesFinished();
     });
 
     /** @test {RedashClient#queryAndWaitResult} */
     it('queryAndWaitResult', async () => {
-      const job1 = require('./fixtures/post-query_results-max_age_0');
-      const job2 = require('./fixtures/get-jobs-2');
-      const job3 = require('./fixtures/get-jobs-3');
-      const queryResult = require('./fixtures/get-query_results');
-
-      const jobId = job1.job.id;
-      const queryResultId = job3.job.query_result_id;
-      mock.onPost('/api/query_results').reply(200, job1);
-      mock.onGet(`/api/jobs/${jobId}`).replyOnce(200, job2);
-      mock.onGet(`/api/jobs/${jobId}`).replyOnce(200, job3);
-      mock.onGet(`/api/query_results/${queryResultId}`).reply(200, queryResult);
-
       const actual = await client.queryAndWaitResult({
-        query: 'select * from cohort2',
-        data_source_id: 2,
+        query: 'select * from actor limit 5',
+        data_source_id: 1,
         max_age: 0,
       });
-      assert.deepEqual(actual, queryResult);
+      const requests = require(nockBackMocha.fixtureFile);
+      const lastRequest = requests[requests.length - 1];
+      assert(/^\/api\/query_results\/\d+/.test(lastRequest.path));
+      assert(lastRequest.status === 200);
+      assert.deepEqual(actual, lastRequest.response);
+      nockBackMocha.assertScopesFinished();
     });
 
     /** @test {RedashClient#queryAndWaitResult} */
-    it('queryAndWaitResult: timeout', function(done) {
-      this.timeout(3000);
-
-      const job1 = require('./fixtures/post-query_results-max_age_0');
-      const job2 = require('./fixtures/get-jobs-2');
-
-      const jobId = job1.job.id;
-      mock.onPost('/api/query_results').reply(200, job1);
-      mock.onGet(`/api/jobs/${jobId}`).reply(200, job2);
-
+    it('queryAndWaitResult: timeout', () =>
       client
         .queryAndWaitResult(
           {
-            query: 'select * from cohort2',
-            data_source_id: 2,
+            query: 'select * from actor limit 5',
+            data_source_id: 1,
             max_age: 0,
           },
-          1000
+          10
         )
-        .catch(e => {
-          assert(/polling timeout/.test(e.message));
-          done();
-        });
-    });
+        .then(
+          () => assert.fail('should be rejected'),
+          e => {
+            assert(/polling timeout/.test(e.message));
+            nockBackMocha.assertScopesFinished();
+          }
+        ));
   });
 });

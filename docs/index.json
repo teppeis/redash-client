@@ -567,9 +567,9 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/RedashClient.js",
-    "content": "'use strict';\n\nconst axios = require('axios');\nconst delay = require('delay');\n\nconst DEFAULT_POLLING_TIMEOUT_MS = 60 * 1000;\n\n/**\n * Redash Client\n */\nclass RedashClient {\n  /**\n   * @param {{endPoint: string, apiToken: string, authHeaderName: ?string}} options\n   */\n  constructor({endPoint, apiToken, authHeaderName = 'Authorization'} = {}) {\n    /**\n     * @type {axios}\n     * @private\n     */\n    this.axios_ = axios.create({\n      baseURL: endPoint,\n      headers: {\n        [authHeaderName]: `Key ${apiToken}`,\n      },\n    });\n  }\n\n  /**\n   * @param {number} id\n   * @return {Promise<DataSource>}\n   */\n  getDataSource(id) {\n    return this.axios_.get(`api/data_sources/${id}`).then(resp => resp.data);\n  }\n\n  /**\n   * @return {Promise<Array<DataSource>>}\n   */\n  getDataSources() {\n    return this.axios_.get(`api/data_sources`).then(resp => resp.data);\n  }\n\n  /**\n   * @param {number} id\n   * @return {Promise<Query>}\n   */\n  getQuery(id) {\n    return this.axios_.get(`api/queries/${id}`).then(resp => resp.data);\n  }\n\n  /**\n   * @return {Promise<{count: number, page: number, page_size: number, results: Array<Query>}>}\n   */\n  getQueries() {\n    return this.axios_.get(`api/queries`).then(resp => resp.data);\n  }\n\n  /**\n   * @param {{data_source_id: number, max_age: number, query: string, query_id: number}} query\n   * @return {Promise<{job: Job}|{query_result: QueryResult}>}\n   */\n  postQuery(query) {\n    return this.axios_.post('api/query_results', query).then(resp => resp.data);\n  }\n\n  /**\n   * @param {number} id\n   * @return {Promise<{job: Job}>}\n   */\n  getJob(id) {\n    return this.axios_.get(`api/jobs/${id}`).then(resp => resp.data);\n  }\n\n  /**\n   * @param {number} queryResultId\n   * @return {Promise<{query_result: QueryResult}>}\n   */\n  getQueryResult(queryResultId) {\n    return this.axios_.get(`api/query_results/${queryResultId}`).then(resp => resp.data);\n  }\n\n  /**\n   * @param {{data_source_id: number, max_age: number, query: string, query_id: number}} query\n   * @param {number=} timeout\n   * @return {Promise<{query_result: QueryResult}>}\n   */\n  async queryAndWaitResult(query, timeout = DEFAULT_POLLING_TIMEOUT_MS) {\n    // `max_age` should be 0 to disable cache always\n    query = {...query, max_age: 0};\n    const {\n      job: {id},\n    } = await this.postQuery(query);\n    let queryResultId;\n    const start = Date.now();\n    while (true) {\n      const {job} = await this.getJob(id);\n      if (job.status === 3) {\n        queryResultId = job.query_result_id;\n        break;\n      }\n      if (Date.now() - start > timeout) {\n        throw new Error('polling timeout');\n      }\n      await delay(1000);\n    }\n    return this.getQueryResult(queryResultId);\n  }\n}\n\nmodule.exports = RedashClient;\n",
+    "content": "'use strict';\n\nconst axios = require('axios');\nconst delay = require('delay');\n\nconst DEFAULT_POLLING_TIMEOUT_MS = 60 * 1000;\n\n/**\n * Redash Client\n */\nclass RedashClient {\n  /**\n   * @param {{endPoint: string, apiToken: string, authHeaderName: ?string}} options\n   */\n  constructor({endPoint, apiToken, authHeaderName = 'Authorization'} = {}) {\n    /**\n     * @type {axios}\n     * @private\n     */\n    this.axios_ = axios.create({\n      baseURL: endPoint,\n      headers: {\n        [authHeaderName]: `Key ${apiToken}`,\n      },\n    });\n  }\n\n  /**\n   * @return {Promise<Array<DataSource>>}\n   */\n  getDataSources() {\n    return this.axios_.get(`api/data_sources`).then(resp => resp.data);\n  }\n\n  /**\n   * @param {number} id\n   * @return {Promise<DataSource>}\n   */\n  getDataSource(id) {\n    if (typeof id !== 'number') {\n      throw new TypeError(`Data Source ID should be number: ${id}`);\n    }\n    return this.axios_.get(`api/data_sources/${id}`).then(resp => resp.data);\n  }\n\n  /**\n   * @param {{query: string, data_source_id: number, name: string, description: string?}} query\n   * @return {Promise<Query>}\n   */\n  postQuery(query) {\n    return this.axios_.post('api/queries', query).then(resp => resp.data);\n  }\n\n  /**\n   * @param {{id: number, query: string, data_source_id: number, name: string, description: string?}} query\n   * @return {Promise<Query>}\n   */\n  updateQuery(query) {\n    if (typeof query.id !== 'number') {\n      throw new TypeError(`Query ID should be number: ${query.id}`);\n    }\n    return this.axios_.post(`api/queries/${query.id}`, query).then(resp => resp.data);\n  }\n\n  /**\n   * @return {Promise<{count: number, page: number, page_size: number, results: Array<Query>}>}\n   */\n  getQueries() {\n    return this.axios_.get(`api/queries`).then(resp => resp.data);\n  }\n\n  /**\n   * @param {number} id\n   * @return {Promise<Query>}\n   */\n  getQuery(id) {\n    return this.axios_.get(`api/queries/${id}`).then(resp => resp.data);\n  }\n\n  /**\n   * @param {{data_source_id: number, max_age: number, query: string, query_id: number}} query\n   * @return {Promise<{job: Job}|{query_result: QueryResult}>}\n   */\n  postQueryResult(query) {\n    return this.axios_.post('api/query_results', query).then(resp => resp.data);\n  }\n\n  /**\n   * @param {number} queryResultId\n   * @return {Promise<{query_result: QueryResult}>}\n   */\n  getQueryResult(queryResultId) {\n    if (typeof queryResultId !== 'number') {\n      throw new TypeError(`Query Result ID should be number: ${queryResultId}`);\n    }\n    return this.axios_.get(`api/query_results/${queryResultId}`).then(resp => resp.data);\n  }\n\n  /**\n   * @param {number} id\n   * @return {Promise<{job: Job}>}\n   */\n  getJob(id) {\n    return this.axios_.get(`api/jobs/${id}`).then(resp => resp.data);\n  }\n\n  /**\n   * @param {{data_source_id: number, max_age: number, query: string, query_id: number}} query\n   * @param {number=} timeout\n   * @return {Promise<{query_result: QueryResult}>}\n   */\n  async queryAndWaitResult(query, timeout = DEFAULT_POLLING_TIMEOUT_MS) {\n    // `max_age` should be 0 to disable cache always\n    query = {...query, max_age: 0};\n    const {\n      job: {id},\n    } = await this.postQueryResult(query);\n    let queryResultId;\n    const start = Date.now();\n    while (true) {\n      const {job} = await this.getJob(id);\n      if (job.status === 3) {\n        queryResultId = job.query_result_id;\n        break;\n      }\n      if (Date.now() - start > timeout) {\n        throw new Error('polling timeout');\n      }\n      await delay(1000);\n    }\n    return this.getQueryResult(queryResultId);\n  }\n}\n\nmodule.exports = RedashClient;\n",
     "static": true,
-    "longname": "/home/vagrant/go/src/github.com/koooge/redash-client/src/RedashClient.js",
+    "longname": "/Users/teppeis/src/github.com/teppeis/redash-client/src/RedashClient.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
@@ -657,6 +657,28 @@
   {
     "__docId__": 53,
     "kind": "method",
+    "name": "getDataSources",
+    "memberof": "src/RedashClient.js~RedashClient",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/RedashClient.js~RedashClient#getDataSources",
+    "access": "public",
+    "description": "",
+    "lineNumber": 31,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise<Array<DataSource>>"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 54,
+    "kind": "method",
     "name": "getDataSource",
     "memberof": "src/RedashClient.js~RedashClient",
     "generator": false,
@@ -665,7 +687,7 @@
     "longname": "src/RedashClient.js~RedashClient#getDataSource",
     "access": "public",
     "description": "",
-    "lineNumber": 32,
+    "lineNumber": 39,
     "params": [
       {
         "nullable": null,
@@ -688,21 +710,87 @@
     }
   },
   {
-    "__docId__": 54,
+    "__docId__": 55,
     "kind": "method",
-    "name": "getDataSources",
+    "name": "postQuery",
     "memberof": "src/RedashClient.js~RedashClient",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/RedashClient.js~RedashClient#getDataSources",
+    "longname": "src/RedashClient.js~RedashClient#postQuery",
     "access": "public",
     "description": "",
-    "lineNumber": 39,
+    "lineNumber": 50,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "{query: string, data_source_id: number, name: string, description: string?}"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "query",
+        "description": ""
+      }
+    ],
     "return": {
       "nullable": null,
       "types": [
-        "Promise<Array<DataSource>>"
+        "Promise<Query>"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 56,
+    "kind": "method",
+    "name": "updateQuery",
+    "memberof": "src/RedashClient.js~RedashClient",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/RedashClient.js~RedashClient#updateQuery",
+    "access": "public",
+    "description": "",
+    "lineNumber": 58,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "{id: number, query: string, data_source_id: number, name: string, description: string?}"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "query",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise<Query>"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 57,
+    "kind": "method",
+    "name": "getQueries",
+    "memberof": "src/RedashClient.js~RedashClient",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/RedashClient.js~RedashClient#getQueries",
+    "access": "public",
+    "description": "",
+    "lineNumber": 68,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise<{count: number, page: number, page_size: number, results: Array<Query>}>"
       ],
       "spread": false,
       "description": ""
@@ -710,7 +798,7 @@
     "params": []
   },
   {
-    "__docId__": 55,
+    "__docId__": 58,
     "kind": "method",
     "name": "getQuery",
     "memberof": "src/RedashClient.js~RedashClient",
@@ -720,7 +808,7 @@
     "longname": "src/RedashClient.js~RedashClient#getQuery",
     "access": "public",
     "description": "",
-    "lineNumber": 47,
+    "lineNumber": 76,
     "params": [
       {
         "nullable": null,
@@ -743,39 +831,17 @@
     }
   },
   {
-    "__docId__": 56,
+    "__docId__": 59,
     "kind": "method",
-    "name": "getQueries",
+    "name": "postQueryResult",
     "memberof": "src/RedashClient.js~RedashClient",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/RedashClient.js~RedashClient#getQueries",
+    "longname": "src/RedashClient.js~RedashClient#postQueryResult",
     "access": "public",
     "description": "",
-    "lineNumber": 54,
-    "return": {
-      "nullable": null,
-      "types": [
-        "Promise<{count: number, page: number, page_size: number, results: Array<Query>}>"
-      ],
-      "spread": false,
-      "description": ""
-    },
-    "params": []
-  },
-  {
-    "__docId__": 57,
-    "kind": "method",
-    "name": "postQuery",
-    "memberof": "src/RedashClient.js~RedashClient",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/RedashClient.js~RedashClient#postQuery",
-    "access": "public",
-    "description": "",
-    "lineNumber": 62,
+    "lineNumber": 84,
     "params": [
       {
         "nullable": null,
@@ -798,40 +864,7 @@
     }
   },
   {
-    "__docId__": 58,
-    "kind": "method",
-    "name": "getJob",
-    "memberof": "src/RedashClient.js~RedashClient",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/RedashClient.js~RedashClient#getJob",
-    "access": "public",
-    "description": "",
-    "lineNumber": 70,
-    "params": [
-      {
-        "nullable": null,
-        "types": [
-          "number"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "id",
-        "description": ""
-      }
-    ],
-    "return": {
-      "nullable": null,
-      "types": [
-        "Promise<{job: Job}>"
-      ],
-      "spread": false,
-      "description": ""
-    }
-  },
-  {
-    "__docId__": 59,
+    "__docId__": 60,
     "kind": "method",
     "name": "getQueryResult",
     "memberof": "src/RedashClient.js~RedashClient",
@@ -841,7 +874,7 @@
     "longname": "src/RedashClient.js~RedashClient#getQueryResult",
     "access": "public",
     "description": "",
-    "lineNumber": 78,
+    "lineNumber": 92,
     "params": [
       {
         "nullable": null,
@@ -864,7 +897,40 @@
     }
   },
   {
-    "__docId__": 60,
+    "__docId__": 61,
+    "kind": "method",
+    "name": "getJob",
+    "memberof": "src/RedashClient.js~RedashClient",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/RedashClient.js~RedashClient#getJob",
+    "access": "public",
+    "description": "",
+    "lineNumber": 103,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "id",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise<{job: Job}>"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 62,
     "kind": "method",
     "name": "queryAndWaitResult",
     "memberof": "src/RedashClient.js~RedashClient",
@@ -874,7 +940,7 @@
     "longname": "src/RedashClient.js~RedashClient#queryAndWaitResult",
     "access": "public",
     "description": "",
-    "lineNumber": 87,
+    "lineNumber": 112,
     "params": [
       {
         "nullable": null,
@@ -908,33 +974,33 @@
   },
   {
     "kind": "index",
-    "content": "# redash-client\n\nJavaScript Client for [Redash](https://redash.io/) API\n\n[![npm version][npm-image]][npm-url]\n![Node.js Version Support][node-version]\n[![build status][circleci-image]][circleci-url]\n[![dependency status][deps-image]][deps-url]\n![License][license]\n\n##### Note: This pacakge requires Node v8+ for async/await\n\n## Install\n\n```console\n$ npm install redash-client\n```\n\n## Usage\n\n```javascript\nconst RedashClient = require('redash-client');\nconst redash = new RedashClient({\n  endPoint: 'https://your-redash.com/',\n  apiToken: 'abcde12345',\n});\nredash\n  .postQuery({\n    query: 'select * from cohort2',\n    data_source_id: 2,\n    max_age: 0,\n  })\n  .then(resp => {\n    console.log(resp.job);\n  });\n```\n\n## API\n\nSee [API document](https://teppeis.github.io/redash-client/)\n\n### Supported REST API\n\n- `#getQuery()`\n- `#getQueries()`\n- `#postQuery()`\n- `#getJob()`\n- `#getQueryResult()`\n\nMethods for other REST API are not implemented yet. Help!\n\n### Utility methods\n\n#### `#queryAndWaitResult()`\n\nInternally:\n\n1. `postQuery()`\n2. Poll `getJob()`\n3. Return `getQueryResult()`\n\n## License\n\nMIT License: Teppei Sato &lt;teppeis@gmail.com&gt;\n\n[npm-image]: https://img.shields.io/npm/v/redash-client.svg\n[npm-url]: https://npmjs.org/package/redash-client\n[npm-downloads-image]: https://img.shields.io/npm/dm/redash-client.svg\n[travis-image]: https://img.shields.io/travis/teppeis/redash-client/master.svg\n[travis-url]: https://travis-ci.org/teppeis/redash-client\n[deps-image]: https://img.shields.io/david/teppeis/redash-client.svg\n[deps-url]: https://david-dm.org/teppeis/redash-client\n[node-version]: https://img.shields.io/badge/Node.js%20support-v8,v10-brightgreen.svg\n[coverage-image]: https://img.shields.io/coveralls/teppeis/redash-client/master.svg\n[coverage-url]: https://coveralls.io/github/teppeis/redash-client?branch=master\n[license]: https://img.shields.io/npm/l/redash-client.svg\n[appveyor-image]: https://ci.appveyor.com/api/projects/status/22nwyfaf5p0yw54j/branch/master?svg=true\n[appveyor-url]: https://ci.appveyor.com/project/teppeis/redash-client/branch/master\n[circleci-image]: https://circleci.com/gh/teppeis/redash-client.svg?style=shield\n[circleci-url]: https://circleci.com/gh/teppeis/redash-client\n",
-    "longname": "/home/vagrant/go/src/github.com/koooge/redash-client/README.md",
+    "content": "# redash-client\n\nJavaScript Client for [Redash](https://redash.io/) API\n\n[![npm version][npm-image]][npm-url]\n![Node.js Version Support][node-version]\n[![build status][circleci-image]][circleci-url]\n[![dependency status][deps-image]][deps-url]\n![License][license]\n\n##### Note: This pacakge requires Node v8+ for async/await\n\n## Install\n\n```console\n$ npm install redash-client\n```\n\n## Usage\n\n```javascript\nconst RedashClient = require('redash-client');\nconst redash = new RedashClient({\n  endPoint: 'https://your-redash.com/',\n  apiToken: 'abcde12345',\n});\nredash\n  .postQuery({\n    query: 'select * from cohort2',\n    data_source_id: 2,\n    max_age: 0,\n  })\n  .then(resp => {\n    console.log(resp.job);\n  });\n```\n\n## API\n\nSee [API document](https://teppeis.github.io/redash-client/)\n\n### Supported REST API\n\n- `#getDataSources()`\n- `#getDataSource()`\n- `#postQuery()`\n- `#getQueries()`\n- `#getQuery()`\n- `#updateQuery()`\n- `#postQueryResult()`\n- `#getQueryResult()`\n- `#getJob()`\n\nMethods for other REST API are not implemented yet. Help!\n\n### Utility methods\n\n#### `#queryAndWaitResult()`\n\nInternally:\n\n1. `postQueryResult()`\n2. Polling `getJob()`\n3. Return `getQueryResult()`\n\n## License\n\nMIT License: Teppei Sato &lt;teppeis@gmail.com&gt;\n\n[npm-image]: https://img.shields.io/npm/v/redash-client.svg\n[npm-url]: https://npmjs.org/package/redash-client\n[npm-downloads-image]: https://img.shields.io/npm/dm/redash-client.svg\n[travis-image]: https://img.shields.io/travis/teppeis/redash-client/master.svg\n[travis-url]: https://travis-ci.org/teppeis/redash-client\n[deps-image]: https://img.shields.io/david/teppeis/redash-client.svg\n[deps-url]: https://david-dm.org/teppeis/redash-client\n[node-version]: https://img.shields.io/badge/Node.js%20support-v8,v10-brightgreen.svg\n[coverage-image]: https://img.shields.io/coveralls/teppeis/redash-client/master.svg\n[coverage-url]: https://coveralls.io/github/teppeis/redash-client?branch=master\n[license]: https://img.shields.io/npm/l/redash-client.svg\n[appveyor-image]: https://ci.appveyor.com/api/projects/status/22nwyfaf5p0yw54j/branch/master?svg=true\n[appveyor-url]: https://ci.appveyor.com/project/teppeis/redash-client/branch/master\n[circleci-image]: https://circleci.com/gh/teppeis/redash-client.svg?style=shield\n[circleci-url]: https://circleci.com/gh/teppeis/redash-client\n",
+    "longname": "/Users/teppeis/src/github.com/teppeis/redash-client/README.md",
     "name": "./README.md",
     "static": true,
     "access": "public"
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"redash-client\",\n  \"description\": \"Redash API Client for JavaScript\",\n  \"version\": \"1.1.2\",\n  \"author\": \"Teppei Sato <teppeis@gmail.com>\",\n  \"engines\": {\n    \"node\": \">=8\"\n  },\n  \"main\": \"index.js\",\n  \"files\": [\n    \"index.js\",\n    \"src\"\n  ],\n  \"scripts\": {\n    \"docs\": \"esdoc\",\n    \"format:json\": \"prettier --config ./node_modules/eslint-config-teppeis/.prettierrc.json --write 'test/fixtures/*.json'\",\n    \"test\": \"run-s format:json test:lint test:unit\",\n    \"test:lint\": \"eslint src test\",\n    \"test:unit\": \"mocha --require intelli-espower-loader test\"\n  },\n  \"dependencies\": {\n    \"axios\": \"^0.18.0\",\n    \"delay\": \"^4.1.0\"\n  },\n  \"devDependencies\": {\n    \"axios-debug-log\": \"^0.4.0\",\n    \"axios-mock-adapter\": \"^1.15.0\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-node\": \"^1.0.3\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^5.6.1\",\n    \"eslint-config-teppeis\": \"^8.3.1\",\n    \"intelli-espower-loader\": \"^1.0.1\",\n    \"mocha\": \"^5.2.0\",\n    \"npm-run-all\": \"^4.1.3\",\n    \"power-assert\": \"^1.6.1\",\n    \"prettier\": \"~1.14.3\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git@github.com:teppeis/redash-client.git\"\n  },\n  \"keywords\": [\n    \"redash\"\n  ],\n  \"license\": \"MIT\"\n}\n",
-    "longname": "/home/vagrant/go/src/github.com/koooge/redash-client/package.json",
+    "content": "{\n  \"name\": \"redash-client\",\n  \"description\": \"Redash API Client for JavaScript\",\n  \"version\": \"1.1.2\",\n  \"author\": \"Teppei Sato <teppeis@gmail.com>\",\n  \"engines\": {\n    \"node\": \">=8\"\n  },\n  \"main\": \"index.js\",\n  \"files\": [\n    \"index.js\",\n    \"src\"\n  ],\n  \"scripts\": {\n    \"docs\": \"esdoc\",\n    \"test\": \"NOCK_BACK_MODE=lockdown run-s test:lint test:unit\",\n    \"test:lint\": \"eslint src test\",\n    \"test:unit\": \"mocha --require intelli-espower-loader test\"\n  },\n  \"dependencies\": {\n    \"axios\": \"^0.18.0\",\n    \"delay\": \"^4.1.0\"\n  },\n  \"devDependencies\": {\n    \"@teppeis/nock-back-mocha\": \"^3.0.0\",\n    \"axios-debug-log\": \"^0.4.0\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-node\": \"^1.0.3\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^5.8.0\",\n    \"eslint-config-teppeis\": \"^8.3.1\",\n    \"intelli-espower-loader\": \"^1.0.1\",\n    \"mocha\": \"^5.2.0\",\n    \"nock\": \"^10.0.1\",\n    \"npm-run-all\": \"^4.1.3\",\n    \"power-assert\": \"^1.6.1\",\n    \"prettier\": \"~1.14.3\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git@github.com:teppeis/redash-client.git\"\n  },\n  \"keywords\": [\n    \"redash\"\n  ],\n  \"license\": \"MIT\"\n}\n",
+    "longname": "/Users/teppeis/src/github.com/teppeis/redash-client/package.json",
     "name": "package.json",
     "static": true,
     "access": "public"
   },
   {
-    "__docId__": 61,
+    "__docId__": 63,
     "kind": "testFile",
     "name": "test/index.js",
-    "content": "'use strict';\n\nconst Client = require('../');\nconst assert = require('assert');\nconst Mock = require('axios-mock-adapter');\n\nrequire('axios-debug-log');\n\n/** @test {RedashClient} */\ndescribe('RedashClient', () => {\n  it('should be a constructor', () => {\n    const client = new Client();\n    assert(client instanceof Client);\n  });\n\n  describe('api', () => {\n    let client, mock;\n\n    beforeEach(() => {\n      client = new Client({\n        endPoint: 'https://demo.redash.io/',\n        apiToken: process.env.API_TOKEN || 'abc123',\n      });\n      mock = new Mock(client.axios_);\n    });\n\n    /** @test {RedashClient#getDataSource} */\n    it('getDataSource', async () => {\n      const expectedBody = require('./fixtures/get-data_source');\n\n      const {id} = expectedBody;\n      mock.onGet(`/api/data_sources/${id}`).reply(200, expectedBody);\n      const actual = await client.getDataSource(id);\n      assert.deepEqual(actual, expectedBody);\n    });\n\n    /** @test {RedashClient#getDataSources} */\n    it('getDataSources', async () => {\n      const expectedBody = require('./fixtures/get-data_sources');\n\n      mock.onGet(`/api/data_sources`).reply(200, expectedBody);\n      const actual = await client.getDataSources();\n      assert.deepEqual(actual, expectedBody);\n    });\n\n    /** @test {RedashClient#getQuery} */\n    it('getQuery', async () => {\n      const expectedBody = require('./fixtures/get-query');\n\n      const {id} = expectedBody;\n      mock.onGet(`/api/queries/${id}`).reply(200, expectedBody);\n      const actual = await client.getQuery(id);\n      assert.deepEqual(actual, expectedBody);\n    });\n\n    /** @test {RedashClient#getQueries} */\n    it('getQueries', async () => {\n      const expectedBody = require('./fixtures/get-queries');\n\n      mock.onGet(`/api/queries`).reply(200, expectedBody);\n      const actual = await client.getQueries();\n      assert.deepEqual(actual, expectedBody);\n    });\n\n    /** @test {RedashClient#postQuery} */\n    it('postQuery with max_age = 0', async () => {\n      const expectedBody = require('./fixtures/post-query_results-max_age_0');\n\n      mock.onPost('/api/query_results').reply(200, expectedBody);\n      const actual = await client.postQuery({\n        query: 'select * from cohort2',\n        data_source_id: 2,\n        max_age: 0,\n      });\n      assert.deepEqual(actual, expectedBody);\n    });\n\n    /** @test {RedashClient#getJob} */\n    it('getJob', async () => {\n      const expectedBody = require('./fixtures/get-jobs-1');\n\n      const {id} = expectedBody.job;\n      mock.onGet(`/api/jobs/${id}`).reply(200, expectedBody);\n      const actual = await client.getJob(id);\n      assert.deepEqual(actual, expectedBody);\n    });\n\n    /** @test {RedashClient#getQueryResult} */\n    it('getQueryResult', async () => {\n      const expectedBody = require('./fixtures/get-query_results');\n\n      const {id} = expectedBody.query_result;\n      mock.onGet(`/api/query_results/${id}`).reply(200, expectedBody);\n      const actual = await client.getQueryResult(id);\n      assert.deepEqual(actual, expectedBody);\n    });\n\n    /** @test {RedashClient#queryAndWaitResult} */\n    it('queryAndWaitResult', async () => {\n      const job1 = require('./fixtures/post-query_results-max_age_0');\n      const job2 = require('./fixtures/get-jobs-2');\n      const job3 = require('./fixtures/get-jobs-3');\n      const queryResult = require('./fixtures/get-query_results');\n\n      const jobId = job1.job.id;\n      const queryResultId = job3.job.query_result_id;\n      mock.onPost('/api/query_results').reply(200, job1);\n      mock.onGet(`/api/jobs/${jobId}`).replyOnce(200, job2);\n      mock.onGet(`/api/jobs/${jobId}`).replyOnce(200, job3);\n      mock.onGet(`/api/query_results/${queryResultId}`).reply(200, queryResult);\n\n      const actual = await client.queryAndWaitResult({\n        query: 'select * from cohort2',\n        data_source_id: 2,\n        max_age: 0,\n      });\n      assert.deepEqual(actual, queryResult);\n    });\n\n    /** @test {RedashClient#queryAndWaitResult} */\n    it('queryAndWaitResult: timeout', function(done) {\n      this.timeout(3000);\n\n      const job1 = require('./fixtures/post-query_results-max_age_0');\n      const job2 = require('./fixtures/get-jobs-2');\n\n      const jobId = job1.job.id;\n      mock.onPost('/api/query_results').reply(200, job1);\n      mock.onGet(`/api/jobs/${jobId}`).reply(200, job2);\n\n      client\n        .queryAndWaitResult(\n          {\n            query: 'select * from cohort2',\n            data_source_id: 2,\n            max_age: 0,\n          },\n          1000\n        )\n        .catch(e => {\n          assert(/polling timeout/.test(e.message));\n          done();\n        });\n    });\n  });\n});\n",
+    "content": "'use strict';\n\nconst Client = require('../');\nconst assert = require('assert');\nconst nockBackMochaFactory = require('@teppeis/nock-back-mocha');\nconst nockBackMocha = nockBackMochaFactory();\n\nrequire('axios-debug-log');\n\n/** @test {RedashClient} */\ndescribe('RedashClient', () => {\n  it('should be a constructor', () => {\n    const client = new Client();\n    assert(client instanceof Client);\n  });\n\n  describe('api', () => {\n    let client;\n\n    beforeEach(function() {\n      client = new Client({\n        endPoint: 'http://localhost/',\n        // apiToken: process.env.API_TOKEN || 'abc123',\n        apiToken: process.env.API_TOKEN || 'fK3nBy18rt1lBadzmumWdqJrJaFCUEeLBcdgWfrV',\n      });\n      return nockBackMocha.beforeEach.call(this);\n    });\n\n    afterEach(nockBackMocha.afterEach);\n\n    /** @test {RedashClient#getDataSources} */\n    it('getDataSources', async () => {\n      const actual = await client.getDataSources();\n      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;\n      assert.deepEqual(actual, expectedBody);\n    });\n\n    /** @test {RedashClient#getDataSource} */\n    it('getDataSource', async () => {\n      const actual = await client.getDataSource(1);\n      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;\n      assert.deepEqual(actual, expectedBody);\n    });\n\n    /** @test {RedashClient#postQuery} */\n    it('postQuery', async () => {\n      const actual = await client.postQuery({\n        query: 'select * from actor',\n        data_source_id: 1,\n        name: 'List Actors',\n      });\n      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;\n      assert.deepEqual(actual, expectedBody);\n      nockBackMocha.assertScopesFinished();\n    });\n\n    /** @test {RedashClient#getQueries} */\n    it('getQueries', async () => {\n      const actual = await client.getQueries();\n      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;\n      assert.deepEqual(actual, expectedBody);\n      nockBackMocha.assertScopesFinished();\n    });\n\n    /** @test {RedashClient#getQuery} */\n    it('getQuery', async () => {\n      const actual = await client.getQuery(2);\n      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;\n      assert.deepEqual(actual, expectedBody);\n      nockBackMocha.assertScopesFinished();\n    });\n\n    /** @test {RedashClient#updateQuery} */\n    it('updateQuery', async () => {\n      const actual = await client.postQuery({\n        id: 3,\n        query: 'select * from actor limit 10',\n        data_source_id: 1,\n        name: 'Top 10 Actors',\n      });\n      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;\n      assert.deepEqual(actual, expectedBody);\n      nockBackMocha.assertScopesFinished();\n    });\n\n    /** @test {RedashClient#postQueryResult} */\n    it('postQueryResult with max_age = 0', async () => {\n      const actual = await client.postQueryResult({\n        query: 'select * from actor',\n        data_source_id: 1,\n        max_age: 0,\n      });\n      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;\n      assert.deepEqual(actual, expectedBody);\n      nockBackMocha.assertScopesFinished();\n    });\n\n    /** @test {RedashClient#getQueryResult} */\n    it('getQueryResult', async () => {\n      const id = 5;\n      const actual = await client.getQueryResult(id);\n      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;\n      assert.deepEqual(actual, expectedBody);\n      nockBackMocha.assertScopesFinished();\n    });\n\n    /** @test {RedashClient#getJob} */\n    it('getJob', async () => {\n      const id = 'a8822893-7614-4b35-b90d-6ae2dcb44e69';\n      const actual = await client.getJob(id);\n      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;\n      assert.deepEqual(actual, expectedBody);\n      nockBackMocha.assertScopesFinished();\n    });\n\n    /** @test {RedashClient#queryAndWaitResult} */\n    it('queryAndWaitResult', async () => {\n      const actual = await client.queryAndWaitResult({\n        query: 'select * from actor limit 5',\n        data_source_id: 1,\n        max_age: 0,\n      });\n      const requests = require(nockBackMocha.fixtureFile);\n      const lastRequest = requests[requests.length - 1];\n      assert(/^\\/api\\/query_results\\/\\d+/.test(lastRequest.path));\n      assert(lastRequest.status === 200);\n      assert.deepEqual(actual, lastRequest.response);\n      nockBackMocha.assertScopesFinished();\n    });\n\n    /** @test {RedashClient#queryAndWaitResult} */\n    it('queryAndWaitResult: timeout', () =>\n      client\n        .queryAndWaitResult(\n          {\n            query: 'select * from actor limit 5',\n            data_source_id: 1,\n            max_age: 0,\n          },\n          10\n        )\n        .then(\n          () => assert.fail('should be rejected'),\n          e => {\n            assert(/polling timeout/.test(e.message));\n            nockBackMocha.assertScopesFinished();\n          }\n        ));\n  });\n});\n",
     "static": true,
-    "longname": "/home/vagrant/go/src/github.com/koooge/redash-client/test/index.js",
+    "longname": "/Users/teppeis/src/github.com/teppeis/redash-client/test/index.js",
     "access": null,
     "description": null,
     "lineNumber": 1
   },
   {
-    "__docId__": 62,
+    "__docId__": 64,
     "kind": "test",
     "name": "describe0",
     "testId": 0,
@@ -944,13 +1010,13 @@
     "longname": "test/index.js~describe0",
     "access": null,
     "description": "RedashClient",
-    "lineNumber": 10,
+    "lineNumber": 11,
     "testTargets": [
       "RedashClient"
     ]
   },
   {
-    "__docId__": 63,
+    "__docId__": 65,
     "kind": "test",
     "name": "it1",
     "testId": 1,
@@ -960,10 +1026,10 @@
     "longname": "test/index.js~describe0.it1",
     "access": null,
     "description": "should be a constructor",
-    "lineNumber": 11
+    "lineNumber": 12
   },
   {
-    "__docId__": 64,
+    "__docId__": 66,
     "kind": "test",
     "name": "describe2",
     "testId": 2,
@@ -973,10 +1039,10 @@
     "longname": "test/index.js~describe0.describe2",
     "access": null,
     "description": "api",
-    "lineNumber": 16
+    "lineNumber": 17
   },
   {
-    "__docId__": 65,
+    "__docId__": 67,
     "kind": "test",
     "name": "it3",
     "testId": 3,
@@ -985,14 +1051,14 @@
     "static": true,
     "longname": "test/index.js~describe0.describe2.it3",
     "access": null,
-    "description": "getDataSource",
-    "lineNumber": 28,
+    "description": "getDataSources",
+    "lineNumber": 32,
     "testTargets": [
-      "RedashClient#getDataSource"
+      "RedashClient#getDataSources"
     ]
   },
   {
-    "__docId__": 66,
+    "__docId__": 68,
     "kind": "test",
     "name": "it4",
     "testId": 4,
@@ -1001,14 +1067,14 @@
     "static": true,
     "longname": "test/index.js~describe0.describe2.it4",
     "access": null,
-    "description": "getDataSources",
-    "lineNumber": 38,
+    "description": "getDataSource",
+    "lineNumber": 39,
     "testTargets": [
-      "RedashClient#getDataSources"
+      "RedashClient#getDataSource"
     ]
   },
   {
-    "__docId__": 67,
+    "__docId__": 69,
     "kind": "test",
     "name": "it5",
     "testId": 5,
@@ -1017,14 +1083,14 @@
     "static": true,
     "longname": "test/index.js~describe0.describe2.it5",
     "access": null,
-    "description": "getQuery",
-    "lineNumber": 47,
+    "description": "postQuery",
+    "lineNumber": 46,
     "testTargets": [
-      "RedashClient#getQuery"
+      "RedashClient#postQuery"
     ]
   },
   {
-    "__docId__": 68,
+    "__docId__": 70,
     "kind": "test",
     "name": "it6",
     "testId": 6,
@@ -1034,13 +1100,13 @@
     "longname": "test/index.js~describe0.describe2.it6",
     "access": null,
     "description": "getQueries",
-    "lineNumber": 57,
+    "lineNumber": 58,
     "testTargets": [
       "RedashClient#getQueries"
     ]
   },
   {
-    "__docId__": 69,
+    "__docId__": 71,
     "kind": "test",
     "name": "it7",
     "testId": 7,
@@ -1049,14 +1115,14 @@
     "static": true,
     "longname": "test/index.js~describe0.describe2.it7",
     "access": null,
-    "description": "postQuery with max_age = 0",
+    "description": "getQuery",
     "lineNumber": 66,
     "testTargets": [
-      "RedashClient#postQuery"
+      "RedashClient#getQuery"
     ]
   },
   {
-    "__docId__": 70,
+    "__docId__": 72,
     "kind": "test",
     "name": "it8",
     "testId": 8,
@@ -1065,14 +1131,14 @@
     "static": true,
     "longname": "test/index.js~describe0.describe2.it8",
     "access": null,
-    "description": "getJob",
-    "lineNumber": 79,
+    "description": "updateQuery",
+    "lineNumber": 74,
     "testTargets": [
-      "RedashClient#getJob"
+      "RedashClient#updateQuery"
     ]
   },
   {
-    "__docId__": 71,
+    "__docId__": 73,
     "kind": "test",
     "name": "it9",
     "testId": 9,
@@ -1081,14 +1147,14 @@
     "static": true,
     "longname": "test/index.js~describe0.describe2.it9",
     "access": null,
-    "description": "getQueryResult",
-    "lineNumber": 89,
+    "description": "postQueryResult with max_age = 0",
+    "lineNumber": 87,
     "testTargets": [
-      "RedashClient#getQueryResult"
+      "RedashClient#postQueryResult"
     ]
   },
   {
-    "__docId__": 72,
+    "__docId__": 74,
     "kind": "test",
     "name": "it10",
     "testId": 10,
@@ -1097,14 +1163,14 @@
     "static": true,
     "longname": "test/index.js~describe0.describe2.it10",
     "access": null,
-    "description": "queryAndWaitResult",
+    "description": "getQueryResult",
     "lineNumber": 99,
     "testTargets": [
-      "RedashClient#queryAndWaitResult"
+      "RedashClient#getQueryResult"
     ]
   },
   {
-    "__docId__": 73,
+    "__docId__": 75,
     "kind": "test",
     "name": "it11",
     "testId": 11,
@@ -1113,8 +1179,40 @@
     "static": true,
     "longname": "test/index.js~describe0.describe2.it11",
     "access": null,
+    "description": "getJob",
+    "lineNumber": 108,
+    "testTargets": [
+      "RedashClient#getJob"
+    ]
+  },
+  {
+    "__docId__": 76,
+    "kind": "test",
+    "name": "it12",
+    "testId": 12,
+    "memberof": "test/index.js~describe0.describe2",
+    "testDepth": 2,
+    "static": true,
+    "longname": "test/index.js~describe0.describe2.it12",
+    "access": null,
+    "description": "queryAndWaitResult",
+    "lineNumber": 117,
+    "testTargets": [
+      "RedashClient#queryAndWaitResult"
+    ]
+  },
+  {
+    "__docId__": 77,
+    "kind": "test",
+    "name": "it13",
+    "testId": 13,
+    "memberof": "test/index.js~describe0.describe2",
+    "testDepth": 2,
+    "static": true,
+    "longname": "test/index.js~describe0.describe2.it13",
+    "access": null,
     "description": "queryAndWaitResult: timeout",
-    "lineNumber": 121,
+    "lineNumber": 132,
     "testTargets": [
       "RedashClient#queryAndWaitResult"
     ]

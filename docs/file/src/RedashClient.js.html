@@ -63,18 +63,47 @@ class RedashClient {
   }
 
   /**
-   * @param {number} id
-   * @return {Promise&lt;DataSource&gt;}
-   */
-  getDataSource(id) {
-    return this.axios_.get(`api/data_sources/${id}`).then(resp =&gt; resp.data);
-  }
-
-  /**
    * @return {Promise&lt;Array&lt;DataSource&gt;&gt;}
    */
   getDataSources() {
     return this.axios_.get(`api/data_sources`).then(resp =&gt; resp.data);
+  }
+
+  /**
+   * @param {number} id
+   * @return {Promise&lt;DataSource&gt;}
+   */
+  getDataSource(id) {
+    if (typeof id !== &apos;number&apos;) {
+      throw new TypeError(`Data Source ID should be number: ${id}`);
+    }
+    return this.axios_.get(`api/data_sources/${id}`).then(resp =&gt; resp.data);
+  }
+
+  /**
+   * @param {{query: string, data_source_id: number, name: string, description: string?}} query
+   * @return {Promise&lt;Query&gt;}
+   */
+  postQuery(query) {
+    return this.axios_.post(&apos;api/queries&apos;, query).then(resp =&gt; resp.data);
+  }
+
+  /**
+   * @param {{id: number, query: string, data_source_id: number, name: string, description: string?}} query
+   * @return {Promise&lt;Query&gt;}
+   */
+  updateQuery(query) {
+    if (typeof query.id !== &apos;number&apos;) {
+      throw new TypeError(`Query ID should be number: ${query.id}`);
+    }
+    return this.axios_.post(`api/queries/${query.id}`, query).then(resp =&gt; resp.data);
+  }
+
+  /**
+   * @return {Promise&lt;{count: number, page: number, page_size: number, results: Array&lt;Query&gt;}&gt;}
+   */
+  getQueries() {
+    return this.axios_.get(`api/queries`).then(resp =&gt; resp.data);
   }
 
   /**
@@ -86,18 +115,22 @@ class RedashClient {
   }
 
   /**
-   * @return {Promise&lt;{count: number, page: number, page_size: number, results: Array&lt;Query&gt;}&gt;}
-   */
-  getQueries() {
-    return this.axios_.get(`api/queries`).then(resp =&gt; resp.data);
-  }
-
-  /**
    * @param {{data_source_id: number, max_age: number, query: string, query_id: number}} query
    * @return {Promise&lt;{job: Job}|{query_result: QueryResult}&gt;}
    */
-  postQuery(query) {
+  postQueryResult(query) {
     return this.axios_.post(&apos;api/query_results&apos;, query).then(resp =&gt; resp.data);
+  }
+
+  /**
+   * @param {number} queryResultId
+   * @return {Promise&lt;{query_result: QueryResult}&gt;}
+   */
+  getQueryResult(queryResultId) {
+    if (typeof queryResultId !== &apos;number&apos;) {
+      throw new TypeError(`Query Result ID should be number: ${queryResultId}`);
+    }
+    return this.axios_.get(`api/query_results/${queryResultId}`).then(resp =&gt; resp.data);
   }
 
   /**
@@ -106,14 +139,6 @@ class RedashClient {
    */
   getJob(id) {
     return this.axios_.get(`api/jobs/${id}`).then(resp =&gt; resp.data);
-  }
-
-  /**
-   * @param {number} queryResultId
-   * @return {Promise&lt;{query_result: QueryResult}&gt;}
-   */
-  getQueryResult(queryResultId) {
-    return this.axios_.get(`api/query_results/${queryResultId}`).then(resp =&gt; resp.data);
   }
 
   /**
@@ -126,7 +151,7 @@ class RedashClient {
     query = {...query, max_age: 0};
     const {
       job: {id},
-    } = await this.postQuery(query);
+    } = await this.postQueryResult(query);
     let queryResultId;
     const start = Date.now();
     while (true) {

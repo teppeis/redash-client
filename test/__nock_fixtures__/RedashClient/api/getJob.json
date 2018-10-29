@@ -1,0 +1,30 @@
+[
+    {
+        "scope": "http://localhost:80",
+        "method": "get",
+        "path": "/api/jobs/a8822893-7614-4b35-b90d-6ae2dcb44e69",
+        "body": "",
+        "status": 200,
+        "response": {
+            "job": {
+                "status": 3,
+                "error": "",
+                "id": "a8822893-7614-4b35-b90d-6ae2dcb44e69",
+                "query_result_id": 5,
+                "updated_at": 0
+            }
+        },
+        "rawHeaders": [
+            "Server",
+            "nginx/1.9.10",
+            "Date",
+            "Mon, 29 Oct 2018 12:41:24 GMT",
+            "Content-Type",
+            "application/json",
+            "Content-Length",
+            "120",
+            "Connection",
+            "close"
+        ]
+    }
+]

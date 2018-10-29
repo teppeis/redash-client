@@ -1,0 +1,32 @@
+[
+    {
+        "scope": "http://localhost:80",
+        "method": "get",
+        "path": "/api/data_sources",
+        "body": "",
+        "status": 200,
+        "response": [
+            {
+                "name": "dvdrental",
+                "pause_reason": null,
+                "syntax": "sql",
+                "paused": false,
+                "view_only": false,
+                "type": "pg",
+                "id": 1
+            }
+        ],
+        "rawHeaders": [
+            "Server",
+            "nginx/1.9.10",
+            "Date",
+            "Mon, 29 Oct 2018 12:52:14 GMT",
+            "Content-Type",
+            "application/json",
+            "Content-Length",
+            "122",
+            "Connection",
+            "close"
+        ]
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "scope": "http://localhost:80",
+        "method": "post",
+        "path": "/api/query_results",
+        "body": {
+            "query": "select * from actor",
+            "data_source_id": 1,
+            "max_age": 0
+        },
+        "status": 200,
+        "response": {
+            "job": {
+                "status": 2,
+                "error": "",
+                "id": "a8822893-7614-4b35-b90d-6ae2dcb44e69",
+                "query_result_id": null,
+                "updated_at": 0
+            }
+        },
+        "rawHeaders": [
+            "Server",
+            "nginx/1.9.10",
+            "Date",
+            "Mon, 29 Oct 2018 12:38:02 GMT",
+            "Content-Type",
+            "application/json",
+            "Content-Length",
+            "123",
+            "Connection",
+            "close"
+        ]
+    }
+]

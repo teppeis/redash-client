@@ -41,13 +41,15 @@ See [API document](https://teppeis.github.io/redash-client/)
 
 ### Supported REST API
 
-- `#getDataSource()`
 - `#getDataSources()`
-- `#getQuery()`
-- `#getQueries()`
+- `#getDataSource()`
 - `#postQuery()`
-- `#getJob()`
+- `#getQueries()`
+- `#getQuery()`
+- `#updateQuery()`
+- `#postQueryResult()`
 - `#getQueryResult()`
+- `#getJob()`
 
 Methods for other REST API are not implemented yet. Help!
 
@@ -57,8 +59,8 @@ Methods for other REST API are not implemented yet. Help!
 
 Internally:
 
-1. `postQuery()`
-2. Poll `getJob()`
+1. `postQueryResult()`
+2. Polling `getJob()`
 3. Return `getQueryResult()`
 
 ## License
