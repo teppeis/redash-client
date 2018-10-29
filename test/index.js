@@ -2,7 +2,8 @@
 
 const Client = require('../');
 const assert = require('assert');
-const nockBackMocha = require('@teppeis/nock-back-mocha')();
+const nockBackMochaFactory = require('@teppeis/nock-back-mocha');
+const nockBackMocha = nockBackMochaFactory();
 
 require('axios-debug-log');
 
