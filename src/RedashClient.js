@@ -31,7 +31,7 @@ class RedashClient {
    */
   getDataSource(id) {
     if (typeof id !== 'number') {
-      throw new TypeError('Query ID should be number');
+      throw new TypeError(`Data Source ID should be number: ${id}`);
     }
     return this.axios_.get(`api/data_sources/${id}`).then(resp => resp.data);
   }
@@ -49,6 +49,17 @@ class RedashClient {
    */
   postQuery(query) {
     return this.axios_.post('api/queries', query).then(resp => resp.data);
+  }
+
+  /**
+   * @param {{id: number, query: string, data_source_id: number, name: string, description: string?}} query
+   * @return {Promise<Query>}
+   */
+  updateQuery(query) {
+    if (typeof query.id !== 'number') {
+      throw new TypeError(`Query ID should be number: ${query.id}`);
+    }
+    return this.axios_.post(`api/queries/${query.id}`, query).then(resp => resp.data);
   }
 
   /**
@@ -88,7 +99,7 @@ class RedashClient {
    */
   getQueryResult(queryResultId) {
     if (typeof queryResultId !== 'number') {
-      throw new TypeError('Query ID should be number');
+      throw new TypeError(`Query Result ID should be number: ${queryResultId}`);
     }
     return this.axios_.get(`api/query_results/${queryResultId}`).then(resp => resp.data);
   }

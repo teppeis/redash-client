@@ -53,6 +53,19 @@ describe('RedashClient', () => {
       nockBackMocha.assertScopesFinished();
     });
 
+    /** @test {RedashClient#updateQuery} */
+    it('updateQuery', async () => {
+      const actual = await client.postQuery({
+        id: 3,
+        query: 'select * from actor limit 10',
+        data_source_id: 1,
+        name: 'Top 10 Actors',
+      });
+      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
+      assert.deepEqual(actual, expectedBody);
+      nockBackMocha.assertScopesFinished();
+    });
+
     /** @test {RedashClient#getQuery} */
     it('getQuery', async () => {
       const actual = await client.getQuery(2);

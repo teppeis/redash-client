@@ -1,0 +1,75 @@
+[
+    {
+        "scope": "http://localhost:80",
+        "method": "post",
+        "path": "/api/queries",
+        "body": {
+            "id": 3,
+            "query": "select * from actor limit 10",
+            "data_source_id": 1,
+            "name": "Top 10 Actors"
+        },
+        "status": 200,
+        "response": {
+            "user": {
+                "auth_type": "password",
+                "disabled_at": null,
+                "name": "redash-client",
+                "groups": [
+                    1,
+                    2
+                ],
+                "updated_at": "2018-10-28T18:18:09.995471+00:00",
+                "created_at": "2018-10-28T18:18:09.995471+00:00",
+                "is_disabled": false,
+                "id": 1,
+                "profile_image_url": "https://www.gravatar.com/avatar/7bcb95c5d66f1d9626c7dee61b85d56f?s=40&d=identicon",
+                "email": "redash-client@example.com"
+            },
+            "created_at": "2018-10-29T13:33:56.264726+00:00",
+            "latest_query_data_id": null,
+            "schedule": null,
+            "description": null,
+            "tags": [],
+            "updated_at": "2018-10-29T13:33:56.264726+00:00",
+            "last_modified_by": {
+                "auth_type": "password",
+                "disabled_at": null,
+                "name": "redash-client",
+                "groups": [
+                    1,
+                    2
+                ],
+                "updated_at": "2018-10-28T18:18:09.995471+00:00",
+                "created_at": "2018-10-28T18:18:09.995471+00:00",
+                "is_disabled": false,
+                "id": 1,
+                "profile_image_url": "https://www.gravatar.com/avatar/7bcb95c5d66f1d9626c7dee61b85d56f?s=40&d=identicon",
+                "email": "redash-client@example.com"
+            },
+            "options": {},
+            "version": 1,
+            "is_favorite": false,
+            "query_hash": "99fefb253298a527172922e1d0f7bb4d",
+            "is_archived": false,
+            "query": "select * from actor limit 10",
+            "api_key": "WyaFYWTnRCQobQGaNapciVYYnV0iYKt0lgjeOGtk",
+            "is_draft": true,
+            "id": 4,
+            "data_source_id": 1,
+            "name": "Top 10 Actors"
+        },
+        "rawHeaders": [
+            "Server",
+            "nginx/1.9.10",
+            "Date",
+            "Mon, 29 Oct 2018 13:33:56 GMT",
+            "Content-Type",
+            "application/json",
+            "Content-Length",
+            "1233",
+            "Connection",
+            "close"
+        ]
+    }
+]
