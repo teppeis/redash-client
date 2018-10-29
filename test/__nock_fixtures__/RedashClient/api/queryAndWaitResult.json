@@ -1,143 +1,175 @@
 [
     {
-        "scope": "http://localhost:5000",
+        "scope": "http://localhost:80",
         "method": "post",
         "path": "/api/query_results",
         "body": {
-            "query": "1E7lGYcgerhmYmKsfN7ReRulItby_tm8ivfTvuQD-TBM",
+            "query": "select * from actor limit 5",
             "data_source_id": 1,
             "max_age": 0
         },
         "status": 200,
         "response": {
             "job": {
-                "status": 1,
+                "status": 2,
                 "error": "",
-                "id": "c508c776-7c1e-4bf9-9ab8-6fa25b698d0f",
+                "id": "c84ec770-c2b8-40bc-9bd8-e964c9a4e8ed",
                 "query_result_id": null,
                 "updated_at": 0
             }
         },
         "rawHeaders": [
             "Server",
-            "gunicorn/19.7.1",
+            "nginx/1.9.10",
             "Date",
-            "Sun, 14 Oct 2018 13:32:39 GMT",
-            "Connection",
-            "close",
+            "Mon, 29 Oct 2018 12:46:04 GMT",
             "Content-Type",
             "application/json",
             "Content-Length",
-            "123"
+            "123",
+            "Connection",
+            "close"
         ]
     },
     {
-        "scope": "http://localhost:5000",
+        "scope": "http://localhost:80",
         "method": "get",
-        "path": "/api/jobs/c508c776-7c1e-4bf9-9ab8-6fa25b698d0f",
+        "path": "/api/jobs/c84ec770-c2b8-40bc-9bd8-e964c9a4e8ed",
         "body": "",
         "status": 200,
         "response": {
             "job": {
                 "status": 2,
                 "error": "",
-                "id": "c508c776-7c1e-4bf9-9ab8-6fa25b698d0f",
+                "id": "c84ec770-c2b8-40bc-9bd8-e964c9a4e8ed",
                 "query_result_id": null,
                 "updated_at": 0
             }
         },
         "rawHeaders": [
             "Server",
-            "gunicorn/19.7.1",
+            "nginx/1.9.10",
             "Date",
-            "Sun, 14 Oct 2018 13:32:39 GMT",
-            "Connection",
-            "close",
+            "Mon, 29 Oct 2018 12:46:04 GMT",
             "Content-Type",
             "application/json",
             "Content-Length",
-            "123"
+            "123",
+            "Connection",
+            "close"
         ]
     },
     {
-        "scope": "http://localhost:5000",
+        "scope": "http://localhost:80",
         "method": "get",
-        "path": "/api/jobs/c508c776-7c1e-4bf9-9ab8-6fa25b698d0f",
+        "path": "/api/jobs/c84ec770-c2b8-40bc-9bd8-e964c9a4e8ed",
         "body": "",
         "status": 200,
         "response": {
             "job": {
                 "status": 3,
                 "error": "",
-                "id": "c508c776-7c1e-4bf9-9ab8-6fa25b698d0f",
-                "query_result_id": 3,
+                "id": "c84ec770-c2b8-40bc-9bd8-e964c9a4e8ed",
+                "query_result_id": 8,
                 "updated_at": 0
             }
         },
         "rawHeaders": [
             "Server",
-            "gunicorn/19.7.1",
+            "nginx/1.9.10",
             "Date",
-            "Sun, 14 Oct 2018 13:32:42 GMT",
-            "Connection",
-            "close",
+            "Mon, 29 Oct 2018 12:46:05 GMT",
             "Content-Type",
             "application/json",
             "Content-Length",
-            "120"
+            "120",
+            "Connection",
+            "close"
         ]
     },
     {
-        "scope": "http://localhost:5000",
+        "scope": "http://localhost:80",
         "method": "get",
-        "path": "/api/query_results/3",
+        "path": "/api/query_results/8",
         "body": "",
         "status": 200,
         "response": {
             "query_result": {
-                "retrieved_at": "2018-10-14T13:32:41.431891+00:00",
-                "query_hash": "ee3dacbd2e008c90402429af8cdd3740",
-                "query": "1E7lGYcgerhmYmKsfN7ReRulItby_tm8ivfTvuQD-TBM",
-                "runtime": 2.12571406364441,
+                "retrieved_at": "2018-10-29T12:46:04.660067+00:00",
+                "query_hash": "0fd5b93c7b9527d13adab67e13c74bf5",
+                "query": "select * from actor limit 5",
+                "runtime": 0.0297338962554932,
                 "data": {
                     "rows": [
                         {
-                            "name": "foo",
-                            "value": 10
+                            "first_name": "Penelope",
+                            "last_name": "Guiness",
+                            "actor_id": 1,
+                            "last_update": "2013-05-26T14:47:57.620000"
                         },
                         {
-                            "name": "bar",
-                            "value": 20
+                            "first_name": "Nick",
+                            "last_name": "Wahlberg",
+                            "actor_id": 2,
+                            "last_update": "2013-05-26T14:47:57.620000"
+                        },
+                        {
+                            "first_name": "Ed",
+                            "last_name": "Chase",
+                            "actor_id": 3,
+                            "last_update": "2013-05-26T14:47:57.620000"
+                        },
+                        {
+                            "first_name": "Jennifer",
+                            "last_name": "Davis",
+                            "actor_id": 4,
+                            "last_update": "2013-05-26T14:47:57.620000"
+                        },
+                        {
+                            "first_name": "Johnny",
+                            "last_name": "Lollobrigida",
+                            "actor_id": 5,
+                            "last_update": "2013-05-26T14:47:57.620000"
                         }
                     ],
                     "columns": [
                         {
-                            "friendly_name": "name",
-                            "type": "string",
-                            "name": "name"
+                            "friendly_name": "actor_id",
+                            "type": "integer",
+                            "name": "actor_id"
                         },
                         {
-                            "friendly_name": "value",
-                            "type": "integer",
-                            "name": "value"
+                            "friendly_name": "first_name",
+                            "type": null,
+                            "name": "first_name"
+                        },
+                        {
+                            "friendly_name": "last_name",
+                            "type": null,
+                            "name": "last_name"
+                        },
+                        {
+                            "friendly_name": "last_update",
+                            "type": "datetime",
+                            "name": "last_update"
                         }
                     ]
                 },
-                "id": 3,
+                "id": 8,
                 "data_source_id": 1
             }
         },
         "rawHeaders": [
             "Server",
-            "gunicorn/19.7.1",
+            "nginx/1.9.10",
             "Date",
-            "Sun, 14 Oct 2018 13:32:42 GMT",
-            "Connection",
-            "close",
+            "Mon, 29 Oct 2018 12:46:05 GMT",
             "Content-Type",
             "application/json",
             "Content-Length",
-            "454",
+            "1087",
+            "Connection",
+            "close",
             "Cache-Control",
             "private,max-age=31557600"
         ]

@@ -1,40 +1,34 @@
 [
     {
-        "scope": "https://demo.redash.io:443",
+        "scope": "http://localhost:80",
         "method": "post",
         "path": "/api/query_results",
         "body": {
-            "query": "select * from cohort2",
-            "data_source_id": 2,
+            "query": "select * from actor",
+            "data_source_id": 1,
             "max_age": 0
         },
         "status": 200,
         "response": {
             "job": {
-                "status": 1,
+                "status": 2,
                 "error": "",
-                "id": "ba2297dd-553e-4b6b-8250-84f4c62d7cb3",
+                "id": "a8822893-7614-4b35-b90d-6ae2dcb44e69",
                 "query_result_id": null,
                 "updated_at": 0
             }
         },
         "rawHeaders": [
+            "Server",
+            "nginx/1.9.10",
             "Date",
-            "Sun, 14 Oct 2018 06:46:45 GMT",
+            "Mon, 29 Oct 2018 12:38:02 GMT",
             "Content-Type",
             "application/json",
-            "Transfer-Encoding",
-            "chunked",
+            "Content-Length",
+            "123",
             "Connection",
-            "close",
-            "Set-Cookie",
-            "__cfduid=dc5264e4cd4cbc11bc728771871c9fc9a1539499604; expires=Mon, 14-Oct-19 06:46:44 GMT; path=/; domain=.redash.io; HttpOnly",
-            "Expect-CT",
-            "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
-            "Server",
-            "cloudflare",
-            "CF-RAY",
-            "46981732ec2f940f-NRT"
+            "close"
         ]
     }
 ]

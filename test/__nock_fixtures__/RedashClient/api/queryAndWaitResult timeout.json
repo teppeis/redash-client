@@ -1,11 +1,11 @@
 [
     {
-        "scope": "https://demo.redash.io:443",
+        "scope": "http://localhost:80",
         "method": "post",
         "path": "/api/query_results",
         "body": {
-            "query": "select * from cohort2",
-            "data_source_id": 2,
+            "query": "select * from actor limit 5",
+            "data_source_id": 1,
             "max_age": 0
         },
         "status": 200,
@@ -13,96 +13,78 @@
             "job": {
                 "status": 1,
                 "error": "",
-                "id": "ba2297dd-553e-4b6b-8250-84f4c62d7cb3",
+                "id": "9003f059-764a-4cf3-a75b-f24936eb030f",
                 "query_result_id": null,
                 "updated_at": 0
             }
         },
         "rawHeaders": [
+            "Server",
+            "nginx/1.9.10",
             "Date",
-            "Sun, 14 Oct 2018 13:48:54 GMT",
+            "Mon, 29 Oct 2018 12:47:30 GMT",
             "Content-Type",
             "application/json",
-            "Transfer-Encoding",
-            "chunked",
+            "Content-Length",
+            "123",
             "Connection",
-            "close",
-            "Set-Cookie",
-            "__cfduid=d6b3cfa6d8c8b41e811e22fded5c5f84f1539524934; expires=Mon, 14-Oct-19 13:48:54 GMT; path=/; domain=.redash.io; HttpOnly",
-            "Expect-CT",
-            "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
-            "Server",
-            "cloudflare",
-            "CF-RAY",
-            "469a819928af947b-NRT"
+            "close"
         ]
     },
     {
-        "scope": "https://demo.redash.io:443",
+        "scope": "http://localhost:80",
         "method": "get",
-        "path": "/api/jobs/ba2297dd-553e-4b6b-8250-84f4c62d7cb3",
+        "path": "/api/jobs/9003f059-764a-4cf3-a75b-f24936eb030f",
         "body": "",
         "status": 200,
         "response": {
             "job": {
-                "status": 1,
+                "status": 2,
                 "error": "",
-                "id": "ba2297dd-553e-4b6b-8250-84f4c62d7cb3",
+                "id": "9003f059-764a-4cf3-a75b-f24936eb030f",
                 "query_result_id": null,
                 "updated_at": 0
             }
         },
         "rawHeaders": [
+            "Server",
+            "nginx/1.9.10",
             "Date",
-            "Sun, 14 Oct 2018 13:48:55 GMT",
+            "Mon, 29 Oct 2018 12:47:30 GMT",
             "Content-Type",
             "application/json",
-            "Transfer-Encoding",
-            "chunked",
+            "Content-Length",
+            "123",
             "Connection",
-            "close",
-            "Set-Cookie",
-            "__cfduid=d542ed71e4d46fcff9af14bea2f3980ad1539524935; expires=Mon, 14-Oct-19 13:48:55 GMT; path=/; domain=.redash.io; HttpOnly",
-            "Expect-CT",
-            "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
-            "Server",
-            "cloudflare",
-            "CF-RAY",
-            "469a819cb8639427-NRT"
+            "close"
         ]
     },
     {
-        "scope": "https://demo.redash.io:443",
+        "scope": "http://localhost:80",
         "method": "get",
-        "path": "/api/jobs/ba2297dd-553e-4b6b-8250-84f4c62d7cb3",
+        "path": "/api/jobs/9003f059-764a-4cf3-a75b-f24936eb030f",
         "body": "",
         "status": 200,
         "response": {
             "job": {
-                "status": 1,
+                "status": 2,
                 "error": "",
-                "id": "ba2297dd-553e-4b6b-8250-84f4c62d7cb3",
+                "id": "9003f059-764a-4cf3-a75b-f24936eb030f",
                 "query_result_id": null,
                 "updated_at": 0
             }
         },
         "rawHeaders": [
+            "Server",
+            "nginx/1.9.10",
             "Date",
-            "Sun, 14 Oct 2018 13:48:57 GMT",
+            "Mon, 29 Oct 2018 12:47:30 GMT",
             "Content-Type",
             "application/json",
-            "Transfer-Encoding",
-            "chunked",
+            "Content-Length",
+            "123",
             "Connection",
-            "close",
-            "Set-Cookie",
-            "__cfduid=d7e67cc20e861473af3d16725851857f51539524936; expires=Mon, 14-Oct-19 13:48:56 GMT; path=/; domain=.redash.io; HttpOnly",
-            "Expect-CT",
-            "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
-            "Server",
-            "cloudflare",
-            "CF-RAY",
-            "469a81a6d9c294e1-NRT"
+            "close"
         ]
     }
 ]
