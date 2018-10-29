@@ -26,6 +26,13 @@ class RedashClient {
   }
 
   /**
+   * @return {Promise<Array<DataSource>>}
+   */
+  getDataSources() {
+    return this.axios_.get(`api/data_sources`).then(resp => resp.data);
+  }
+
+  /**
    * @param {number} id
    * @return {Promise<DataSource>}
    */
@@ -34,13 +41,6 @@ class RedashClient {
       throw new TypeError(`Data Source ID should be number: ${id}`);
     }
     return this.axios_.get(`api/data_sources/${id}`).then(resp => resp.data);
-  }
-
-  /**
-   * @return {Promise<Array<DataSource>>}
-   */
-  getDataSources() {
-    return this.axios_.get(`api/data_sources`).then(resp => resp.data);
   }
 
   /**
@@ -78,14 +78,6 @@ class RedashClient {
   }
 
   /**
-   * @param {number} id
-   * @return {Promise<{job: Job}>}
-   */
-  getJob(id) {
-    return this.axios_.get(`api/jobs/${id}`).then(resp => resp.data);
-  }
-
-  /**
    * @param {{data_source_id: number, max_age: number, query: string, query_id: number}} query
    * @return {Promise<{job: Job}|{query_result: QueryResult}>}
    */
@@ -102,6 +94,14 @@ class RedashClient {
       throw new TypeError(`Query Result ID should be number: ${queryResultId}`);
     }
     return this.axios_.get(`api/query_results/${queryResultId}`).then(resp => resp.data);
+  }
+
+  /**
+   * @param {number} id
+   * @return {Promise<{job: Job}>}
+   */
+  getJob(id) {
+    return this.axios_.get(`api/jobs/${id}`).then(resp => resp.data);
   }
 
   /**

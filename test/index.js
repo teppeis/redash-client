@@ -27,16 +27,16 @@ describe('RedashClient', () => {
 
     afterEach(nockBackMocha.afterEach);
 
-    /** @test {RedashClient#getDataSource} */
-    it('getDataSource', async () => {
-      const actual = await client.getDataSource(1);
+    /** @test {RedashClient#getDataSources} */
+    it('getDataSources', async () => {
+      const actual = await client.getDataSources();
       const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
       assert.deepEqual(actual, expectedBody);
     });
 
-    /** @test {RedashClient#getDataSources} */
-    it('getDataSources', async () => {
-      const actual = await client.getDataSources();
+    /** @test {RedashClient#getDataSource} */
+    it('getDataSource', async () => {
+      const actual = await client.getDataSource(1);
       const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
       assert.deepEqual(actual, expectedBody);
     });
@@ -48,6 +48,22 @@ describe('RedashClient', () => {
         data_source_id: 1,
         name: 'List Actors',
       });
+      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
+      assert.deepEqual(actual, expectedBody);
+      nockBackMocha.assertScopesFinished();
+    });
+
+    /** @test {RedashClient#getQueries} */
+    it('getQueries', async () => {
+      const actual = await client.getQueries();
+      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
+      assert.deepEqual(actual, expectedBody);
+      nockBackMocha.assertScopesFinished();
+    });
+
+    /** @test {RedashClient#getQuery} */
+    it('getQuery', async () => {
+      const actual = await client.getQuery(2);
       const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
       assert.deepEqual(actual, expectedBody);
       nockBackMocha.assertScopesFinished();
@@ -66,22 +82,6 @@ describe('RedashClient', () => {
       nockBackMocha.assertScopesFinished();
     });
 
-    /** @test {RedashClient#getQuery} */
-    it('getQuery', async () => {
-      const actual = await client.getQuery(2);
-      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
-      assert.deepEqual(actual, expectedBody);
-      nockBackMocha.assertScopesFinished();
-    });
-
-    /** @test {RedashClient#getQueries} */
-    it('getQueries', async () => {
-      const actual = await client.getQueries();
-      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
-      assert.deepEqual(actual, expectedBody);
-      nockBackMocha.assertScopesFinished();
-    });
-
     /** @test {RedashClient#postQueryResult} */
     it('postQueryResult with max_age = 0', async () => {
       const actual = await client.postQueryResult({
@@ -94,19 +94,19 @@ describe('RedashClient', () => {
       nockBackMocha.assertScopesFinished();
     });
 
-    /** @test {RedashClient#getJob} */
-    it('getJob', async () => {
-      const id = 'a8822893-7614-4b35-b90d-6ae2dcb44e69';
-      const actual = await client.getJob(id);
+    /** @test {RedashClient#getQueryResult} */
+    it('getQueryResult', async () => {
+      const id = 5;
+      const actual = await client.getQueryResult(id);
       const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
       assert.deepEqual(actual, expectedBody);
       nockBackMocha.assertScopesFinished();
     });
 
-    /** @test {RedashClient#getQueryResult} */
-    it('getQueryResult', async () => {
-      const id = 5;
-      const actual = await client.getQueryResult(id);
+    /** @test {RedashClient#getJob} */
+    it('getJob', async () => {
+      const id = 'a8822893-7614-4b35-b90d-6ae2dcb44e69';
+      const actual = await client.getJob(id);
       const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
       assert.deepEqual(actual, expectedBody);
       nockBackMocha.assertScopesFinished();
