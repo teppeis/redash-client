@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "docs": "esdoc",
-    "test": "run-s test:lint test:unit",
+    "test": "NOCK_BACK_MODE=lockdown run-s test:lint test:unit",
     "test:lint": "eslint src test",
     "test:unit": "mocha --require intelli-espower-loader test"
   },
