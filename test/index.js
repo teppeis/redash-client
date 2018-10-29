@@ -41,9 +41,21 @@ describe('RedashClient', () => {
       assert.deepEqual(actual, expectedBody);
     });
 
+    /** @test {RedashClient#postQuery} */
+    it('postQuery', async () => {
+      const actual = await client.postQuery({
+        query: 'select * from actor',
+        data_source_id: 1,
+        name: 'List Actors',
+      });
+      const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
+      assert.deepEqual(actual, expectedBody);
+      nockBackMocha.assertScopesFinished();
+    });
+
     /** @test {RedashClient#getQuery} */
-    it.skip('getQuery', async () => {
-      const actual = await client.getQuery(1);
+    it('getQuery', async () => {
+      const actual = await client.getQuery(2);
       const expectedBody = require(nockBackMocha.fixtureFile)[0].response;
       assert.deepEqual(actual, expectedBody);
       nockBackMocha.assertScopesFinished();
@@ -57,9 +69,9 @@ describe('RedashClient', () => {
       nockBackMocha.assertScopesFinished();
     });
 
-    /** @test {RedashClient#postQuery} */
-    it('postQuery with max_age = 0', async () => {
-      const actual = await client.postQuery({
+    /** @test {RedashClient#postQueryResult} */
+    it('postQueryResult with max_age = 0', async () => {
+      const actual = await client.postQueryResult({
         query: 'select * from actor',
         data_source_id: 1,
         max_age: 0,

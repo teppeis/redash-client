@@ -6,20 +6,95 @@
         "body": "",
         "status": 200,
         "response": {
-            "count": 0,
+            "count": 2,
             "page": 1,
             "page_size": 25,
-            "results": []
+            "results": [
+                {
+                    "user": {
+                        "auth_type": "password",
+                        "disabled_at": null,
+                        "name": "redash-client",
+                        "groups": [
+                            1,
+                            2
+                        ],
+                        "updated_at": "2018-10-28T18:18:09.995471+00:00",
+                        "created_at": "2018-10-28T18:18:09.995471+00:00",
+                        "is_disabled": false,
+                        "id": 1,
+                        "profile_image_url": "https://www.gravatar.com/avatar/7bcb95c5d66f1d9626c7dee61b85d56f?s=40&d=identicon",
+                        "email": "redash-client@example.com"
+                    },
+                    "created_at": "2018-10-29T13:13:38.677882+00:00",
+                    "runtime": null,
+                    "latest_query_data_id": null,
+                    "is_favorite": false,
+                    "schedule": null,
+                    "description": null,
+                    "tags": [],
+                    "retrieved_at": null,
+                    "updated_at": "2018-10-29T13:13:38.677882+00:00",
+                    "options": {},
+                    "version": 1,
+                    "last_modified_by_id": 1,
+                    "query_hash": "d012d72c9c722ecc9cab3dbcb8fb713e",
+                    "is_archived": false,
+                    "query": "select * from actor",
+                    "api_key": "qvC2zpF9d7g90jjxSBxQqJ5LgZEyPchRl9NsbT0A",
+                    "is_draft": true,
+                    "id": 3,
+                    "data_source_id": 1,
+                    "name": "List Actors"
+                },
+                {
+                    "user": {
+                        "auth_type": "password",
+                        "disabled_at": null,
+                        "name": "redash-client",
+                        "groups": [
+                            1,
+                            2
+                        ],
+                        "updated_at": "2018-10-28T18:18:09.995471+00:00",
+                        "created_at": "2018-10-28T18:18:09.995471+00:00",
+                        "is_disabled": false,
+                        "id": 1,
+                        "profile_image_url": "https://www.gravatar.com/avatar/7bcb95c5d66f1d9626c7dee61b85d56f?s=40&d=identicon",
+                        "email": "redash-client@example.com"
+                    },
+                    "created_at": "2018-10-29T13:11:28.238788+00:00",
+                    "runtime": null,
+                    "latest_query_data_id": null,
+                    "is_favorite": false,
+                    "schedule": null,
+                    "description": null,
+                    "tags": [],
+                    "retrieved_at": null,
+                    "updated_at": "2018-10-29T13:11:28.238788+00:00",
+                    "options": {},
+                    "version": 1,
+                    "last_modified_by_id": 1,
+                    "query_hash": "d012d72c9c722ecc9cab3dbcb8fb713e",
+                    "is_archived": false,
+                    "query": "select * from actor",
+                    "api_key": "vMdNMEuRi4hDJzYsIejAG9zbN0Uc3gf6QI49O7L0",
+                    "is_draft": true,
+                    "id": 2,
+                    "data_source_id": 1,
+                    "name": "List Actors"
+                }
+            ]
         },
         "rawHeaders": [
             "Server",
             "nginx/1.9.10",
             "Date",
-            "Mon, 29 Oct 2018 12:38:02 GMT",
+            "Mon, 29 Oct 2018 13:23:58 GMT",
             "Content-Type",
             "application/json",
             "Content-Length",
-            "55",
+            "1859",
             "Connection",
             "close"
         ]

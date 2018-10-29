@@ -30,6 +30,9 @@ class RedashClient {
    * @return {Promise<DataSource>}
    */
   getDataSource(id) {
+    if (typeof id !== 'number') {
+      throw new TypeError('Query ID should be number');
+    }
     return this.axios_.get(`api/data_sources/${id}`).then(resp => resp.data);
   }
 
@@ -41,11 +44,11 @@ class RedashClient {
   }
 
   /**
-   * @param {number} id
+   * @param {{query: string, data_source_id: number, name: string, description: string?}} query
    * @return {Promise<Query>}
    */
-  getQuery(id) {
-    return this.axios_.get(`api/queries/${id}`).then(resp => resp.data);
+  postQuery(query) {
+    return this.axios_.post('api/queries', query).then(resp => resp.data);
   }
 
   /**
@@ -56,11 +59,11 @@ class RedashClient {
   }
 
   /**
-   * @param {{data_source_id: number, max_age: number, query: string, query_id: number}} query
-   * @return {Promise<{job: Job}|{query_result: QueryResult}>}
+   * @param {number} id
+   * @return {Promise<Query>}
    */
-  postQuery(query) {
-    return this.axios_.post('api/query_results', query).then(resp => resp.data);
+  getQuery(id) {
+    return this.axios_.get(`api/queries/${id}`).then(resp => resp.data);
   }
 
   /**
@@ -72,10 +75,21 @@ class RedashClient {
   }
 
   /**
+   * @param {{data_source_id: number, max_age: number, query: string, query_id: number}} query
+   * @return {Promise<{job: Job}|{query_result: QueryResult}>}
+   */
+  postQueryResult(query) {
+    return this.axios_.post('api/query_results', query).then(resp => resp.data);
+  }
+
+  /**
    * @param {number} queryResultId
    * @return {Promise<{query_result: QueryResult}>}
    */
   getQueryResult(queryResultId) {
+    if (typeof queryResultId !== 'number') {
+      throw new TypeError('Query ID should be number');
+    }
     return this.axios_.get(`api/query_results/${queryResultId}`).then(resp => resp.data);
   }
 
@@ -89,7 +103,7 @@ class RedashClient {
     query = {...query, max_age: 0};
     const {
       job: {id},
-    } = await this.postQuery(query);
+    } = await this.postQueryResult(query);
     let queryResultId;
     const start = Date.now();
     while (true) {
