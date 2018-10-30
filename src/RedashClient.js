@@ -1,6 +1,6 @@
 'use strict';
 
-const axios = require('axios');
+const fetch = require('cross-fetch');
 const delay = require('delay');
 
 const DEFAULT_POLLING_TIMEOUT_MS = 60 * 1000;
@@ -10,26 +10,60 @@ const DEFAULT_POLLING_TIMEOUT_MS = 60 * 1000;
  */
 class RedashClient {
   /**
-   * @param {{endPoint: string, apiToken: string, authHeaderName: ?string}} options
+   * @param {{endPoint: string, apiToken: string, agent: ?http.Agent, authHeaderName: ?string}} options
    */
-  constructor({endPoint, apiToken, authHeaderName = 'Authorization'} = {}) {
+  constructor({endPoint, apiToken, agent, authHeaderName = 'Authorization'} = {}) {
     /**
-     * @type {axios}
+     * @param {string} path
+     * @param {Object=} body
+     * @param {Object=} options
+     * @return {Promise<Response>}
      * @private
      */
-    this.axios_ = axios.create({
-      baseURL: endPoint,
-      headers: {
+    this.fetchJson_ = (path, body, options = {}) => {
+      options.headers = {
+        ...options.headers,
+        agent,
         [authHeaderName]: `Key ${apiToken}`,
-      },
-    });
+        'content-type': 'application/json',
+      };
+      if (body) {
+        options.body = JSON.stringify(body);
+      }
+      return fetch(endPoint + path, options).then(resp => resp.json());
+    };
+  }
+
+  /**
+   * @param {string} path
+   * @return {Promise<Response>}
+   * @private
+   */
+  get_(path) {
+    const options = {
+      method: 'GET',
+    };
+    return this.fetchJson_(path, null, options);
+  }
+
+  /**
+   * @param {string} path
+   * @param {Object=} body
+   * @return {Promise<Response>}
+   * @private
+   */
+  post_(path, body = {}) {
+    const options = {
+      method: 'POST',
+    };
+    return this.fetchJson_(path, body, options);
   }
 
   /**
    * @return {Promise<Array<DataSource>>}
    */
   getDataSources() {
-    return this.axios_.get(`api/data_sources`).then(resp => resp.data);
+    return this.get_(`api/data_sources`);
   }
 
   /**
@@ -40,7 +74,7 @@ class RedashClient {
     if (typeof id !== 'number') {
       throw new TypeError(`Data Source ID should be number: ${id}`);
     }
-    return this.axios_.get(`api/data_sources/${id}`).then(resp => resp.data);
+    return this.get_(`api/data_sources/${id}`);
   }
 
   /**
@@ -48,7 +82,7 @@ class RedashClient {
    * @return {Promise<Query>}
    */
   postQuery(query) {
-    return this.axios_.post('api/queries', query).then(resp => resp.data);
+    return this.post_('api/queries', query);
   }
 
   /**
@@ -59,14 +93,14 @@ class RedashClient {
     if (typeof query.id !== 'number') {
       throw new TypeError(`Query ID should be number: ${query.id}`);
     }
-    return this.axios_.post(`api/queries/${query.id}`, query).then(resp => resp.data);
+    return this.post_(`api/queries/${query.id}`, query);
   }
 
   /**
    * @return {Promise<{count: number, page: number, page_size: number, results: Array<Query>}>}
    */
   getQueries() {
-    return this.axios_.get(`api/queries`).then(resp => resp.data);
+    return this.get_(`api/queries`);
   }
 
   /**
@@ -74,7 +108,7 @@ class RedashClient {
    * @return {Promise<Query>}
    */
   getQuery(id) {
-    return this.axios_.get(`api/queries/${id}`).then(resp => resp.data);
+    return this.get_(`api/queries/${id}`);
   }
 
   /**
@@ -82,7 +116,7 @@ class RedashClient {
    * @return {Promise<{job: Job}|{query_result: QueryResult}>}
    */
   postQueryResult(query) {
-    return this.axios_.post('api/query_results', query).then(resp => resp.data);
+    return this.post_('api/query_results', query);
   }
 
   /**
@@ -93,7 +127,7 @@ class RedashClient {
     if (typeof queryResultId !== 'number') {
       throw new TypeError(`Query Result ID should be number: ${queryResultId}`);
     }
-    return this.axios_.get(`api/query_results/${queryResultId}`).then(resp => resp.data);
+    return this.get_(`api/query_results/${queryResultId}`);
   }
 
   /**
@@ -101,7 +135,7 @@ class RedashClient {
    * @return {Promise<{job: Job}>}
    */
   getJob(id) {
-    return this.axios_.get(`api/jobs/${id}`).then(resp => resp.data);
+    return this.get_(`api/jobs/${id}`);
   }
 
   /**

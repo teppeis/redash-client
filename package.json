@@ -18,12 +18,11 @@
     "test:unit": "mocha --require intelli-espower-loader test"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "cross-fetch": "^2.2.3",
     "delay": "^4.1.0"
   },
   "devDependencies": {
     "@teppeis/nock-back-mocha": "^3.0.0",
-    "axios-debug-log": "^0.4.0",
     "esdoc": "^1.1.0",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-node": "^1.0.3",

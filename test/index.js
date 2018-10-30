@@ -5,8 +5,6 @@ const assert = require('assert');
 const nockBackMochaFactory = require('@teppeis/nock-back-mocha');
 const nockBackMocha = nockBackMochaFactory();
 
-require('axios-debug-log');
-
 /** @test {RedashClient} */
 describe('RedashClient', () => {
   it('should be a constructor', () => {
