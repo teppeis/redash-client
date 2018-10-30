@@ -7,85 +7,85 @@ window.esdocSearchIndex = [
   ],
   [
     "redashclient src/redashclient.js~redashclient,redashclient",
-    "test-file/test/index.js.html#lineNumber11",
+    "test-file/test/index.js.html#lineNumber9",
     "RedashClient",
     "test"
   ],
   [
     "",
-    "test-file/test/index.js.html#lineNumber17",
+    "test-file/test/index.js.html#lineNumber15",
     "RedashClient api",
     "test"
   ],
   [
     "redashclient#getdatasource src/redashclient.js~redashclient#getdatasource,redashclient#getdatasource",
-    "test-file/test/index.js.html#lineNumber39",
+    "test-file/test/index.js.html#lineNumber37",
     "RedashClient api getDataSource",
     "test"
   ],
   [
     "redashclient#getdatasources src/redashclient.js~redashclient#getdatasources,redashclient#getdatasources",
-    "test-file/test/index.js.html#lineNumber32",
+    "test-file/test/index.js.html#lineNumber30",
     "RedashClient api getDataSources",
     "test"
   ],
   [
     "redashclient#getjob src/redashclient.js~redashclient#getjob,redashclient#getjob",
-    "test-file/test/index.js.html#lineNumber108",
+    "test-file/test/index.js.html#lineNumber106",
     "RedashClient api getJob",
     "test"
   ],
   [
     "redashclient#getqueries src/redashclient.js~redashclient#getqueries,redashclient#getqueries",
-    "test-file/test/index.js.html#lineNumber58",
+    "test-file/test/index.js.html#lineNumber56",
     "RedashClient api getQueries",
     "test"
   ],
   [
     "redashclient#getquery src/redashclient.js~redashclient#getquery,redashclient#getquery",
-    "test-file/test/index.js.html#lineNumber66",
+    "test-file/test/index.js.html#lineNumber64",
     "RedashClient api getQuery",
     "test"
   ],
   [
     "redashclient#getqueryresult src/redashclient.js~redashclient#getqueryresult,redashclient#getqueryresult",
-    "test-file/test/index.js.html#lineNumber99",
+    "test-file/test/index.js.html#lineNumber97",
     "RedashClient api getQueryResult",
     "test"
   ],
   [
     "redashclient#postquery src/redashclient.js~redashclient#postquery,redashclient#postquery",
-    "test-file/test/index.js.html#lineNumber46",
+    "test-file/test/index.js.html#lineNumber44",
     "RedashClient api postQuery",
     "test"
   ],
   [
     "redashclient#postqueryresult src/redashclient.js~redashclient#postqueryresult,redashclient#postqueryresult",
-    "test-file/test/index.js.html#lineNumber87",
+    "test-file/test/index.js.html#lineNumber85",
     "RedashClient api postQueryResult with max_age = 0",
     "test"
   ],
   [
     "redashclient#queryandwaitresult src/redashclient.js~redashclient#queryandwaitresult,redashclient#queryandwaitresult",
-    "test-file/test/index.js.html#lineNumber117",
+    "test-file/test/index.js.html#lineNumber115",
     "RedashClient api queryAndWaitResult",
     "test"
   ],
   [
     "redashclient#queryandwaitresult src/redashclient.js~redashclient#queryandwaitresult,redashclient#queryandwaitresult",
-    "test-file/test/index.js.html#lineNumber132",
+    "test-file/test/index.js.html#lineNumber130",
     "RedashClient api queryAndWaitResult: timeout",
     "test"
   ],
   [
     "redashclient#updatequery src/redashclient.js~redashclient#updatequery,redashclient#updatequery",
-    "test-file/test/index.js.html#lineNumber74",
+    "test-file/test/index.js.html#lineNumber72",
     "RedashClient api updateQuery",
     "test"
   ],
   [
     "",
-    "test-file/test/index.js.html#lineNumber12",
+    "test-file/test/index.js.html#lineNumber10",
     "RedashClient should be a constructor",
     "test"
   ],
@@ -378,16 +378,16 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/redashclient.js~redashclient#axios_",
-    "class/src/RedashClient.js~RedashClient.html#instance-member-axios_",
-    "src/RedashClient.js~RedashClient#axios_",
-    "member"
-  ],
-  [
     "src/redashclient.js~redashclient#constructor",
     "class/src/RedashClient.js~RedashClient.html#instance-constructor-constructor",
     "src/RedashClient.js~RedashClient#constructor",
     "method"
+  ],
+  [
+    "src/redashclient.js~redashclient#fetchjson_",
+    "class/src/RedashClient.js~RedashClient.html#instance-member-fetchJson_",
+    "src/RedashClient.js~RedashClient#fetchJson_",
+    "member"
   ],
   [
     "src/redashclient.js~redashclient#getdatasource",
@@ -426,6 +426,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/redashclient.js~redashclient#get_",
+    "class/src/RedashClient.js~RedashClient.html#instance-method-get_",
+    "src/RedashClient.js~RedashClient#get_",
+    "method"
+  ],
+  [
     "src/redashclient.js~redashclient#postquery",
     "class/src/RedashClient.js~RedashClient.html#instance-method-postQuery",
     "src/RedashClient.js~RedashClient#postQuery",
@@ -435,6 +441,12 @@ window.esdocSearchIndex = [
     "src/redashclient.js~redashclient#postqueryresult",
     "class/src/RedashClient.js~RedashClient.html#instance-method-postQueryResult",
     "src/RedashClient.js~RedashClient#postQueryResult",
+    "method"
+  ],
+  [
+    "src/redashclient.js~redashclient#post_",
+    "class/src/RedashClient.js~RedashClient.html#instance-method-post_",
+    "src/RedashClient.js~RedashClient#post_",
     "method"
   ],
   [
