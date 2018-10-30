@@ -48,13 +48,12 @@ const redash = new RedashClient({
   apiToken: &apos;abcde12345&apos;,
 });
 redash
-  .postQuery({
-    query: &apos;select * from cohort2&apos;,
-    data_source_id: 2,
-    max_age: 0,
+  .queryAndWaitResult({
+    query: &apos;select * from actor&apos;,
+    data_source_id: 1,
   })
   .then(resp =&gt; {
-    console.log(resp.job);
+    console.log(resp.query_result);
   });</code>
 </code></pre>
 <h2 id="api">API</h2><p>See <a href="https://teppeis.github.io/redash-client/">API document</a></p>
