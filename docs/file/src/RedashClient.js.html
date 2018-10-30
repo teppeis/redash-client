@@ -37,7 +37,7 @@
 <div class="content" data-ice="content"><h1 data-ice="title">src/RedashClient.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
 
-const axios = require(&apos;axios&apos;);
+const fetch = require(&apos;cross-fetch&apos;);
 const delay = require(&apos;delay&apos;);
 
 const DEFAULT_POLLING_TIMEOUT_MS = 60 * 1000;
@@ -47,26 +47,60 @@ const DEFAULT_POLLING_TIMEOUT_MS = 60 * 1000;
  */
 class RedashClient {
   /**
-   * @param {{endPoint: string, apiToken: string, authHeaderName: ?string}} options
+   * @param {{endPoint: string, apiToken: string, agent: ?http.Agent, authHeaderName: ?string}} options
    */
-  constructor({endPoint, apiToken, authHeaderName = &apos;Authorization&apos;} = {}) {
+  constructor({endPoint, apiToken, agent, authHeaderName = &apos;Authorization&apos;} = {}) {
     /**
-     * @type {axios}
+     * @param {string} path
+     * @param {Object=} body
+     * @param {Object=} options
+     * @return {Promise&lt;Response&gt;}
      * @private
      */
-    this.axios_ = axios.create({
-      baseURL: endPoint,
-      headers: {
+    this.fetchJson_ = (path, body, options = {}) =&gt; {
+      options.headers = {
+        ...options.headers,
+        agent,
         [authHeaderName]: `Key ${apiToken}`,
-      },
-    });
+        &apos;content-type&apos;: &apos;application/json&apos;,
+      };
+      if (body) {
+        options.body = JSON.stringify(body);
+      }
+      return fetch(endPoint + path, options).then(resp =&gt; resp.json());
+    };
+  }
+
+  /**
+   * @param {string} path
+   * @return {Promise&lt;Response&gt;}
+   * @private
+   */
+  get_(path) {
+    const options = {
+      method: &apos;GET&apos;,
+    };
+    return this.fetchJson_(path, null, options);
+  }
+
+  /**
+   * @param {string} path
+   * @param {Object=} body
+   * @return {Promise&lt;Response&gt;}
+   * @private
+   */
+  post_(path, body = {}) {
+    const options = {
+      method: &apos;POST&apos;,
+    };
+    return this.fetchJson_(path, body, options);
   }
 
   /**
    * @return {Promise&lt;Array&lt;DataSource&gt;&gt;}
    */
   getDataSources() {
-    return this.axios_.get(`api/data_sources`).then(resp =&gt; resp.data);
+    return this.get_(`api/data_sources`);
   }
 
   /**
@@ -77,7 +111,7 @@ class RedashClient {
     if (typeof id !== &apos;number&apos;) {
       throw new TypeError(`Data Source ID should be number: ${id}`);
     }
-    return this.axios_.get(`api/data_sources/${id}`).then(resp =&gt; resp.data);
+    return this.get_(`api/data_sources/${id}`);
   }
 
   /**
@@ -85,7 +119,7 @@ class RedashClient {
    * @return {Promise&lt;Query&gt;}
    */
   postQuery(query) {
-    return this.axios_.post(&apos;api/queries&apos;, query).then(resp =&gt; resp.data);
+    return this.post_(&apos;api/queries&apos;, query);
   }
 
   /**
@@ -96,14 +130,14 @@ class RedashClient {
     if (typeof query.id !== &apos;number&apos;) {
       throw new TypeError(`Query ID should be number: ${query.id}`);
     }
-    return this.axios_.post(`api/queries/${query.id}`, query).then(resp =&gt; resp.data);
+    return this.post_(`api/queries/${query.id}`, query);
   }
 
   /**
    * @return {Promise&lt;{count: number, page: number, page_size: number, results: Array&lt;Query&gt;}&gt;}
    */
   getQueries() {
-    return this.axios_.get(`api/queries`).then(resp =&gt; resp.data);
+    return this.get_(`api/queries`);
   }
 
   /**
@@ -111,7 +145,7 @@ class RedashClient {
    * @return {Promise&lt;Query&gt;}
    */
   getQuery(id) {
-    return this.axios_.get(`api/queries/${id}`).then(resp =&gt; resp.data);
+    return this.get_(`api/queries/${id}`);
   }
 
   /**
@@ -119,7 +153,7 @@ class RedashClient {
    * @return {Promise&lt;{job: Job}|{query_result: QueryResult}&gt;}
    */
   postQueryResult(query) {
-    return this.axios_.post(&apos;api/query_results&apos;, query).then(resp =&gt; resp.data);
+    return this.post_(&apos;api/query_results&apos;, query);
   }
 
   /**
@@ -130,7 +164,7 @@ class RedashClient {
     if (typeof queryResultId !== &apos;number&apos;) {
       throw new TypeError(`Query Result ID should be number: ${queryResultId}`);
     }
-    return this.axios_.get(`api/query_results/${queryResultId}`).then(resp =&gt; resp.data);
+    return this.get_(`api/query_results/${queryResultId}`);
   }
 
   /**
@@ -138,7 +172,7 @@ class RedashClient {
    * @return {Promise&lt;{job: Job}&gt;}
    */
   getJob(id) {
-    return this.axios_.get(`api/jobs/${id}`).then(resp =&gt; resp.data);
+    return this.get_(`api/jobs/${id}`);
   }
 
   /**

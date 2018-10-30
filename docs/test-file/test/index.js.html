@@ -42,8 +42,6 @@ const assert = require(&apos;assert&apos;);
 const nockBackMochaFactory = require(&apos;@teppeis/nock-back-mocha&apos;);
 const nockBackMocha = nockBackMochaFactory();
 
-require(&apos;axios-debug-log&apos;);
-
 /** @test {RedashClient} */
 describe(&apos;RedashClient&apos;, () =&gt; {
   it(&apos;should be a constructor&apos;, () =&gt; {

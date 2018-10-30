@@ -73,7 +73,7 @@
     <h4>Test:</h4>
     <ul>
       
-    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber11">RedashClient</a></span></li>
+    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber9">RedashClient</a></span></li>
 </ul>
   </div>
 
@@ -100,7 +100,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/RedashClient.js~RedashClient.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">(options: {endPoint: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, apiToken: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, authHeaderName: ?<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>})</span>
+          <span class="code" data-ice="name"><span><a href="class/src/RedashClient.js~RedashClient.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">(options: {endPoint: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, apiToken: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, agent: ?<span>http.Agent</span>, authHeaderName: ?<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>})</span>
         </p>
       </div>
       <div>
@@ -135,7 +135,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/RedashClient.js~RedashClient.html#instance-member-axios_">axios_</a></span></span><span class="code" data-ice="signature">: <span>axios</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/RedashClient.js~RedashClient.html#instance-member-fetchJson_">fetchJson_</a></span></span><span class="code" data-ice="signature">(path: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, body: <span>Object=</span>, options: <span>Object=</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span>Response</span>&gt;: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -438,6 +438,68 @@
   </tr>
 </tbody>
 </table>
+<table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3">Private Methods</td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">private</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/RedashClient.js~RedashClient.html#instance-method-get_">get_</a></span></span><span class="code" data-ice="signature">(path: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span>Response</span>&gt;</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">private</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/RedashClient.js~RedashClient.html#instance-method-post_">post_</a></span></span><span class="code" data-ice="signature">(path: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, body: <span>Object=</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span>Response</span>&gt;</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+</tbody>
+</table>
 </div>
 
 
@@ -454,7 +516,7 @@
     
     
     
-    <span class="code" data-ice="name">constructor</span><span class="code" data-ice="signature">(options: {endPoint: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, apiToken: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, authHeaderName: ?<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>})</span>
+    <span class="code" data-ice="name">constructor</span><span class="code" data-ice="signature">(options: {endPoint: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, apiToken: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, agent: ?<span>http.Agent</span>, authHeaderName: ?<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>})</span>
     <span class="right-info">
       
       
@@ -479,7 +541,7 @@
     
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">options</td>
-      <td data-ice="type" class="code">{endPoint: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, apiToken: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, authHeaderName: ?<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>}</td>
+      <td data-ice="type" class="code">{endPoint: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, apiToken: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, agent: ?<span>http.Agent</span>, authHeaderName: ?<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>}</td>
       <td data-ice="appendix"></td>
       <td data-ice="description"></td>
     </tr>
@@ -509,18 +571,18 @@
 <div data-ice="memberDetails"><h2 data-ice="title">Private Members</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-axios_">
+  <h3 data-ice="anchor" id="instance-member-fetchJson_">
     <span class="access" data-ice="access">private</span>
     
     
     
     
     
-    <span class="code" data-ice="name">axios_</span><span class="code" data-ice="signature">: <span>axios</span></span>
+    <span class="code" data-ice="name">fetchJson_</span><span class="code" data-ice="signature">(path: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, body: <span>Object=</span>, options: <span>Object=</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span>Response</span>&gt;: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber20">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber23">source</a></span></span>
     </span>
   </h3>
 
@@ -534,7 +596,19 @@
   <div data-ice="properties">
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span>Response</span>&gt;</td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -566,7 +640,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber39">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber73">source</a></span></span>
     </span>
   </h3>
 
@@ -624,7 +698,7 @@
     <h4>Test:</h4>
     <ul>
       
-    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber39">RedashClient api getDataSource</a></span></li>
+    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber37">RedashClient api getDataSource</a></span></li>
 </ul>
   </div>
 
@@ -643,7 +717,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber31">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber65">source</a></span></span>
     </span>
   </h3>
 
@@ -685,7 +759,7 @@
     <h4>Test:</h4>
     <ul>
       
-    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber32">RedashClient api getDataSources</a></span></li>
+    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber30">RedashClient api getDataSources</a></span></li>
 </ul>
   </div>
 
@@ -704,7 +778,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber103">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber137">source</a></span></span>
     </span>
   </h3>
 
@@ -762,7 +836,7 @@
     <h4>Test:</h4>
     <ul>
       
-    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber108">RedashClient api getJob</a></span></li>
+    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber106">RedashClient api getJob</a></span></li>
 </ul>
   </div>
 
@@ -781,7 +855,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber68">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber102">source</a></span></span>
     </span>
   </h3>
 
@@ -823,7 +897,7 @@
     <h4>Test:</h4>
     <ul>
       
-    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber58">RedashClient api getQueries</a></span></li>
+    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber56">RedashClient api getQueries</a></span></li>
 </ul>
   </div>
 
@@ -842,7 +916,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber76">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber110">source</a></span></span>
     </span>
   </h3>
 
@@ -900,7 +974,7 @@
     <h4>Test:</h4>
     <ul>
       
-    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber66">RedashClient api getQuery</a></span></li>
+    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber64">RedashClient api getQuery</a></span></li>
 </ul>
   </div>
 
@@ -919,7 +993,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber92">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber126">source</a></span></span>
     </span>
   </h3>
 
@@ -977,7 +1051,7 @@
     <h4>Test:</h4>
     <ul>
       
-    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber99">RedashClient api getQueryResult</a></span></li>
+    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber97">RedashClient api getQueryResult</a></span></li>
 </ul>
   </div>
 
@@ -996,7 +1070,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber50">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber84">source</a></span></span>
     </span>
   </h3>
 
@@ -1054,7 +1128,7 @@
     <h4>Test:</h4>
     <ul>
       
-    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber46">RedashClient api postQuery</a></span></li>
+    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber44">RedashClient api postQuery</a></span></li>
 </ul>
   </div>
 
@@ -1073,7 +1147,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber84">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber118">source</a></span></span>
     </span>
   </h3>
 
@@ -1131,7 +1205,7 @@
     <h4>Test:</h4>
     <ul>
       
-    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber87">RedashClient api postQueryResult with max_age = 0</a></span></li>
+    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber85">RedashClient api postQueryResult with max_age = 0</a></span></li>
 </ul>
   </div>
 
@@ -1150,7 +1224,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber112">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber146">source</a></span></span>
     </span>
   </h3>
 
@@ -1214,8 +1288,8 @@
     <h4>Test:</h4>
     <ul>
       
-    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber117">RedashClient api queryAndWaitResult</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber132">RedashClient api queryAndWaitResult: timeout</a></span></li>
+    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber115">RedashClient api queryAndWaitResult</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber130">RedashClient api queryAndWaitResult: timeout</a></span></li>
 </ul>
   </div>
 
@@ -1234,7 +1308,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber58">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber92">source</a></span></span>
     </span>
   </h3>
 
@@ -1292,9 +1366,159 @@
     <h4>Test:</h4>
     <ul>
       
-    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber74">RedashClient api updateQuery</a></span></li>
+    <li data-ice="test"><span><a href="test-file/test/index.js.html#lineNumber72">RedashClient api updateQuery</a></span></li>
 </ul>
   </div>
+
+  
+  
+</div>
+<h2 data-ice="title">Private Methods</h2>
+
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-get_">
+    <span class="access" data-ice="access">private</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">get_</span><span class="code" data-ice="signature">(path: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span>Response</span>&gt;</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber42">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">path</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span>Response</span>&gt;</td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-post_">
+    <span class="access" data-ice="access">private</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">post_</span><span class="code" data-ice="signature">(path: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, body: <span>Object=</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span>Response</span>&gt;</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/RedashClient.js.html#lineNumber55">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">path</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">body</td>
+      <td data-ice="type" class="code"><span>Object=</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span>Response</span>&gt;</td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
   
