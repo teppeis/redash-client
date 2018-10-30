@@ -139,7 +139,7 @@ class RedashClient {
   }
 
   /**
-   * @param {{data_source_id: number, max_age: number, query: string, query_id: number}} query
+   * @param {{data_source_id: number, query: string, query_id: number}} query
    * @param {number=} timeout
    * @return {Promise<{query_result: QueryResult}>}
    */

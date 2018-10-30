@@ -25,13 +25,12 @@ const redash = new RedashClient({
   apiToken: 'abcde12345',
 });
 redash
-  .postQuery({
-    query: 'select * from cohort2',
-    data_source_id: 2,
-    max_age: 0,
+  .queryAndWaitResult({
+    query: 'select * from actor',
+    data_source_id: 1,
   })
   .then(resp => {
-    console.log(resp.job);
+    console.log(resp.query_result);
   });
 ```
 
