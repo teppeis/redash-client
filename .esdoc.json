@@ -21,6 +21,16 @@
       "option": {
         "objectRestSpread": true
       }
+    },
+    {
+      "name": "esdoc-typescript-plugin",
+      "option": {"enable": true}
+    },
+    {
+      "name": "esdoc-integrate-test-plugin",
+      "option": {
+        "source": "./src/test/"
+      }
     }
   ]
 }

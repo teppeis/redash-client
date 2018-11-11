@@ -1,93 +1,9 @@
 window.esdocSearchIndex = [
   [
-    "redash-client/src/redashclient.js~redashclient",
-    "class/src/RedashClient.js~RedashClient.html",
-    "<span>RedashClient</span> <span class=\"search-result-import-path\">redash-client/src/RedashClient.js</span>",
+    "redash-client/src/redashclient.ts~redashclient",
+    "class/src/RedashClient.ts~RedashClient.html",
+    "<span>RedashClient</span> <span class=\"search-result-import-path\">redash-client/src/RedashClient.ts</span>",
     "class"
-  ],
-  [
-    "redashclient src/redashclient.js~redashclient,redashclient",
-    "test-file/test/index.js.html#lineNumber9",
-    "RedashClient",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/index.js.html#lineNumber15",
-    "RedashClient api",
-    "test"
-  ],
-  [
-    "redashclient#getdatasource src/redashclient.js~redashclient#getdatasource,redashclient#getdatasource",
-    "test-file/test/index.js.html#lineNumber37",
-    "RedashClient api getDataSource",
-    "test"
-  ],
-  [
-    "redashclient#getdatasources src/redashclient.js~redashclient#getdatasources,redashclient#getdatasources",
-    "test-file/test/index.js.html#lineNumber30",
-    "RedashClient api getDataSources",
-    "test"
-  ],
-  [
-    "redashclient#getjob src/redashclient.js~redashclient#getjob,redashclient#getjob",
-    "test-file/test/index.js.html#lineNumber106",
-    "RedashClient api getJob",
-    "test"
-  ],
-  [
-    "redashclient#getqueries src/redashclient.js~redashclient#getqueries,redashclient#getqueries",
-    "test-file/test/index.js.html#lineNumber56",
-    "RedashClient api getQueries",
-    "test"
-  ],
-  [
-    "redashclient#getquery src/redashclient.js~redashclient#getquery,redashclient#getquery",
-    "test-file/test/index.js.html#lineNumber64",
-    "RedashClient api getQuery",
-    "test"
-  ],
-  [
-    "redashclient#getqueryresult src/redashclient.js~redashclient#getqueryresult,redashclient#getqueryresult",
-    "test-file/test/index.js.html#lineNumber97",
-    "RedashClient api getQueryResult",
-    "test"
-  ],
-  [
-    "redashclient#postquery src/redashclient.js~redashclient#postquery,redashclient#postquery",
-    "test-file/test/index.js.html#lineNumber44",
-    "RedashClient api postQuery",
-    "test"
-  ],
-  [
-    "redashclient#postqueryresult src/redashclient.js~redashclient#postqueryresult,redashclient#postqueryresult",
-    "test-file/test/index.js.html#lineNumber85",
-    "RedashClient api postQueryResult with max_age = 0",
-    "test"
-  ],
-  [
-    "redashclient#queryandwaitresult src/redashclient.js~redashclient#queryandwaitresult,redashclient#queryandwaitresult",
-    "test-file/test/index.js.html#lineNumber115",
-    "RedashClient api queryAndWaitResult",
-    "test"
-  ],
-  [
-    "redashclient#queryandwaitresult src/redashclient.js~redashclient#queryandwaitresult,redashclient#queryandwaitresult",
-    "test-file/test/index.js.html#lineNumber130",
-    "RedashClient api queryAndWaitResult: timeout",
-    "test"
-  ],
-  [
-    "redashclient#updatequery src/redashclient.js~redashclient#updatequery,redashclient#updatequery",
-    "test-file/test/index.js.html#lineNumber72",
-    "RedashClient api updateQuery",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/index.js.html#lineNumber10",
-    "RedashClient should be a constructor",
-    "test"
   ],
   [
     "src/.external-ecmascript.js~array",
@@ -372,99 +288,123 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
-    "src/redashclient.js",
-    "file/src/RedashClient.js.html",
-    "src/RedashClient.js",
+    "src/redashclient.ts",
+    "file/src/RedashClient.ts.html",
+    "src/RedashClient.ts",
     "file"
   ],
   [
-    "src/redashclient.js~redashclient#constructor",
-    "class/src/RedashClient.js~RedashClient.html#instance-constructor-constructor",
-    "src/RedashClient.js~RedashClient#constructor",
-    "method"
-  ],
-  [
-    "src/redashclient.js~redashclient#fetchjson_",
-    "class/src/RedashClient.js~RedashClient.html#instance-member-fetchJson_",
-    "src/RedashClient.js~RedashClient#fetchJson_",
+    "src/redashclient.ts~redashclient#agent",
+    "class/src/RedashClient.ts~RedashClient.html#instance-member-agent",
+    "src/RedashClient.ts~RedashClient#agent",
     "member"
   ],
   [
-    "src/redashclient.js~redashclient#getdatasource",
-    "class/src/RedashClient.js~RedashClient.html#instance-method-getDataSource",
-    "src/RedashClient.js~RedashClient#getDataSource",
+    "src/redashclient.ts~redashclient#apitoken",
+    "class/src/RedashClient.ts~RedashClient.html#instance-member-apiToken",
+    "src/RedashClient.ts~RedashClient#apiToken",
+    "member"
+  ],
+  [
+    "src/redashclient.ts~redashclient#authheadername",
+    "class/src/RedashClient.ts~RedashClient.html#instance-member-authHeaderName",
+    "src/RedashClient.ts~RedashClient#authHeaderName",
+    "member"
+  ],
+  [
+    "src/redashclient.ts~redashclient#constructor",
+    "class/src/RedashClient.ts~RedashClient.html#instance-constructor-constructor",
+    "src/RedashClient.ts~RedashClient#constructor",
     "method"
   ],
   [
-    "src/redashclient.js~redashclient#getdatasources",
-    "class/src/RedashClient.js~RedashClient.html#instance-method-getDataSources",
-    "src/RedashClient.js~RedashClient#getDataSources",
+    "src/redashclient.ts~redashclient#endpoint",
+    "class/src/RedashClient.ts~RedashClient.html#instance-member-endPoint",
+    "src/RedashClient.ts~RedashClient#endPoint",
+    "member"
+  ],
+  [
+    "src/redashclient.ts~redashclient#fetchjson_",
+    "class/src/RedashClient.ts~RedashClient.html#instance-method-fetchJson_",
+    "src/RedashClient.ts~RedashClient#fetchJson_",
     "method"
   ],
   [
-    "src/redashclient.js~redashclient#getjob",
-    "class/src/RedashClient.js~RedashClient.html#instance-method-getJob",
-    "src/RedashClient.js~RedashClient#getJob",
+    "src/redashclient.ts~redashclient#getdatasource",
+    "class/src/RedashClient.ts~RedashClient.html#instance-method-getDataSource",
+    "src/RedashClient.ts~RedashClient#getDataSource",
     "method"
   ],
   [
-    "src/redashclient.js~redashclient#getqueries",
-    "class/src/RedashClient.js~RedashClient.html#instance-method-getQueries",
-    "src/RedashClient.js~RedashClient#getQueries",
+    "src/redashclient.ts~redashclient#getdatasources",
+    "class/src/RedashClient.ts~RedashClient.html#instance-method-getDataSources",
+    "src/RedashClient.ts~RedashClient#getDataSources",
     "method"
   ],
   [
-    "src/redashclient.js~redashclient#getquery",
-    "class/src/RedashClient.js~RedashClient.html#instance-method-getQuery",
-    "src/RedashClient.js~RedashClient#getQuery",
+    "src/redashclient.ts~redashclient#getjob",
+    "class/src/RedashClient.ts~RedashClient.html#instance-method-getJob",
+    "src/RedashClient.ts~RedashClient#getJob",
     "method"
   ],
   [
-    "src/redashclient.js~redashclient#getqueryresult",
-    "class/src/RedashClient.js~RedashClient.html#instance-method-getQueryResult",
-    "src/RedashClient.js~RedashClient#getQueryResult",
+    "src/redashclient.ts~redashclient#getqueries",
+    "class/src/RedashClient.ts~RedashClient.html#instance-method-getQueries",
+    "src/RedashClient.ts~RedashClient#getQueries",
     "method"
   ],
   [
-    "src/redashclient.js~redashclient#get_",
-    "class/src/RedashClient.js~RedashClient.html#instance-method-get_",
-    "src/RedashClient.js~RedashClient#get_",
+    "src/redashclient.ts~redashclient#getquery",
+    "class/src/RedashClient.ts~RedashClient.html#instance-method-getQuery",
+    "src/RedashClient.ts~RedashClient#getQuery",
     "method"
   ],
   [
-    "src/redashclient.js~redashclient#postquery",
-    "class/src/RedashClient.js~RedashClient.html#instance-method-postQuery",
-    "src/RedashClient.js~RedashClient#postQuery",
+    "src/redashclient.ts~redashclient#getqueryresult",
+    "class/src/RedashClient.ts~RedashClient.html#instance-method-getQueryResult",
+    "src/RedashClient.ts~RedashClient#getQueryResult",
     "method"
   ],
   [
-    "src/redashclient.js~redashclient#postqueryresult",
-    "class/src/RedashClient.js~RedashClient.html#instance-method-postQueryResult",
-    "src/RedashClient.js~RedashClient#postQueryResult",
+    "src/redashclient.ts~redashclient#get_",
+    "class/src/RedashClient.ts~RedashClient.html#instance-method-get_",
+    "src/RedashClient.ts~RedashClient#get_",
     "method"
   ],
   [
-    "src/redashclient.js~redashclient#post_",
-    "class/src/RedashClient.js~RedashClient.html#instance-method-post_",
-    "src/RedashClient.js~RedashClient#post_",
+    "src/redashclient.ts~redashclient#postquery",
+    "class/src/RedashClient.ts~RedashClient.html#instance-method-postQuery",
+    "src/RedashClient.ts~RedashClient#postQuery",
     "method"
   ],
   [
-    "src/redashclient.js~redashclient#queryandwaitresult",
-    "class/src/RedashClient.js~RedashClient.html#instance-method-queryAndWaitResult",
-    "src/RedashClient.js~RedashClient#queryAndWaitResult",
+    "src/redashclient.ts~redashclient#postqueryresult",
+    "class/src/RedashClient.ts~RedashClient.html#instance-method-postQueryResult",
+    "src/RedashClient.ts~RedashClient#postQueryResult",
     "method"
   ],
   [
-    "src/redashclient.js~redashclient#updatequery",
-    "class/src/RedashClient.js~RedashClient.html#instance-method-updateQuery",
-    "src/RedashClient.js~RedashClient#updateQuery",
+    "src/redashclient.ts~redashclient#post_",
+    "class/src/RedashClient.ts~RedashClient.html#instance-method-post_",
+    "src/RedashClient.ts~RedashClient#post_",
     "method"
   ],
   [
-    "test/index.js",
-    "test-file/test/index.js.html",
-    "test/index.js",
-    "testFile"
+    "src/redashclient.ts~redashclient#queryandwaitresult",
+    "class/src/RedashClient.ts~RedashClient.html#instance-method-queryAndWaitResult",
+    "src/RedashClient.ts~RedashClient#queryAndWaitResult",
+    "method"
+  ],
+  [
+    "src/redashclient.ts~redashclient#updatequery",
+    "class/src/RedashClient.ts~RedashClient.html#instance-method-updateQuery",
+    "src/RedashClient.ts~RedashClient#updateQuery",
+    "method"
+  ],
+  [
+    "src/test/index.ts",
+    "file/src/test/index.ts.html",
+    "src/test/index.ts",
+    "file"
   ]
 ]
