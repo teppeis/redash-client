@@ -31,11 +31,6 @@
   "devDependencies": {
     "@teppeis/nock-back-mocha": "^3.0.0",
     "@types/mocha": "^5.2.5",
-    "esdoc": "^1.1.0",
-    "esdoc-ecmascript-proposal-plugin": "^1.0.0",
-    "esdoc-node": "^1.0.3",
-    "esdoc-standard-plugin": "^1.0.0",
-    "esdoc-typescript-plugin": "^1.0.1",
     "eslint-config-teppeis": "^8.3.1",
     "espower-typescript": "^9.0.1",
     "intelli-espower-loader": "^1.0.1",
