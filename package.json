@@ -6,35 +6,48 @@
   "engines": {
     "node": ">=8"
   },
-  "main": "index.js",
+  "main": "lib/RedashClient.js",
+  "types": "lib/RedashClient.d.ts",
   "files": [
-    "index.js",
-    "src"
+    "lib"
   ],
   "scripts": {
+    "prepublishOnly": "run-s test esdoc",
+    "build": "run-s clean tsc",
+    "clean": "rimraf lib",
+    "tsc": "tsc",
     "docs": "esdoc",
-    "test": "NOCK_BACK_MODE=lockdown run-s test:lint test:unit",
-    "test:lint": "eslint src test",
-    "test:unit": "mocha --require intelli-espower-loader test"
+    "test": "NOCK_BACK_MODE=lockdown run-s test:lint build test:unit",
+    "test:lint": "tslint -c tslint.js src/**/*.ts",
+    "test:unit": "mocha --require espower-typescript/guess src/test/*.ts"
   },
   "dependencies": {
+    "@types/node": "^8.10.37",
     "cross-fetch": "^2.2.3",
     "delay": "^4.1.0"
   },
   "devDependencies": {
     "@teppeis/nock-back-mocha": "^3.0.0",
+    "@types/mocha": "^5.2.5",
     "esdoc": "^1.1.0",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-node": "^1.0.3",
     "esdoc-standard-plugin": "^1.0.0",
-    "eslint": "^5.8.0",
     "eslint-config-teppeis": "^8.3.1",
+    "espower-typescript": "^9.0.1",
     "intelli-espower-loader": "^1.0.1",
     "mocha": "^5.2.0",
     "nock": "^10.0.2",
     "npm-run-all": "^4.1.3",
     "power-assert": "^1.6.1",
-    "prettier": "~1.15.1"
+    "prettier": "~1.15.1",
+    "rimraf": "^2.6.2",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-import-eslint-config": "^1.0.2",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.1.6"
   },
   "repository": {
     "type": "git",

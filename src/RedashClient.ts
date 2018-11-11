@@ -1,58 +1,61 @@
-'use strict';
-
-const fetch = require('cross-fetch');
-const delay = require('delay');
+import {fetch, Headers} from 'cross-fetch';
+import delay from 'delay';
+import http from 'http';
 
 const DEFAULT_POLLING_TIMEOUT_MS = 60 * 1000;
+
+interface ConstructorOptions {
+  endPoint: string;
+  apiToken: string;
+  agent?: http.Agent;
+  authHeaderName?: string;
+}
 
 /**
  * Redash Client
  */
-class RedashClient {
-  /**
-   * @param {{endPoint: string, apiToken: string, agent: ?http.Agent, authHeaderName: ?string}} options
-   */
-  constructor({endPoint, apiToken, agent, authHeaderName = 'Authorization'} = {}) {
-    /**
-     * @param {string} path
-     * @param {Object=} body
-     * @param {Object=} options
-     * @return {Promise<Response>}
-     * @private
-     */
-    this.fetchJson_ = (path, body, options = {}) => {
-      options.headers = {
-        ...options.headers,
-        agent,
-        [authHeaderName]: `Key ${apiToken}`,
-        'content-type': 'application/json',
-      };
-      if (body) {
-        options.body = JSON.stringify(body);
-      }
-      return fetch(endPoint + path, options).then(resp => resp.json());
-    };
+export default class RedashClient {
+  private endPoint: string;
+  private apiToken: string;
+  private agent: http.Agent | null;
+  private authHeaderName: string;
+  constructor({endPoint, apiToken, agent, authHeaderName = 'Authorization'}: ConstructorOptions) {
+    this.endPoint = endPoint;
+    this.apiToken = apiToken;
+    this.agent = agent || null;
+    this.authHeaderName = authHeaderName;
   }
 
-  /**
-   * @param {string} path
-   * @return {Promise<Response>}
-   * @private
-   */
-  get_(path) {
+  private fetchJson_(
+    path: string,
+    body?: any,
+    options: RequestInit & {agent?: http.Agent} = {} // append `agent` for node-fetch
+  ): Promise<any> {
+    if (!(options.headers instanceof Headers)) {
+      options.headers = new Headers(options.headers || {});
+    }
+    options.headers.append(this.authHeaderName, `Key ${this.apiToken}`);
+    options.headers.append('content-type', 'application/json');
+
+    if (this.agent) {
+      options.agent = this.agent;
+    }
+
+    if (body) {
+      options.body = JSON.stringify(body);
+    }
+
+    return fetch(this.endPoint + path, options).then(resp => resp.json());
+  }
+
+  private get_(path: string): Promise<any> {
     const options = {
       method: 'GET',
     };
     return this.fetchJson_(path, null, options);
   }
 
-  /**
-   * @param {string} path
-   * @param {Object=} body
-   * @return {Promise<Response>}
-   * @private
-   */
-  post_(path, body = {}) {
+  private post_(path: string, body = {}): Promise<any> {
     const options = {
       method: 'POST',
     };
@@ -70,7 +73,7 @@ class RedashClient {
    * @param {number} id
    * @return {Promise<DataSource>}
    */
-  getDataSource(id) {
+  getDataSource(id: number) {
     if (typeof id !== 'number') {
       throw new TypeError(`Data Source ID should be number: ${id}`);
     }
@@ -81,7 +84,7 @@ class RedashClient {
    * @param {{query: string, data_source_id: number, name: string, description: string?}} query
    * @return {Promise<Query>}
    */
-  postQuery(query) {
+  postQuery(query: any) {
     return this.post_('api/queries', query);
   }
 
@@ -89,7 +92,7 @@ class RedashClient {
    * @param {{id: number, query: string, data_source_id: number, name: string, description: string?}} query
    * @return {Promise<Query>}
    */
-  updateQuery(query) {
+  updateQuery(query: any) {
     if (typeof query.id !== 'number') {
       throw new TypeError(`Query ID should be number: ${query.id}`);
     }
@@ -107,7 +110,7 @@ class RedashClient {
    * @param {number} id
    * @return {Promise<Query>}
    */
-  getQuery(id) {
+  getQuery(id: number) {
     return this.get_(`api/queries/${id}`);
   }
 
@@ -115,7 +118,7 @@ class RedashClient {
    * @param {{data_source_id: number, max_age: number, query: string, query_id: number}} query
    * @return {Promise<{job: Job}|{query_result: QueryResult}>}
    */
-  postQueryResult(query) {
+  postQueryResult(query: any) {
     return this.post_('api/query_results', query);
   }
 
@@ -123,7 +126,7 @@ class RedashClient {
    * @param {number} queryResultId
    * @return {Promise<{query_result: QueryResult}>}
    */
-  getQueryResult(queryResultId) {
+  getQueryResult(queryResultId: number) {
     if (typeof queryResultId !== 'number') {
       throw new TypeError(`Query Result ID should be number: ${queryResultId}`);
     }
@@ -131,10 +134,10 @@ class RedashClient {
   }
 
   /**
-   * @param {number} id
+   * @param {string} id
    * @return {Promise<{job: Job}>}
    */
-  getJob(id) {
+  getJob(id: string) {
     return this.get_(`api/jobs/${id}`);
   }
 
@@ -143,7 +146,7 @@ class RedashClient {
    * @param {number=} timeout
    * @return {Promise<{query_result: QueryResult}>}
    */
-  async queryAndWaitResult(query, timeout = DEFAULT_POLLING_TIMEOUT_MS) {
+  async queryAndWaitResult(query: any, timeout: number = DEFAULT_POLLING_TIMEOUT_MS) {
     // `max_age` should be 0 to disable cache always
     query = {...query, max_age: 0};
     const {
@@ -165,5 +168,3 @@ class RedashClient {
     return this.getQueryResult(queryResultId);
   }
 }
-
-module.exports = RedashClient;

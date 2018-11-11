@@ -1,19 +1,12 @@
-'use strict';
-
-const Client = require('../');
-const assert = require('assert');
-const nockBackMochaFactory = require('@teppeis/nock-back-mocha');
+import Client from '../RedashClient';
+import assert from 'assert';
+import nockBackMochaFactory from '@teppeis/nock-back-mocha';
 const nockBackMocha = nockBackMochaFactory();
 
 /** @test {RedashClient} */
 describe('RedashClient', () => {
-  it('should be a constructor', () => {
-    const client = new Client();
-    assert(client instanceof Client);
-  });
-
   describe('api', () => {
-    let client;
+    let client: Client;
 
     beforeEach(function() {
       client = new Client({
