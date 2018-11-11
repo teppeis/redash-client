@@ -12,14 +12,16 @@
     "lib"
   ],
   "scripts": {
-    "prepublishOnly": "run-s test esdoc",
-    "build": "run-s clean tsc",
-    "clean": "rimraf lib",
-    "tsc": "tsc",
-    "docs": "esdoc",
-    "test": "NOCK_BACK_MODE=lockdown run-s test:lint build test:unit",
-    "test:lint": "tslint -c tslint.js src/**/*.ts",
-    "test:unit": "mocha --require espower-typescript/guess src/test/*.ts"
+    "docs": "run-s docs:clean docs:build",
+    "docs:build": "typedoc --out docs --exclude '**/src/test/**' src",
+    "docs:clean": "rimraf docs",
+    "lint": "tslint -c tslint.js src/**/*.ts",
+    "prepublishOnly": "run-p test docs",
+    "test": "NOCK_BACK_MODE=lockdown run-s lint tsc test:unit",
+    "test:unit": "mocha --require espower-typescript/guess src/test/*.ts",
+    "tsc": "run-s tsc:clean tsc:build",
+    "tsc:build": "tsc",
+    "tsc:clean": "rimraf lib"
   },
   "dependencies": {
     "@types/node": "^8.10.37",
@@ -48,6 +50,7 @@
     "tslint-eslint-rules": "^5.4.0",
     "tslint-import-eslint-config": "^1.0.2",
     "tslint-plugin-prettier": "^2.0.1",
+    "typedoc": "^0.13.0",
     "typescript": "^3.1.6"
   },
   "repository": {
