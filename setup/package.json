@@ -11,6 +11,6 @@
   "author": "Teppei Sato <teppeis@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "puppeteer": "^1.9.0"
+    "puppeteer": "^4.0.1"
   }
 }
