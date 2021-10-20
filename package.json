@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "cross-fetch": "^2.2.5",
-    "delay": "^4.3.0"
+    "delay": "^4.4.1"
   },
   "devDependencies": {
     "@teppeis/nock-back-mocha": "^3.0.0",
