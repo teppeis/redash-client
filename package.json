@@ -18,7 +18,7 @@
     "test:unit": "mocha --require intelli-espower-loader test"
   },
   "dependencies": {
-    "cross-fetch": "^2.2.5",
+    "cross-fetch": "^2.2.6",
     "delay": "^4.4.1"
   },
   "devDependencies": {
